@@ -319,7 +319,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'Keterbatasan angle kamera tunggal yang membuat aktivitas di sudut belakang kelas kurang terekam dengan jelas.'
       ],
       theory: 'Video ini menjadi alat utama untuk Reflective Practice (Schon) yang memungkinkan calon guru melakukan reflection-on-action dengan mengevaluasi bahasa tubuh, kejelasan instruksi, serta respon langsung dari para murid.'
-    },
+    }
+  };
 
   function openModal(modalId) {
     const data = artifactData[modalId] || artifactData['default'];
