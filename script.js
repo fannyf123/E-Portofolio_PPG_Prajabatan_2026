@@ -233,3 +233,156 @@ style.textContent = `
   }
 `;
 document.head.appendChild(style);
+
+/* ============================================
+   PARTICLE ANIMATION SYSTEM
+   Lightweight canvas-based floating particles
+   ============================================ */
+(function() {
+  // Respect reduced motion preference
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const canvas = document.getElementById('particleCanvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let animationId;
+  let width, height;
+
+  // Particle colors (matching the design palette)
+  const colors = [
+    { r: 255, g: 107, b: 107 }, // coral
+    { r: 46,  g: 196, b: 182 }, // teal
+    { r: 155, g: 114, b: 207 }, // lavender
+    { r: 255, g: 179, b: 71  }, // amber
+    { r: 86,  g: 204, b: 242 }, // sky
+    { r: 107, g: 203, b: 119 }, // mint
+    { r: 255, g: 111, b: 145 }, // rose
+  ];
+
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+
+  function getParticleCount() {
+    // Fewer particles on mobile for performance
+    if (width < 768) return 30;
+    if (width < 1024) return 45;
+    return 60;
+  }
+
+  function createParticle() {
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    return {
+      x: Math.random() * width,
+      y: Math.random() * height,
+      size: Math.random() * 4 + 1,
+      speedX: (Math.random() - 0.5) * 0.6,
+      speedY: (Math.random() - 0.5) * 0.4 - 0.15, // slight upward drift
+      color: color,
+      alpha: isDark ? (Math.random() * 0.12 + 0.03) : (Math.random() * 0.2 + 0.05),
+      pulse: Math.random() * Math.PI * 2,
+      pulseSpeed: Math.random() * 0.02 + 0.005,
+    };
+  }
+
+  function initParticles() {
+    particles = [];
+    const count = getParticleCount();
+    for (let i = 0; i < count; i++) {
+      particles.push(createParticle());
+    }
+  }
+
+  function drawParticle(p) {
+    // Pulsating alpha
+    const pulseFactor = Math.sin(p.pulse) * 0.3 + 0.7;
+    const alpha = p.alpha * pulseFactor;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${alpha})`;
+    ctx.fill();
+
+    // Subtle glow for larger particles
+    if (p.size > 2.5) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${alpha * 0.15})`;
+      ctx.fill();
+    }
+  }
+
+  function drawConnections() {
+    const connectionDistance = 120;
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const maxAlpha = isDark ? 0.04 : 0.06;
+
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < connectionDistance) {
+          const alpha = (1 - dist / connectionDistance) * maxAlpha;
+          const p = particles[i];
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${alpha})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+
+    particles.forEach(p => {
+      p.x += p.speedX;
+      p.y += p.speedY;
+      p.pulse += p.pulseSpeed;
+
+      // Wrap around edges
+      if (p.x < -10) p.x = width + 10;
+      if (p.x > width + 10) p.x = -10;
+      if (p.y < -10) p.y = height + 10;
+      if (p.y > height + 10) p.y = -10;
+
+      drawParticle(p);
+    });
+
+    drawConnections();
+    animationId = requestAnimationFrame(animate);
+  }
+
+  // Initialize
+  resize();
+  initParticles();
+  animate();
+
+  // Handle resize
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      resize();
+      initParticles();
+    }, 200);
+  });
+
+  // Pause when tab not visible
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      cancelAnimationFrame(animationId);
+    } else {
+      animate();
+    }
+  });
+})();
