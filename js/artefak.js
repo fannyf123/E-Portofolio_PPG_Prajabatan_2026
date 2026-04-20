@@ -30,26 +30,39 @@ document.addEventListener('DOMContentLoaded', () => {
       theory: 'Pembelajaran ini didasarkan pada teori Konstruktivisme Vygotsky dengan penerapan Scaffolding. Pendekatan Diferensiasi (Tomlinson) juga diterapkan dengan membedakan proses belajar antara kelompok yang butuh panduan bertahap dengan kelompok yang siap untuk eksplorasi mandiri.'
     },
     'modal-materi1': {
-      title: 'Bahan Ajar — Assembly Tool Post',
-      type: 'Modul Ajar / Bahan Ajar Cetak & Digital',
-      fileUrl: 'assets/pdf/Materi_Siklus_1.pdf',
-      context: 'Modul ini dirancang khusus untuk Siklus 1, materi "Perancangan Gambar Rakitan Kompleks". Disusun berdasarkan Capaian Pembelajaran Fase F.',
-      purpose: 'Menyediakan panduan sistematis bagi siswa untuk merakit 8 komponen utama Tool Post (menetapkan Grounded Component, constraint Mate, Flush, Insert) hingga mencapai derajat kebebasan (DOF) = 0.',
-      pros: [
-        'Terstruktur secara runtut mulai dari tujuan hingga referensi.',
-        'Dilengkapi bagian Panduan Troubleshooting Error Umum yang sangat praktis bagi siswa SMK.',
-        'Menyertakan Glosarium Istilah CAD untuk memperkaya kosakata keteknikan siswa.'
-      ],
-      cons: [
-        'Teks instruksional dalam format dokumen kurang interaktif dibandingkan video tutorial.',
-        'Biaya cetak yang cukup tinggi jika memperbanyak modul berhalaman tebal secara fisik.'
-      ],
-      theory: 'Pengembangan bahan ajar ini didasarkan pada prinsip Cognitive Load Theory (Sweller) yang berusaha mengurangi extraneous cognitive load dengan menyajikan informasi esensial seperti daftar komponen dan troubleshooting secara ringkas dan terfokus.'
+      title: 'Bahan Ajar P1 — Dasar Assembly Tool Post',
+      type: 'Modul Ajar Cetak & Digital',
+      fileUrl: 'assets/pdf/Materi_Siklus-1_P1.pdf',
+      context: 'Materi Siklus 1 Pertemuan 1, membahas pengenalan komponen utama Tool Post dan cara melakukan penempatan awal (Place Component) beserta penetapan Grounded Component.',
+      purpose: 'Memberikan pemahaman awal mengenai antarmuka Autodesk Inventor untuk perakitan, dan memastikan siswa paham mana komponen yang harus menjadi patokan (Grounded).',
+      pros: ['Sangat detail untuk siswa pemula.', 'Dilengkapi gambar tiap ikon perintah.'],
+      cons: ['Berfokus pada teori dasar, praktik aslinya mungkin lebih cepat.'],
+      theory: 'Mengacu pada prinsip Scaffolding (Vygotsky), di mana tahap awal diberikan panduan penuh.'
+    },
+    'modal-materi2': {
+      title: 'Bahan Ajar P2 — Penerapan Constraint',
+      type: 'Modul Ajar Cetak & Digital',
+      fileUrl: 'assets/pdf/Materi_Siklus-1_P2.pdf',
+      context: 'Materi Siklus 1 Pertemuan 2, fokus pada penerapan constraint Mate, Flush, dan Insert pada 8 komponen Tool Post.',
+      purpose: 'Membimbing siswa agar dapat merakit komponen hingga memiliki Degrees of Freedom (DOF) = 0.',
+      pros: ['Menyertakan troubleshooting untuk error constraint yang sering terjadi.', 'Glosarium sangat membantu.'],
+      cons: ['Cukup padat, siswa butuh waktu untuk memahami perbedaan Mate dan Flush.'],
+      theory: 'Didasarkan pada prinsip Cognitive Load Theory (Sweller) dengan memisahkan materi kompleks menjadi sub-langkah kecil.'
+    },
+    'modal-materi3': {
+      title: 'Bahan Ajar P3 — Drawing & Bill of Materials',
+      type: 'Modul Ajar Cetak & Digital',
+      fileUrl: 'assets/pdf/Materi_Siklus-1_P3.pdf',
+      context: 'Materi Siklus 1 Pertemuan 3, materi tingkat lanjut mengenai pembuatan gambar kerja 2D (Drawing) dari hasil rakitan 3D.',
+      purpose: 'Siswa dapat membuat etiket (title block), Bill of Materials (BOM), dan Ballooning sesuai standar industri manufaktur.',
+      pros: ['Mengajarkan standar industri yang sangat krusial di dunia kerja nyata.'],
+      cons: ['Langkah pembuatan BOM dan penomoran (Balloon) cukup rumit.'],
+      theory: 'Penerapan Contextual Teaching and Learning (CTL) karena sangat berkaitan dengan dokumen kerja bengkel industri.'
     },
     'modal-media1': {
       title: 'Media Presentasi (PPT) — Assembly Tool Post',
       type: 'Media Pembelajaran (Slide Interaktif)',
-      fileUrl: '', // PPTX preview is generally not natively supported without Google Docs viewer
+      fileUrl: '', // PPTX preview is generally not natively supported
       context: 'Disusun sebagai pendamping visualisasi bagi siswa di awal pertemuan sebelum mereka turun praktik merakit komponen menggunakan komputer.',
       purpose: 'Memvisualisasikan bentuk akhir dari Tool Post secara 3D untuk memancing atensi (hook) serta menjelaskan langkah krusial seperti perbedaan constraint Mate dan Flush.',
       pros: [
@@ -79,32 +92,43 @@ document.addEventListener('DOMContentLoaded', () => {
       theory: 'Asesmen ini mengimplementasikan konsep Assessment for Learning dan Assessment as Learning (Earl, 2003). Rubrik unjuk kerjanya berlandaskan prinsip Asesmen Autentik (Wiggins) di mana siswa dinilai melalui performa praktik yang menyerupai standar industri manufaktur sesungguhnya.'
     },
     'modal-lkm1': {
-      title: 'Lembar Kerja Murid (LKM) & Portofolio Siswa',
-      type: 'Dokumen Hasil Praktik',
-      fileUrl: 'assets/pdf/LKM_Siklus_1.pdf',
-      context: 'LKM dirancang khusus untuk memandu siswa tahap demi tahap. Siswa diwajibkan melampirkan screenshot pada tahap-tahap krusial.',
-      purpose: 'Merekam proses dan rekam jejak praktik (portofolio) setiap siswa secara individu. Melatih kedisiplinan dan prosedur kerja operasional di software CAD.',
-      pros: [
-        'Terdapat kolom "Self-Assessment" dan "Refleksi/Kendala" yang melatih kemandirian siswa.',
-        'Tugas didokumentasikan rapi sebagai portofolio belajar.'
-      ],
-      cons: [
-        'Ada risiko siswa sekadar meniru *screenshot* teman bila guru tidak memonitor layar mereka satu-per-satu.'
-      ],
-      theory: 'Fitur self-assessment dan refleksi di dalam LKM ini merepresentasikan implementasi dari Self-Regulated Learning (Zimmerman), di mana siswa diajak secara sadar mengevaluasi progres dan kendala yang mereka hadapi dalam merakit.'
+      title: 'Lembar Kerja Murid (LKM) — Pertemuan 1',
+      type: 'Dokumen Hasil Praktik P1',
+      fileUrl: 'assets/pdf/LKM_Siklus-1_P1.pdf',
+      context: 'LKM untuk pertemuan pertama yang memandu siswa memposisikan komponen Base dan Tool Holder (Grounded).',
+      purpose: 'Melatih kemampuan dasar perakitan 3D, membiasakan siswa melakukan self-assessment.',
+      pros: ['Sangat mudah diikuti dengan format checklist.'],
+      cons: ['Terkadang siswa lupa mengambil screenshot sebagai bukti.'],
+      theory: 'Menerapkan prinsip Self-Regulated Learning (Zimmerman) dengan kolom refleksi kendala di bagian akhir LKM.'
+    },
+    'modal-lkm2': {
+      title: 'Lembar Kerja Murid (LKM) — Pertemuan 2',
+      type: 'Dokumen Hasil Praktik P2',
+      fileUrl: 'assets/pdf/LKM_Siklus-1_P2.pdf',
+      context: 'LKM pertemuan kedua yang berfokus pada pemasangan baut, washer, dan pengunci menggunakan Insert Constraint.',
+      purpose: 'Memastikan seluruh komponen Tool Post terakit sempurna dengan DOF = 0.',
+      pros: ['Memiliki tingkat kesulitan yang bertahap (graded difficulty).'],
+      cons: ['Butuh ketelitian lebih untuk memasang constraint pada lubang yang kecil.'],
+      theory: 'Menerapkan Zone of Proximal Development (Vygotsky) dengan pemberian bantuan terstruktur.'
+    },
+    'modal-lkm3': {
+      title: 'Lembar Kerja Murid (LKM) — Pertemuan 3',
+      type: 'Dokumen Hasil Praktik P3',
+      fileUrl: 'assets/pdf/LKM_Siklus-1_P3.pdf',
+      context: 'LKM pertemuan terakhir yang berisi tugas membuat presentasi file 2D (Drawing) lengkap dengan part list (BOM).',
+      purpose: 'Mendokumentasikan hasil akhir siswa secara komprehensif dalam bentuk file PDF Drawing.',
+      pros: ['Meningkatkan kemampuan literasi grafis siswa sesuai standar.'],
+      cons: ['Proses layout drawing cukup kompleks untuk siswa.'],
+      theory: 'Penerapan Experiential Learning (Kolb) dari proses merakit (konkret) menjadi gambar teknik standar (abstrak).'
     },
     'modal-toolpost': {
       title: 'Gambar Teknik Tool Post (Revisi)',
       type: 'Gambar Teknik',
-      fileUrl: '', // Not provided currently as PDF
+      fileUrl: 'assets/pdf/Tool Post Rev.pdf',
       context: 'File gambar rakitan Tool Post hasil revisi, digunakan sebagai referensi objek praktik Assembly di Siklus 1.',
-      purpose: 'Mendokumentasikan penerapan praktik mengajar secara riil.',
-      pros: [
-        'Menjadi referensi utama untuk objek rakitan.'
-      ],
-      cons: [
-        'Keterbatasan angle kamera tunggal yang membuat aktivitas di sudut belakang kelas kurang terekam dengan jelas.'
-      ],
+      purpose: 'Siswa menggunakan dimensi dan bentuk pada file ini sebagai acuan perakitan komponen.',
+      pros: ['Detail presisi sangat jelas sebagai referensi utama untuk objek rakitan.'],
+      cons: ['Bukan modul ajar, murni hanya gambar teknik tanpa instruksi urutan pasang.'],
       theory: 'Video ini menjadi alat utama untuk Reflective Practice (Schon) yang memungkinkan calon guru melakukan reflection-on-action dengan mengevaluasi bahasa tubuh, kejelasan instruksi, serta respon langsung dari para murid.'
     }
   };
