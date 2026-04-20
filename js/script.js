@@ -245,9 +245,9 @@ document.addEventListener("DOMContentLoaded", () => {
       title: "RPP Siklus 1 — Gambar Teknik Manufaktur (Deep Learning)",
       type: "RPP & Modul Ajar (Fase F / Kelas XI TPM)",
       context:
-        'RPP ini disusun untuk kelas XI Teknik Pemesinan (TPM) di SMK Negeri 2 Depok Sleman pada materi "Perancangan Gambar Rakitan Kompleks (Assembly) Menggunakan Aplikasi Teknologi CAD". Latar belakang penyusunan didasarkan pada hasil asesmen diagnostik di mana mayoritas siswa memiliki gaya belajar visual-kinestetik dan sudah menguasai dasar 3D Part Modeling (.ipt).',
+        'RPP ini disusun untuk kelas XI Teknik Pemesinan (TPM) di SMK Negeri 2 Depok Sleman pada materi "Perancangan Gambar Rakitan Kompleks (Assembly) Menggunakan Aplikasi Teknologi CAD". Latar belakang utamanya adalah kebutuhan siswa akan pemahaman visualisasi 3D yang kuat untuk bekal di industri manufaktur.',
       purpose:
-        "Menerapkan Perencanaan Pembelajaran Mendalam (Deep Learning) untuk memfasilitasi kebutuhan belajar siswa yang beragam, membimbing mereka dari merakit komponen fisik di bengkel hingga mahir merakit secara virtual (Assembly) di Autodesk Inventor.",
+        "Menerapkan Perencanaan Pembelajaran Mendalam (Deep Learning) untuk memfasilitasi kebutuhan belajar siswa yang beragam, membimbing mereka dari merakit komponen fisik di bengkel hingga mahir menggunakan software CAD.",
       pros: [
         "Menerapkan scaffolding (panduan bertahap) bagi murid yang butuh panduan ekstra.",
         "Menyediakan pengayaan eksplorasi fitur lanjut bagi siswa yang lebih cepat paham.",
@@ -259,8 +259,9 @@ document.addEventListener("DOMContentLoaded", () => {
       ],
       theory:
         "Pembelajaran ini didasarkan pada teori Konstruktivisme Vygotsky dengan penerapan Scaffolding. Pendekatan Diferensiasi (Tomlinson) juga diterapkan dengan membedakan proses belajar antara kelompok yang butuh panduan bertahap dengan kelompok yang siap untuk eksplorasi mandiri.",
+      pdfPreview: "Siklus%201/RPP%20Siklus%201_FIX%20.pdf",
       fileLinks: [
-        { label: "📄 RPP Siklus 1 (DOCX)", url: "Siklus%201/RPP%20Siklus%201_FIX%20.docx" },
+        { label: "📄 RPP Siklus 1 (PDF)", url: "Siklus%201/RPP%20Siklus%201_FIX%20.pdf" },
       ],
     },
     "modal-materi1": {
@@ -281,11 +282,12 @@ document.addEventListener("DOMContentLoaded", () => {
       ],
       theory:
         "Pengembangan bahan ajar ini didasarkan pada prinsip Cognitive Load Theory (Sweller) yang berusaha mengurangi extraneous cognitive load dengan menyajikan informasi esensial seperti daftar komponen dan troubleshooting secara ringkas dan terfokus.",
+      pdfPreview: "Siklus%201/Materi/BahanAjar_Siklus1_TFLM_XI.pdf",
       fileLinks: [
-        { label: "📘 Bahan Ajar Siklus 1 (DOCX)", url: "Siklus%201/Materi/BahanAjar_Siklus1_TFLM_XI.docx" },
-        { label: "📄 Materi Pertemuan 1 (DOCX)", url: "Siklus%201/Materi/Materi_Siklus-1_P1.docx" },
-        { label: "📄 Materi Pertemuan 2 (DOCX)", url: "Siklus%201/Materi/Materi_Siklus-1_P2.docx" },
-        { label: "📄 Materi Pertemuan 3 (DOCX)", url: "Siklus%201/Materi/Materi_Siklus-1_P3.docx" },
+        { label: "📘 Bahan Ajar Siklus 1 (PDF)", url: "Siklus%201/Materi/BahanAjar_Siklus1_TFLM_XI.pdf" },
+        { label: "📄 Materi Pertemuan 1 (PDF)", url: "Siklus%201/Materi/Materi_Siklus-1_P1.pdf" },
+        { label: "📄 Materi Pertemuan 2 (PDF)", url: "Siklus%201/Materi/Materi_Siklus-1_P2.pdf" },
+        { label: "📄 Materi Pertemuan 3 (PDF)", url: "Siklus%201/Materi/Materi_Siklus-1_P3.pdf" },
       ],
     },
     "modal-media1": {
@@ -305,8 +307,9 @@ document.addEventListener("DOMContentLoaded", () => {
       ],
       theory:
         "Desain media ini bertumpu pada Dual Coding Theory (Paivio), di mana integrasi stimulasi verbal (penjelasan guru) dan gambar (slide PPT) terbukti lebih mudah diingat dalam working memory siswa.",
+      pdfPreview: "Siklus%201/Media%20Pembelajaran/PPT_P1_Siklus1.pdf",
       fileLinks: [
-        { label: "📊 PPT Pertemuan 1 (PPTX)", url: "Siklus%201/Media%20Pembelajaran/PPT_P1_Siklus1.pptx" },
+        { label: "📊 PPT Pertemuan 1 (PDF)", url: "Siklus%201/Media%20Pembelajaran/PPT_P1_Siklus1.pdf" },
       ],
     },
     "modal-asesmen1": {
@@ -325,9 +328,10 @@ document.addEventListener("DOMContentLoaded", () => {
         "Lembar observasi manual memakan banyak waktu guru jika diterapkan pada kelas dengan jumlah siswa >30 orang.",
       ],
       theory:
-        "Asesmen ini mengimplementasikan konsep Assessment for Learning dan Assessment as Learning (Earl, 2003). Rubrik unjuk kerjanya berlandaskan prinsip Asesmen Autentik (Wiggins) di mana siswa dinilai melalui performa praktik yang menyerupai standar industri manufaktur sesungguhnya.",
+        "Asesmen ini mengimplementasikan konsep Assessment for Learning dan Assessment as Learning (Earl, 2003). Rubrik unjuk kerjanya berlandaskan prinsip Asesmen Autentik (Wiggins) di mana siswa dievaluasi berdasarkan performa nyata di aplikasi CAD, bukan sekadar tes tertulis.",
+      pdfPreview: "Siklus%201/Asesmen/Asesmen_Siklus1_FIX.pdf",
       fileLinks: [
-        { label: "📋 Asesmen Siklus 1 (DOCX)", url: "Siklus%201/Asesmen/Asesmen_Siklus1_FIX.docx" },
+        { label: "📋 Asesmen Siklus 1 (PDF)", url: "Siklus%201/Asesmen/Asesmen_Siklus1_FIX.pdf" },
       ],
     },
     "modal-lkm1": {
@@ -347,18 +351,19 @@ document.addEventListener("DOMContentLoaded", () => {
         "Format cetak LKM memerlukan biaya pengadaan tambahan jika jumlah siswa banyak.",
       ],
       theory:
-        "Fitur self-assessment dan refleksi di dalam LKM ini merepresentasikan implementasi Self-Regulated Learning (Zimmerman), di mana siswa diajak secara sadar mengevaluasi progres dan kendala yang mereka hadapi dalam merakit.",
+        "Fitur self-assessment dan refleksi di dalam LKM ini merepresentasikan implementasi Self-Regulated Learning (Zimmerman), di mana siswa diajak secara sadar mengevaluasi progres dan kendala yang dialaminya sendiri.",
+      pdfPreview: "Siklus%201/LKM/LKM_Siklus-1_P1.pdf",
       fileLinks: [
-        { label: "📝 LKM Pertemuan 1 (DOCX)", url: "Siklus%201/LKM/LKM_Siklus-1_P1.docx" },
-        { label: "📝 LKM Pertemuan 2 (DOCX)", url: "Siklus%201/LKM/LKM_Siklus-1_P2.docx" },
-        { label: "📝 LKM Pertemuan 3 (DOCX)", url: "Siklus%201/LKM/LKM_Siklus-1_P3.docx" },
+        { label: "📝 LKM Pertemuan 1 (PDF)", url: "Siklus%201/LKM/LKM_Siklus-1_P1.pdf" },
+        { label: "📝 LKM Pertemuan 2 (PDF)", url: "Siklus%201/LKM/LKM_Siklus-1_P2.pdf" },
+        { label: "📝 LKM Pertemuan 3 (PDF)", url: "Siklus%201/LKM/LKM_Siklus-1_P3.pdf" },
       ],
     },
     "modal-toolpost": {
       title: "Gambar Teknik Tool Post — Revisi",
       type: "Gambar Rakitan Teknik (PDF)",
       context:
-        "File PDF ini merupakan gambar rakitan Tool Post hasil revisi yang digunakan sebagai objek referensi utama dalam praktik Assembly di Siklus 1. Tool Post adalah komponen pemegang pahat pada mesin bubut yang terdiri dari 8 part utama.",
+        "File PDF ini merupakan gambar rakitan Tool Post hasil revisi yang digunakan sebagai objek referensi utama dalam praktik Assembly di Siklus 1. Tool Post adalah komponen pemegang pahat pada mesin bubut.",
       purpose:
         "Menyediakan gambar kerja terstandar sebagai acuan siswa dalam merakit komponen secara virtual di Autodesk Inventor, sekaligus melatih kemampuan membaca gambar teknik manufaktur.",
       pros: [
@@ -371,7 +376,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "Resolusi gambar perlu dijaga kualitasnya agar detail dimensi tetap terbaca jelas.",
       ],
       theory:
-        "Penggunaan gambar teknik sebagai media pembelajaran mengacu pada teori Representasi Ganda (Multiple Representation) yang memperkuat pemahaman konseptual siswa melalui hubungan antara gambar proyeksi 2D dan visualisasi 3D yang mereka bangun di software CAD.",
+        "Penggunaan gambar teknik sebagai media pembelajaran mengacu pada teori Representasi Ganda (Multiple Representation) yang memperkuat pemahaman konseptual siswa melalui hubungan antara gambar 2D dan model 3D.",
       pdfPreview: "Siklus%201/Tool%20Post%20Rev.pdf",
       fileLinks: [
         { label: "📐 Tool Post Rev (PDF)", url: "Siklus%201/Tool%20Post%20Rev.pdf" },
@@ -400,8 +405,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const pdfPreviewHtml = data.pdfPreview
       ? `<div class="modal-pdf-preview">
            <h4>🖼️ Preview Dokumen</h4>
-           <div class="pdf-embed-wrapper">
-             <object data="${data.pdfPreview}" type="application/pdf" class="pdf-embed" aria-label="Preview ${data.title}">
+           <div class="pdf-embed-wrapper" style="height: 60vh;">
+             <object data="${data.pdfPreview}" type="application/pdf" class="pdf-embed" aria-label="Preview ${data.title}" style="width: 100%; height: 100%; border: none;">
                <div class="pdf-fallback">
                  <span>🗂️</span>
                  <p>Preview tidak tersedia di browser ini.</p>
@@ -773,7 +778,8 @@ document.head.appendChild(style);
   grids.forEach((grid) => {
     const cards = grid.querySelectorAll(".reveal");
     cards.forEach((card, idx) => {
-      card.style.transitionDelay = `${idx * 0.1}s`;
+      card.style.transitionDelay = \
+        `${idx * 0.1}s`;
     });
   });
 
@@ -808,7 +814,7 @@ document.head.appendChild(style);
 
   function animateCounter(el) {
     const text = el.textContent.trim();
-    const match = text.match(/^(\d+)(\+?)$/);
+    const match = text.match(/^\d+(\+?)$/);
     if (!match) return;
     const target = parseInt(match[1]);
     const suffix = match[2] || "";
