@@ -82,6 +82,7 @@
   --radius-lg: 20px;
   --radius-xl: 24px;
   --radius-full: 9999px;
+  --nav-offset: 104px;
 
   /* Transitions */
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
@@ -112,7 +113,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  scroll-padding-top: var(--nav-offset);
 }
 
 /* ---------- Particle Canvas ---------- */
@@ -396,6 +397,10 @@ ol {
   padding: 0 24px;
 }
 
+section {
+  scroll-margin-top: var(--nav-offset);
+}
+
 /* ---------- Utility: Section ---------- */
 .section {
   padding: var(--section-padding);
@@ -524,6 +529,13 @@ ol {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
 }
 
 .nav-logo {
@@ -1028,13 +1040,21 @@ ol {
 
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
+  grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(36px, 5vw, 64px);
+  align-items: start;
 }
 
 .about-image {
   position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding-bottom: 54px;
+}
+
+.about-content {
+  min-width: 0;
 }
 
 .about-image-card {
@@ -1042,12 +1062,14 @@ ol {
   overflow: hidden;
   box-shadow: var(--shadow-lg);
   position: relative;
+  aspect-ratio: 4 / 5;
 }
 
 .about-image-card img {
   width: 100%;
-  height: 420px;
+  height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 .about-image-card::after {
@@ -1063,19 +1085,24 @@ ol {
 
 .about-stats {
   position: absolute;
-  bottom: -30px;
-  right: -20px;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
   display: flex;
+  width: min(100% - 32px, 420px);
   gap: 12px;
+  justify-content: center;
 }
 
 .about-stat {
   background: var(--white);
   border-radius: 16px;
-  padding: 16px 20px;
+  padding: 14px 16px;
   text-align: center;
   box-shadow: var(--shadow-md);
-  min-width: 90px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .about-stat .number {
@@ -1098,21 +1125,26 @@ ol {
 .about-content .about-text {
   font-size: 1rem;
   color: var(--gray-500);
-  margin-bottom: 20px;
+  margin-bottom: 0;
   line-height: 1.8;
 }
 
 .about-info-list {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
-  margin-top: 28px;
+  margin-top: 24px;
 }
 
 .about-info-item {
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--gray-100);
 }
 
 .about-info-item .info-icon {
@@ -1150,6 +1182,7 @@ ol {
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--gray-700);
+  overflow-wrap: anywhere;
 }
 
 /* ============================================
@@ -2267,6 +2300,16 @@ ol {
   flex-shrink: 0;
 }
 
+.nav-actions .theme-toggle,
+.nav-actions .hamburger {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .theme-toggle:hover {
   border-color: var(--coral-light);
   transform: translateY(-2px);
@@ -3057,16 +3100,18 @@ body {
    PROFIL NARASI (About Section Narrative Blocks)
    ============================================ */
 .profil-narasi {
-  margin-bottom: 20px;
-  padding: 16px 20px;
-  border-left: 3px solid #1E3A5F;
-  background: rgba(30,58,95,0.03);
-  border-radius: 0 12px 12px 0;
-  transition: border-color 0.3s ease;
+  margin-bottom: 16px;
+  padding: 18px 20px;
+  border-left: 4px solid #1E3A5F;
+  background: rgba(30,58,95,0.04);
+  border-radius: 0 16px 16px 0;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
 }
 .profil-narasi:hover {
   border-color: #F97316;
   background: rgba(249,115,22,0.03);
+  transform: translateX(2px);
 }
 .narasi-heading {
   font-size: 1rem;
@@ -3076,8 +3121,8 @@ body {
 }
 .profil-quote {
   position: relative;
-  margin-top: 28px;
-  padding: 24px 24px 24px 60px;
+  margin-top: 24px;
+  padding: 24px 24px 24px 56px;
   background: linear-gradient(135deg, rgba(30,58,95,0.04), rgba(249,115,22,0.03));
   border-radius: 16px;
   border: 1px solid rgba(30,58,95,0.1);
@@ -3108,6 +3153,90 @@ body {
   color: #1E3A5F;
   font-style: normal;
 }
+.life-timeline {
+  margin-top: 28px;
+  padding: 22px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--gray-100);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+  overflow: hidden;
+}
+.life-timeline-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1E3A5F;
+  margin-bottom: 18px;
+}
+.life-timeline-track {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  width: 100%;
+}
+.life-step {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 58px;
+}
+.life-step-dot {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--gray-50);
+  border: 2px solid var(--gray-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+.life-step:hover .life-step-dot,
+.life-step.active .life-step-dot {
+  background: linear-gradient(135deg, #1E3A5F, #F97316);
+  border-color: transparent;
+  transform: scale(1.06);
+  box-shadow: 0 4px 16px rgba(30, 58, 95, 0.25);
+}
+.life-step.active .life-step-dot {
+  animation: lifePulse 2s ease-in-out infinite;
+}
+@keyframes lifePulse {
+  0%, 100% { box-shadow: 0 4px 16px rgba(30, 58, 95, 0.25); }
+  50% { box-shadow: 0 4px 24px rgba(249, 115, 22, 0.45); }
+}
+.life-step-label {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--gray-600);
+  line-height: 1.3;
+}
+.life-step-label span {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--gray-400);
+  margin-top: 2px;
+}
+.life-step.active .life-step-label {
+  color: #1E3A5F;
+}
+.life-step.active .life-step-label span {
+  color: #F97316;
+  font-weight: 600;
+}
+.life-step-line {
+  height: 2px;
+  flex: 1 1 24px;
+  min-width: 18px;
+  background: linear-gradient(90deg, var(--gray-200) 0%, var(--gray-300) 100%);
+  margin-top: 22px;
+  border-radius: 2px;
+}
 [data-theme="dark"] .profil-narasi {
   background: rgba(249,115,22,0.04);
   border-color: #F97316;
@@ -3121,6 +3250,19 @@ body {
 }
 [data-theme="dark"] .profil-quote cite {
   color: #F97316;
+}
+[data-theme="dark"] .life-timeline,
+[data-theme="dark"] .about-info-item {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(249,115,22,0.14);
+}
+[data-theme="dark"] .life-timeline-title,
+[data-theme="dark"] .life-step.active .life-step-label {
+  color: #FB923C;
+}
+[data-theme="dark"] .life-step-dot {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 /* ============================================

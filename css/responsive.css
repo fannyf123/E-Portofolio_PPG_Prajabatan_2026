@@ -61,11 +61,23 @@ body                   { font-size: clamp(0.9rem, 2.5vw, 1rem); }
   .contact-grid {
     grid-template-columns: 1fr;
   }
+  .about-grid {
+    gap: 36px;
+  }
+  .about-image {
+    max-width: 620px;
+    padding-bottom: 0;
+  }
+  .about-image-card {
+    aspect-ratio: 16 / 9;
+  }
   .about-image-card img {
-    height: 280px; /* Reduce height on mobile to prevent massive scroll */
+    height: 100%;
   }
   .about-stats {
     position: static;
+    transform: none;
+    width: 100%;
     margin-top: 20px;
     justify-content: center;
     flex-wrap: wrap; /* Ensure stats wrap and don't overflow horizontally */
@@ -292,6 +304,13 @@ body                   { font-size: clamp(0.9rem, 2.5vw, 1rem); }
   /* About info list */
   .about-info-list {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .profil-narasi {
+    padding: 16px 18px;
+  }
+  .profil-quote {
+    padding: 22px 22px 22px 52px;
   }
 
   /* Footer */
@@ -382,6 +401,7 @@ body                   { font-size: clamp(0.9rem, 2.5vw, 1rem); }
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     gap: 0;
+    justify-content: flex-start;
     padding-bottom: 12px;
     scrollbar-width: none;
   }
@@ -403,6 +423,9 @@ body                   { font-size: clamp(0.9rem, 2.5vw, 1rem); }
   }
   .life-step-label span {
     font-size: 0.65rem;
+  }
+  .life-timeline {
+    padding: 18px 16px;
   }
 
   /* --- PORTFOLIO FILTER: horizontal scroll --- */
@@ -439,6 +462,10 @@ body                   { font-size: clamp(0.9rem, 2.5vw, 1rem); }
   .portfolio-grid {
     grid-template-columns: 1fr;
     gap: 20px;
+  }
+  .penilaian-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
   }
   .portfolio-card-body {
     padding: 20px;
@@ -607,13 +634,18 @@ body                   { font-size: clamp(0.9rem, 2.5vw, 1rem); }
     flex-wrap: wrap;
     gap: 10px;
   }
+  .about-stat {
+    flex-basis: calc(33.333% - 10px);
+    padding: 12px 10px;
+  }
   .about-stat .number {
     font-size: 1.4rem;
   }
 
   /* About info items */
   .about-info-item {
-    padding: 10px;
+    align-items: flex-start;
+    padding: 12px;
   }
 
   /* Penilaian Card Padding */
