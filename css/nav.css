@@ -104,26 +104,7 @@
   transform: rotate(-45deg) translate(6px, -6px);
 }
 
-/* Mobile Nav */
-@media (max-width: 768px) {
-  .hamburger { display: flex; }
-  .nav-links {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 280px;
-    height: 100vh;
-    flex-direction: column;
-    justify-content: center;
-    gap: 28px;
-    background: var(--white);
-    box-shadow: var(--shadow-xl);
-    transition: right 0.4s var(--ease-smooth);
-    padding: 40px;
-  }
-  .nav-links.open { right: 0; }
-  .nav-links a { font-size: 1.1rem; }
-}
+/* Mobile Nav — styles moved to responsive.css for centralized breakpoint management */
 
 
 /* Scroll Progress Bar */
