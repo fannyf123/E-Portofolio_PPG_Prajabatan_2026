@@ -3149,3 +3149,7 @@ body {
   opacity: 1;
   transform: translateY(-4px);
 }
+
+/* Siklus placeholder image tints */
+.img-siklus2 { filter: hue-rotate(120deg); }
+.img-siklus3 { filter: hue-rotate(240deg); }
