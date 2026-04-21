@@ -34,7 +34,7 @@
 
 .portfolio-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 28px;
 }
 
@@ -101,12 +101,13 @@
 .portfolio-card-img .card-tag {
   position: absolute;
   top: 12px;
-  left: 12px;
+  right: 12px;
   padding: 5px 12px;
   border-radius: 8px;
   font-size: 0.75rem;
   font-weight: 600;
   color: var(--white);
+  z-index: 2;
 }
 
 .card-tag.rpp     { background: var(--coral); }

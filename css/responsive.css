@@ -25,6 +25,11 @@
     margin-left: auto;
     margin-right: auto;
   }
+
+  /* Portfolio: 3 → 2 columns at tablet */
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
@@ -40,6 +45,7 @@
   }
   .timeline-dot { left: 20px; }
 
+  /* Portfolio: 2 → 1 column at mobile */
   .portfolio-grid {
     grid-template-columns: 1fr;
   }
@@ -51,12 +57,23 @@
   }
 
   .contact-form { padding: 24px; }
+
+  /* Life timeline wrap on mobile */
+  .life-timeline-track {
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+  .life-step-line {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
-  .hero-name { font-size: 2rem; }
+  .hero-name { font-size: clamp(1.8rem, 6vw, 2.4rem); }
   .hero-image-wrapper { width: 240px; height: 240px; }
   .btn { padding: 12px 20px; font-size: 0.88rem; }
   .skills-grid, .cert-grid { grid-template-columns: 1fr; }
+  .section-title { font-size: clamp(1.6rem, 5vw, 2.2rem); }
 }
 
