@@ -2300,12 +2300,19 @@ section {
   flex-shrink: 0;
 }
 
-.nav-actions .theme-toggle,
-.nav-actions .hamburger {
+.nav-actions .theme-toggle {
   width: 44px;
   height: 44px;
   padding: 0;
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-actions .hamburger {
+  width: 44px;
+  height: 44px;
+  padding: 0;
   align-items: center;
   justify-content: center;
 }
