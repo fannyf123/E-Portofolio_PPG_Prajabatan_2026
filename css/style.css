@@ -2620,6 +2620,7 @@ body {
   font-weight: 800;
   background: linear-gradient(135deg, #F97316, #FB923C);
   -webkit-background-clip: text;
+  color: transparent;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: 16px;

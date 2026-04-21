@@ -384,10 +384,8 @@ document.addEventListener('DOMContentLoaded', () => {
     currentGalleryIdx = idx;
     const item = galleryItems[idx];
     const imgEl = item.querySelector('img');
-    // Use resolved img.src (safe absolute URL) as default; only use data-src if it's a relative path
-    const rawSrc = item.getAttribute('data-src') || '';
-    const safeSrc = rawSrc && /^assets\//.test(rawSrc) ? rawSrc : (imgEl ? imgEl.src : '');
-    lightboxImg.src = safeSrc;
+    // Use the already-resolved absolute URL from the loaded img element (safe, browser-resolved)
+    lightboxImg.src = imgEl ? imgEl.src : '';
     lightboxCaption.textContent = item.getAttribute('data-caption') || '';
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';

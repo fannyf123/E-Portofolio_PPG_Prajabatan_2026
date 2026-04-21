@@ -239,7 +239,7 @@
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
-  border: 4px solid white !important;
+  border: 4px solid var(--white);
   box-shadow: var(--shadow-lg);
   position: relative;
   z-index: 1;
