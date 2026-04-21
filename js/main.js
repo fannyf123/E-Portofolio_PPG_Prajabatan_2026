@@ -5,13 +5,32 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // ---------- Loading Screen ----------
+  const loadingScreen = document.getElementById('loadingScreen');
+  if (loadingScreen) {
+    setTimeout(() => {
+      loadingScreen.classList.add('hidden');
+    }, 1800);
+  }
+
+  // ---------- Scroll Progress Bar ----------
+  const scrollProgress = document.getElementById('scrollProgress');
+  function updateScrollProgress() {
+    if (!scrollProgress) return;
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    scrollProgress.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateScrollProgress, { passive: true });
+
   // ---------- Typed Text Effect ----------
   const typedTextEl = document.getElementById('typedText');
   const phrases = [
     'Guru Teknik Manufaktur',
     'Peserta PPG Prajabatan 2026',
-    'Pendidik yang Berdedikasi',
-    'Pembelajar Sepanjang Hayat'
+    'Pengajar Autodesk Inventor',
+    'Pendidik yang Berdedikasi'
   ];
 
   let phraseIdx = 0;
@@ -160,6 +179,31 @@ document.addEventListener('DOMContentLoaded', () => {
   const portfolioGridWrapper = document.getElementById('portfolioGridWrapper');
   const portfolioGridInner = document.getElementById('portfolioGridInner');
 
+  function getActiveSiklus() {
+    const activeTab = document.querySelector('.tab-btn.active');
+    return activeTab ? activeTab.getAttribute('data-tab') : 'siklus1';
+  }
+
+  function getActiveFilter() {
+    const activeFilter = document.querySelector('.filter-btn.active');
+    return activeFilter ? activeFilter.getAttribute('data-filter') : 'all';
+  }
+
+  function applyFilters(siklus, filter) {
+    portfolioCards.forEach(card => {
+      const cardSiklus = card.getAttribute('data-siklus') || 'siklus1';
+      const cardCategory = card.getAttribute('data-category');
+      const matchesSiklus = (cardSiklus === siklus);
+      const matchesFilter = (filter === 'all' || cardCategory === filter);
+      if (matchesSiklus && matchesFilter) {
+        card.style.display = '';
+        card.style.animation = 'fadeIn 0.5s ease forwards';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const isActive = btn.classList.contains('active');
@@ -172,9 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
           portfolioGridWrapper.style.gridTemplateRows = '0fr';
           portfolioGridInner.style.opacity = '0';
           portfolioGridInner.style.marginTop = '-20px';
-          // Kita tidak perlu display none pada cards, karena wrapper sudah hilang (tinggi 0).
         } else {
-          // Fallback jika HTML wrapper tidak ada
           portfolioCards.forEach(card => card.style.display = 'none');
         }
       } else {
@@ -182,16 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.classList.add('active');
         const filter = btn.getAttribute('data-filter');
 
-        // Pertama siapkan card mana yang tampil sebelum expand
-        portfolioCards.forEach(card => {
-          const category = card.getAttribute('data-category');
-          if (filter === 'all' || category === filter) {
-            card.style.display = '';
-            card.style.animation = 'fadeIn 0.5s ease forwards';
-          } else {
-            card.style.display = 'none';
-          }
-        });
+        applyFilters(getActiveSiklus(), filter);
 
         // Buka wrapper dengan animasi
         if (portfolioGridWrapper && portfolioGridInner) {
@@ -218,23 +251,28 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  // ---------- Contact Form (basic) ----------
+  // ---------- Contact Form ----------
   const contactForm = document.getElementById('contactForm');
-
-  contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const btn = contactForm.querySelector('.form-submit');
-    const originalText = btn.textContent;
-    btn.textContent = '✅ Pesan Terkirim!';
-    btn.style.background = 'linear-gradient(135deg, #6BCB77, #2EC4B6)';
-
-    setTimeout(() => {
-      btn.textContent = originalText;
-      btn.style.background = '';
-      contactForm.reset();
-    }, 3000);
-  });
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formSuccess = document.getElementById('formSuccess');
+      const btn = contactForm.querySelector('.form-submit');
+      btn.textContent = '⏳ Mengirim...';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.style.display = 'none';
+        if (formSuccess) formSuccess.style.display = 'block';
+        setTimeout(() => {
+          btn.style.display = '';
+          btn.textContent = 'Kirim Pesan 🚀';
+          btn.disabled = false;
+          if (formSuccess) formSuccess.style.display = 'none';
+          contactForm.reset();
+        }, 3000);
+      }, 1000);
+    });
+  }
 
   // ---------- Smooth anchor scrolling ----------
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -245,6 +283,148 @@ document.addEventListener('DOMContentLoaded', () => {
         target.scrollIntoView({ behavior: 'smooth' });
       }
     });
+  });
+
+  // ---------- Count-up Animation ----------
+  const statNumbers = document.querySelectorAll('.about-stat .number');
+
+  function countUp(el, target, suffix) {
+    let current = 0;
+    const increment = target / 60;
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        el.textContent = target + suffix;
+        clearInterval(timer);
+      } else {
+        el.textContent = Math.floor(current) + suffix;
+      }
+    }, 16);
+  }
+
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.dataset.counted) {
+        entry.target.dataset.counted = 'true';
+        const text = entry.target.textContent;
+        const num = parseInt(text);
+        const suffix = text.includes('+') ? '+' : '';
+        countUp(entry.target, num, suffix);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  statNumbers.forEach(el => countObserver.observe(el));
+
+  // ---------- Portfolio Siklus Tabs ----------
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tab = btn.getAttribute('data-tab');
+      applyFilters(tab, getActiveFilter());
+    });
+  });
+
+  // ---------- Skills Tabs ----------
+  const skillsTabBtns = document.querySelectorAll('.skills-tab-btn');
+  skillsTabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      skillsTabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.skills-panel').forEach(p => p.classList.remove('active'));
+      const target = document.getElementById('skills-' + btn.getAttribute('data-skills-tab'));
+      if (target) target.classList.add('active');
+    });
+  });
+
+  // ---------- Accordion ----------
+  document.querySelectorAll('.accordion-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const isOpen = header.getAttribute('aria-expanded') === 'true';
+      document.querySelectorAll('.accordion-header').forEach(h => {
+        h.setAttribute('aria-expanded', 'false');
+        h.nextElementSibling.classList.remove('open');
+      });
+      if (!isOpen) {
+        header.setAttribute('aria-expanded', 'true');
+        header.nextElementSibling.classList.add('open');
+      }
+    });
+  });
+
+  // ---------- Pillar Progress Animation ----------
+  const pillarObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const fill = entry.target.querySelector('.pillar-progress-fill');
+        if (fill) {
+          const styleAttr = fill.getAttribute('style') || '';
+          const match = styleAttr.match(/--progress:\s*([^;"]+)/);
+          const width = match ? match[1].trim() : '80%';
+          fill.style.width = width;
+        }
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.pillar-card').forEach(card => pillarObserver.observe(card));
+
+  // ---------- Gallery Lightbox ----------
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+  let currentGalleryIdx = 0;
+
+  function openLightbox(idx) {
+    currentGalleryIdx = idx;
+    const item = galleryItems[idx];
+    const imgEl = item.querySelector('img');
+    // Use the already-resolved absolute URL from the loaded img element (safe, browser-resolved)
+    lightboxImg.src = imgEl ? imgEl.src : '';
+    lightboxCaption.textContent = item.getAttribute('data-caption') || '';
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  galleryItems.forEach((item, idx) => {
+    item.addEventListener('click', () => openLightbox(idx));
+  });
+
+  if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+  if (lightbox) {
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+  }
+  if (lightboxPrev) {
+    lightboxPrev.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentGalleryIdx = (currentGalleryIdx - 1 + galleryItems.length) % galleryItems.length;
+      openLightbox(currentGalleryIdx);
+    });
+  }
+  if (lightboxNext) {
+    lightboxNext.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentGalleryIdx = (currentGalleryIdx + 1) % galleryItems.length;
+      openLightbox(currentGalleryIdx);
+    });
+  }
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox || !lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft' && lightboxPrev) lightboxPrev.click();
+    if (e.key === 'ArrowRight' && lightboxNext) lightboxNext.click();
   });
 
 }); // End DOMContentLoaded
