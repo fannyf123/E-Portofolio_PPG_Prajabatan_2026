@@ -294,10 +294,12 @@ function initMain() {
   // ---------- Active Nav Link ----------
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-links a');
+  let lastSyncedHash = '';
 
   function highlightNav() {
     // Trigger highlight when section reaches the upper third of the screen
     const scrollPos = window.scrollY + (window.innerHeight / 3);
+    let activeId = '';
 
     sections.forEach(sec => {
       const top = sec.offsetTop;
@@ -305,6 +307,7 @@ function initMain() {
       const id = sec.getAttribute('id');
 
       if (scrollPos >= top && scrollPos < top + height) {
+        activeId = id;
         navLinks.forEach(link => {
           link.classList.remove('active');
           if (link.getAttribute('href') === `#${id}`) {
@@ -313,6 +316,18 @@ function initMain() {
         });
       }
     });
+
+    // Sync URL hash with active section without scrolling
+    if (activeId && window.scrollY > 80) {
+      const nextHash = `#${activeId}`;
+      if (nextHash !== lastSyncedHash && nextHash !== window.location.hash) {
+        history.replaceState(null, '', nextHash);
+        lastSyncedHash = nextHash;
+      }
+    } else if (!activeId && window.scrollY < 80 && window.location.hash) {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+      lastSyncedHash = '';
+    }
   }
 
   let highlightTicking = false;
