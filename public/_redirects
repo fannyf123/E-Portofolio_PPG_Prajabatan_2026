@@ -1,3 +1,2 @@
-# SPA fallback: redirect any unmatched route ke index.html
-# Tidak wajib untuk site statis murni, tapi aman dipasang
-/*    /index.html   200
+# Catatan: tidak pakai SPA fallback agar custom 404.html bisa muncul
+# untuk URL yang tidak ditemukan.
