@@ -207,3 +207,26 @@ body {
 [data-theme="dark"] {
   --bg-dark: #0F172A;
 }
+
+/* Dark mode contrast fixes for previously low-contrast text */
+[data-theme="dark"] .section-subtitle {
+  color: rgba(226, 232, 240, 0.7);
+}
+
+[data-theme="dark"] .dossier-meta,
+[data-theme="dark"] .dossier-meta span,
+[data-theme="dark"] .dossier-meta strong {
+  color: rgba(226, 232, 240, 0.78);
+}
+
+[data-theme="dark"] .dossier-meta strong {
+  color: #F8FAFC;
+}
+
+[data-theme="dark"] .institution {
+  color: rgba(226, 232, 240, 0.72);
+}
+
+[data-theme="dark"] .info-label {
+  color: rgba(148, 163, 184, 0.85);
+}

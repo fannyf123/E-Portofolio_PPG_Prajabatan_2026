@@ -533,6 +533,9 @@ function initMain() {
         card.style.display = 'none';
       }
     });
+    if (window.ScrollTrigger && typeof window.ScrollTrigger.refresh === 'function') {
+      requestAnimationFrame(() => window.ScrollTrigger.refresh());
+    }
   }
 
   filterBtns.forEach(btn => {

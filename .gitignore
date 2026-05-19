@@ -4,6 +4,7 @@ dist/
 .npm-cache/
 .chrome-debug/
 .codex/
+.claude/
 npm-debug.log*
 vite-dev.log
 vite-dev.err.log
@@ -13,3 +14,8 @@ pnpm-debug.log*
 Untitled.png
 .DS_Store
 Thumbs.db
+
+# Stray shell artefacts
+p
+{
+{,
