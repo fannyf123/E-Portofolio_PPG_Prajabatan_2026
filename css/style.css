@@ -711,7 +711,7 @@ section {
   height: 560px;
   background:
     linear-gradient(135deg, rgba(250, 251, 253, 0.16), rgba(250, 251, 253, 0.74)),
-    url("../assets/img/hero-bg.png") center/cover no-repeat;
+    url("../assets/img/hero-bg.webp") center/cover no-repeat;
   opacity: 0.3;
   filter: blur(2px) saturate(1.05);
   transform: translateY(-50%);

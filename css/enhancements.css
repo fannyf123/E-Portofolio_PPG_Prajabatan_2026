@@ -1247,7 +1247,7 @@
 
 /* AI-generated technical drawing hero backgrounds with full-section motion. */
 #hero.hero.section {
-  --hero-bg-image: url("../assets/img/hero-bg-ai-light.png");
+  --hero-bg-image: url("../assets/img/hero-bg-ai-light.webp");
   --hero-bg-overlay:
     linear-gradient(90deg, rgba(248, 250, 252, 0.98) 0%, rgba(248, 250, 252, 0.96) 36%, rgba(248, 250, 252, 0.86) 54%, rgba(248, 250, 252, 0.42) 72%, rgba(248, 250, 252, 0.08) 100%);
   --hero-bg-position: center right;
@@ -1263,7 +1263,7 @@
 }
 
 [data-theme="dark"] #hero.hero.section {
-  --hero-bg-image: url("../assets/img/hero-bg-ai-dark.png");
+  --hero-bg-image: url("../assets/img/hero-bg-ai-dark.webp");
   --hero-bg-overlay:
     linear-gradient(90deg, rgba(15, 23, 42, 0.92) 0%, rgba(15, 23, 42, 0.82) 28%, rgba(15, 23, 42, 0.55) 50%, rgba(15, 23, 42, 0.24) 74%, rgba(15, 23, 42, 0.08) 100%);
   --hero-motion-layer-opacity: 0.34;
