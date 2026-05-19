@@ -7,7 +7,7 @@
   if (!canvas) return;
 
   const isMobile = window.innerWidth < 768;
-  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const prefersReduced = false;
   const isPerfMode = document.documentElement.classList.contains('perf-mode');
   if (isMobile || prefersReduced || isPerfMode) {
     canvas.style.display = 'none';
