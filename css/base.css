@@ -332,6 +332,29 @@ a {
   transition: color 0.3s var(--ease-smooth);
 }
 
+/* Keyboard focus indicator for accessibility */
+:focus-visible {
+  outline: 2px solid var(--coral, #FF6B6B);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+button:focus-visible,
+a:focus-visible,
+.tab-btn:focus-visible,
+.filter-btn:focus-visible,
+.chooser-card:focus-visible,
+.theme-toggle:focus-visible,
+.btn:focus-visible {
+  outline: 2px solid var(--coral, #FF6B6B);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.18);
+}
+
+[data-theme="dark"] :focus-visible {
+  outline-color: var(--coral-light, #FFA8A8);
+}
+
 img {
   max-width: 100%;
   height: auto;
