@@ -145,12 +145,12 @@ export function initPortfolioChooser() {
 
   function tryShowChooser() {
     if (introAnimationCompleted()) {
-      showChooser();
+      handleInitialHash() || showChooser();
     } else {
       const observer = new MutationObserver(() => {
         if (introAnimationCompleted()) {
           observer.disconnect();
-          showChooser();
+          handleInitialHash() || showChooser();
         }
       });
       observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
@@ -159,6 +159,37 @@ export function initPortfolioChooser() {
         observer.observe(introTear, { attributes: true, attributeFilter: ['class'] });
       }
     }
+  }
+
+  function handleInitialHash() {
+    const hash = window.location.hash;
+    if (!hash || hash.length < 2) return false;
+
+    const ep2Card = chooser.querySelector('.chooser-card[data-portfolio="2"]');
+    const ep2Locked = ep2Card && (ep2Card.classList.contains('is-locked') || ep2Card.dataset.locked === 'true');
+    const isEp2Hash = hash.startsWith('#ep2-');
+
+    // EP2 hash but card is locked: ignore deep link, show chooser instead
+    if (isEp2Hash && ep2Locked) {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+      return false;
+    }
+
+    if (isEp2Hash) {
+      hideChooser();
+      showEP2();
+    } else {
+      hideChooser();
+    }
+
+    setTimeout(() => {
+      const target = document.querySelector(hash);
+      if (target && typeof target.scrollIntoView === 'function') {
+        target.scrollIntoView({ behavior: 'auto', block: 'start' });
+      }
+    }, 60);
+
+    return true;
   }
 
   if (document.readyState === 'loading') {
