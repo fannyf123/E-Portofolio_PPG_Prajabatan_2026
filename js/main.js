@@ -3,6 +3,7 @@
    Core interactions, nav, theme, scroll reveal
    ============================================ */
 
+import './gsap-init.js';
 import '../css/index.css';
 import './particles.js';
 import './scroll-experience.js';
