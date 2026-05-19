@@ -2701,6 +2701,19 @@ html.perf-mode .hero-image-wrapper::before,
 html.perf-mode .hero-content::before,
 html.perf-mode .shape { filter: none !important; }
 
+html.perf-mode #particleCanvas,
+html.perf-mode .scroll-aura,
+html.perf-mode .scroll-aura__wash,
+html.perf-mode .scroll-aura__beam,
+html.perf-mode .floating-shapes,
+html.perf-mode .ep2-aurora-bg {
+  mix-blend-mode: normal !important;
+}
+
+html.perf-mode .scroll-fx-current * {
+  will-change: auto !important;
+}
+
 html.perf-mode .scroll-fx-current .hero-greeting,
 html.perf-mode .scroll-fx-current .hero-name,
 html.perf-mode .scroll-fx-current .hero-role,
