@@ -351,7 +351,7 @@ html {
 }
 
 /* Reduce motion for accessibility */
-@media (prefers-reduced-motion: reduce) and (max-width: 0px) {
+@media (prefers-reduced-motion: reduce) {
 
   .shape,
   #particleCanvas {
@@ -2969,7 +2969,7 @@ body {
   }
 }
 
-@media (prefers-reduced-motion: reduce) and (max-width: 0px) {
+@media (prefers-reduced-motion: reduce) {
 
   .loading-screen,
   .loading-screen::before,

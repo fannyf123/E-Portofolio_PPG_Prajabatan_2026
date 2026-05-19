@@ -301,7 +301,7 @@ html {
 }
 
 /* Reduce motion for accessibility */
-@media (prefers-reduced-motion: reduce) and (max-width: 0px) {
+@media (prefers-reduced-motion: reduce) {
   .shape,
   #particleCanvas {
     animation-duration: 18s !important;
