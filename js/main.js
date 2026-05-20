@@ -137,7 +137,7 @@ function initMain() {
     document.body.classList.add('intro-ready', 'intro-opened');
   };
 
-  if (introTear && !window.location.hash) {
+  if (introTear) {
     // Phase 1: Loading bar runs via CSS animation (~1.5s)
     // After page load, transition to Phase 2: "Scroll to view"
     try { window.history.scrollRestoration = 'manual'; } catch (_) {}

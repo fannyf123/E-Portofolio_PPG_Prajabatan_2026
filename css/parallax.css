@@ -173,11 +173,6 @@ body:not(.intro-ready) {
   pointer-events: none;
 }
 
-/* Skip intro entirely on deep-link load */
-html.skip-intro .intro-tear {
-  display: none !important;
-}
-
 .intro-tear.is-complete .intro-tear-top {
   transform: translateY(-110%);
   opacity: 0;
