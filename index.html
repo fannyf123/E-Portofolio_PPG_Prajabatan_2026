@@ -33,6 +33,10 @@
     if(localStorage.getItem('perfMode')==='1'){
       document.documentElement.classList.add('perf-mode');
     }
+    // Skip intro loader when arriving via deep link
+    if(window.location.hash && window.location.hash.length>1){
+      document.documentElement.classList.add('skip-intro');
+    }
   })();
   </script>
 
