@@ -152,15 +152,15 @@ export function initPortfolioChooser() {
     });
   });
 
-  // EP1 home button -> back to chooser
-  var homeBtn = document.getElementById('homeBtn');
-  if (homeBtn) {
-    homeBtn.addEventListener('click', (e) => {
+  // EP1 home button & footer switch -> back to chooser
+  var ep1BackTriggers = document.querySelectorAll('#homeBtn, #ep1FooterBack');
+  ep1BackTriggers.forEach(btn => {
+    btn.addEventListener('click', (e) => {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'auto' });
       showChooser();
     });
-  }
+  });
 
   // EP2 back buttons
   if (ep2Wrapper) {
