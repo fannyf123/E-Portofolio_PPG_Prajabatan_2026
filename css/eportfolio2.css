@@ -2360,3 +2360,134 @@
 @media (max-width: 768px) {
   .ep2-scroll-rail { display: none; }
 }
+
+/* ============================================
+   EP2 FOOTER SWITCH BUTTON
+   Tombol "Ganti Portofolio" yang lebih estetik
+   ============================================ */
+.ep2-footer-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 18px;
+  padding: 12px 18px 12px 14px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(46, 196, 182, 0.12), rgba(155, 114, 207, 0.10));
+  border: 1px solid rgba(46, 196, 182, 0.32);
+  color: var(--teal, #2EC4B6);
+  text-decoration: none;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.32s ease,
+    border-color 0.32s ease,
+    background 0.32s ease;
+}
+
+.ep2-footer-switch::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--teal, #2EC4B6), var(--lavender, #9B72CF));
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.35s ease;
+}
+
+.ep2-footer-switch:hover,
+.ep2-footer-switch:focus-visible {
+  transform: translateY(-3px);
+  border-color: transparent;
+  color: #fff;
+  box-shadow:
+    0 14px 32px rgba(46, 196, 182, 0.32),
+    0 4px 12px rgba(155, 114, 207, 0.25);
+}
+
+.ep2-footer-switch:hover::before,
+.ep2-footer-switch:focus-visible::before {
+  opacity: 1;
+}
+
+.ep2-footer-switch-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--teal, #2EC4B6);
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  transition:
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.32s ease,
+    color 0.32s ease;
+}
+
+.ep2-footer-switch:hover .ep2-footer-switch-icon,
+.ep2-footer-switch:focus-visible .ep2-footer-switch-icon {
+  transform: rotate(180deg);
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.ep2-footer-switch-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.25;
+}
+
+.ep2-footer-switch-label {
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.ep2-footer-switch-sub {
+  font-size: 0.72rem;
+  font-weight: 500;
+  opacity: 0.78;
+  margin-top: 2px;
+}
+
+.ep2-footer-switch-arrow {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 6px;
+  font-size: 0.78rem;
+  opacity: 0.7;
+  transition: transform 0.32s ease, opacity 0.32s ease;
+}
+
+.ep2-footer-switch:hover .ep2-footer-switch-arrow,
+.ep2-footer-switch:focus-visible .ep2-footer-switch-arrow {
+  transform: translateX(5px);
+  opacity: 1;
+}
+
+[data-theme="dark"] .ep2-footer-switch {
+  background: linear-gradient(135deg, rgba(46, 196, 182, 0.16), rgba(155, 114, 207, 0.14));
+  border-color: rgba(125, 211, 252, 0.3);
+  color: var(--teal-light, #4DD9CC);
+}
+
+[data-theme="dark"] .ep2-footer-switch-icon {
+  background: rgba(15, 23, 42, 0.6);
+  color: var(--teal-light, #4DD9CC);
+}
+
+[data-theme="dark"] .ep2-footer-switch:hover .ep2-footer-switch-icon,
+[data-theme="dark"] .ep2-footer-switch:focus-visible .ep2-footer-switch-icon {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
