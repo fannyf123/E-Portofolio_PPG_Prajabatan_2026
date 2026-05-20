@@ -12,23 +12,42 @@ export function initPortfolioChooser() {
   const prefersReducedMotion = false;
   const ep2Wrapper = document.getElementById('eportfolio2Wrapper');
 
-  // Auto-unlock UAS chooser starting 8 June 2026 (local time)
+  // Auto-unlock UAS chooser starting 8 June 2026.
+  // Pakai server time dari HTTP Date header agar tidak bisa diakali
+  // dengan ubah jam PC. Fallback ke client time hanya kalau request gagal.
   (function maybeAutoUnlockEp2() {
-    const UNLOCK_AT = new Date(2026, 5, 8, 0, 0, 0); // bulan 5 = Juni (0-indexed)
-    if (Date.now() < UNLOCK_AT.getTime()) return;
+    const UNLOCK_AT = Date.UTC(2026, 5, 7, 17, 0, 0); // 8 Juni 00:00 WIB (UTC+7)
 
     const ep2Card = chooser.querySelector('.chooser-card[data-portfolio="2"]');
     if (!ep2Card) return;
 
-    ep2Card.classList.remove('is-locked');
-    ep2Card.removeAttribute('aria-disabled');
-    delete ep2Card.dataset.locked;
+    function applyUnlock() {
+      ep2Card.classList.remove('is-locked');
+      ep2Card.removeAttribute('aria-disabled');
+      delete ep2Card.dataset.locked;
+      const lockBadge = ep2Card.querySelector('.chooser-card-lock');
+      if (lockBadge) lockBadge.remove();
+      const cta = ep2Card.querySelector('.chooser-card-cta');
+      if (cta) cta.textContent = 'Lihat E-Portfolio 2 →';
+    }
 
-    const lockBadge = ep2Card.querySelector('.chooser-card-lock');
-    if (lockBadge) lockBadge.remove();
+    function checkUnlock(nowMs) {
+      if (nowMs >= UNLOCK_AT) applyUnlock();
+    }
 
-    const cta = ep2Card.querySelector('.chooser-card-cta');
-    if (cta) cta.textContent = 'Lihat E-Portfolio 2 →';
+    // Get trusted server time via HTTP Date header
+    fetch(window.location.href, { method: 'HEAD', cache: 'no-store' })
+      .then(res => {
+        const dateHeader = res.headers.get('date');
+        if (!dateHeader) throw new Error('no date header');
+        const serverMs = new Date(dateHeader).getTime();
+        if (!Number.isFinite(serverMs)) throw new Error('invalid date');
+        checkUnlock(serverMs);
+      })
+      .catch(() => {
+        // Network gagal: fallback ke client clock (best-effort)
+        checkUnlock(Date.now());
+      });
   })();
 
   function showChooser() {
