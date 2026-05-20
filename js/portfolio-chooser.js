@@ -12,6 +12,25 @@ export function initPortfolioChooser() {
   const prefersReducedMotion = false;
   const ep2Wrapper = document.getElementById('eportfolio2Wrapper');
 
+  // Auto-unlock UAS chooser starting 8 June 2026 (local time)
+  (function maybeAutoUnlockEp2() {
+    const UNLOCK_AT = new Date(2026, 5, 8, 0, 0, 0); // bulan 5 = Juni (0-indexed)
+    if (Date.now() < UNLOCK_AT.getTime()) return;
+
+    const ep2Card = chooser.querySelector('.chooser-card[data-portfolio="2"]');
+    if (!ep2Card) return;
+
+    ep2Card.classList.remove('is-locked');
+    ep2Card.removeAttribute('aria-disabled');
+    delete ep2Card.dataset.locked;
+
+    const lockBadge = ep2Card.querySelector('.chooser-card-lock');
+    if (lockBadge) lockBadge.remove();
+
+    const cta = ep2Card.querySelector('.chooser-card-cta');
+    if (cta) cta.textContent = 'Lihat E-Portfolio 2 →';
+  })();
+
   function showChooser() {
     chooser.classList.add('active');
     chooser.setAttribute('aria-hidden', 'false');
