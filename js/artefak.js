@@ -400,6 +400,14 @@ document.addEventListener('DOMContentLoaded', () => {
     return text;
   }
 
+  function getEmbedHtml(url, height) {
+    var h = height || '100%';
+    if (!navigator.onLine) {
+      return '<div class="offline-embed-fallback" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: ' + h + '; min-height: 300px; padding: 30px; text-align: center; background: rgba(0,0,0,0.02); border: 2px dashed #DEE2E8; border-radius: 8px; font-family: sans-serif;"><i class="fa-solid fa-wifi-slash" style="font-size: 2.5rem; color: #98A2B3; margin-bottom: 16px;"></i><h4 style="margin-bottom: 8px; color: #344054; font-weight: 600;">Koneksi Offline</h4><p style="margin-bottom: 0; color: #667085; max-width: 400px; font-size: 0.9rem; line-height: 1.4;">Dokumen ini bersumber dari Google Drive dan membutuhkan koneksi internet untuk memuat preview. Silakan hubungkan ke internet.</p></div>';
+    }
+    return '<iframe src="' + url + '" style="width: 100%; height: ' + h + '; border: 1px solid #DEE2E8; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);" title="PDF Preview"></iframe>';
+  }
+
   function openModal(modalId, viewMode) {
     const data = artifactData[modalId] || artifactData['modal-rpp1'];
     const fileUrl = data.fileUrl || '';
@@ -408,14 +416,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const canPreview = Boolean(fileUrl && (isDrive || /\.pdf(?:$|[?#])/i.test(fileUrl)));
 
     if (viewMode === 'pdf' && canPreview) {
-      modalContent.innerHTML = '<div class="modal-header" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; border-bottom: none; padding-bottom: 0; gap: 15px; padding-right: 30px;"><div style="flex: 1; min-width: 250px;"><h3 style="margin-bottom: 4px; font-size: 1.3rem;">' + data.title + '</h3><p style="margin-bottom: 0;">Preview Dokumen</p></div><a href="' + fileUrl + '" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; background: #2EC4B6; color: #FFFFFF; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.9rem; box-shadow: 0 4px 12px rgba(46,196,182,0.3); z-index: 5;">Buka di Tab Baru &nearr;</a></div><div class="modal-body" style="height: 75vh; padding-top: 20px;"><iframe src="' + embedUrl + '" style="width: 100%; height: 100%; border: 1px solid #DEE2E8; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);" title="PDF Preview"></iframe></div>';
+      modalContent.innerHTML = '<div class="modal-header" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; border-bottom: none; padding-bottom: 0; gap: 15px; padding-right: 30px;"><div style="flex: 1; min-width: 250px;"><h3 style="margin-bottom: 4px; font-size: 1.3rem;">' + data.title + '</h3><p style="margin-bottom: 0;">Preview Dokumen</p></div><a href="' + fileUrl + '" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; background: #2EC4B6; color: #FFFFFF; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.9rem; box-shadow: 0 4px 12px rgba(46,196,182,0.3); z-index: 5;">Buka di Tab Baru &nearr;</a></div><div class="modal-body" style="height: 75vh; padding-top: 20px;">' + getEmbedHtml(embedUrl) + '</div>';
     } else {
       var prosHtml = data.pros.map(function(p) { return '<li style="margin-bottom: 8px; padding: 6px 0;"><span style="color:#2EC4B6;font-weight:700;margin-right:8px;font-size:1.1em;">&#10003;</span>' + highlightText(p) + '</li>'; }).join('');
       var consHtml = data.cons.map(function(c) { return '<li style="margin-bottom: 8px; padding: 6px 0;"><span style="color:#FF6B6B;font-weight:700;margin-right:8px;font-size:1.1em;">&#9888;</span>' + highlightText(c) + '</li>'; }).join('');
 
       var filePreviewHtml = '';
       if (canPreview) {
-        filePreviewHtml = '<div class="pdf-preview" style="margin-top: 30px; border-top: 2px dashed #DEE2E8; padding-top: 20px;"><div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 16px; gap: 10px;"><h4 style="margin: 0;">Preview Dokumen Full</h4><a href="' + fileUrl + '" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 6px 14px; background: #EEF0F4; color: #2EC4B6; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.85rem;">Buka di Tab Baru &nearr;</a></div><iframe src="' + embedUrl + '" style="width: 100%; height: 60vh; border: 1px solid #DEE2E8; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);" title="PDF Preview"></iframe></div>';
+        filePreviewHtml = '<div class="pdf-preview" style="margin-top: 30px; border-top: 2px dashed #DEE2E8; padding-top: 20px;"><div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 16px; gap: 10px;"><h4 style="margin: 0;">Preview Dokumen Full</h4><a href="' + fileUrl + '" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 6px 14px; background: #EEF0F4; color: #2EC4B6; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.85rem;">Buka di Tab Baru &nearr;</a></div>' + getEmbedHtml(embedUrl, '60vh') + '</div>';
       } else if (fileUrl) {
         filePreviewHtml = '<div class="modal-files" style="margin-top: 20px;"><h4>File Artefak</h4><a href="' + fileUrl + '" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 10px 20px; background: #FF6B6B; color: #FFFFFF; border-radius: 8px; font-weight: 600; text-decoration: none;">Buka File</a></div>';
       }
@@ -445,7 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const fileUrl = btn.getAttribute('data-pdf-url') || '#';
       const previewUrl = btn.getAttribute('data-pdf-preview') || fileUrl;
 
-      modalContent.innerHTML = '<div class="modal-header" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; border-bottom: none; padding-bottom: 0; gap: 15px; padding-right: 30px;"><div style="flex: 1; min-width: 250px;"><h3 style="margin-bottom: 4px; font-size: 1.3rem;">' + title + '</h3><p style="margin-bottom: 0;">Preview Dokumen Penilaian</p></div><a href="' + fileUrl + '" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; background: #2EC4B6; color: #FFFFFF; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.9rem; box-shadow: 0 4px 12px rgba(46,196,182,0.3); z-index: 5;">Buka di Tab Baru &nearr;</a></div><div class="modal-body" style="height: 75vh; padding-top: 20px;"><iframe src="' + previewUrl + '" style="width: 100%; height: 100%; border: 1px solid #DEE2E8; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);" title="PDF Preview"></iframe></div>';
+      modalContent.innerHTML = '<div class="modal-header" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; border-bottom: none; padding-bottom: 0; gap: 15px; padding-right: 30px;"><div style="flex: 1; min-width: 250px;"><h3 style="margin-bottom: 4px; font-size: 1.3rem;">' + title + '</h3><p style="margin-bottom: 0;">Preview Dokumen Penilaian</p></div><a href="' + fileUrl + '" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; background: #2EC4B6; color: #FFFFFF; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.9rem; box-shadow: 0 4px 12px rgba(46,196,182,0.3); z-index: 5;">Buka di Tab Baru &nearr;</a></div><div class="modal-body" style="height: 75vh; padding-top: 20px;">' + getEmbedHtml(previewUrl) + '</div>';
       modalOverlay.classList.add('active');
       document.body.style.overflow = 'hidden';
     });

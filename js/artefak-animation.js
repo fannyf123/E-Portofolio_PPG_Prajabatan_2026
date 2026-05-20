@@ -80,11 +80,15 @@ export function initArtefakAnimation(){
     if (window.innerWidth > 768) {
       var rafId = null;
       var lastEvent = null;
+      var rect = null;
+      card.addEventListener('mouseenter', function(){
+        rect = card.getBoundingClientRect();
+      });
       card.addEventListener('mousemove', function(e){
         lastEvent = e;
         if (rafId) return;
         rafId = requestAnimationFrame(function(){
-          var rect = card.getBoundingClientRect();
+          if (!rect) rect = card.getBoundingClientRect();
           var x = (lastEvent.clientX - rect.left) / rect.width - 0.5;
           var y = (lastEvent.clientY - rect.top) / rect.height - 0.5;
           gsap.to(card, {
@@ -97,6 +101,7 @@ export function initArtefakAnimation(){
       });
 
       card.addEventListener('mouseleave', function(){
+        rect = null;
         if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
         gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.6, ease: 'elastic.out(1, 0.5)', overwrite: 'auto' });
       });

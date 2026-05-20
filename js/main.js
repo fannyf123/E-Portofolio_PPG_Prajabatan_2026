@@ -824,3 +824,17 @@ style.textContent = `
   }
 `;
 document.head.appendChild(style);
+
+// Register Service Worker for PWA
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    const base = import.meta.env.BASE_URL || '/';
+    navigator.serviceWorker.register(`${base}sw.js`)
+      .then((reg) => {
+        console.log('[PWA] Service Worker registered with scope:', reg.scope);
+      })
+      .catch((err) => {
+        console.error('[PWA] Service Worker registration failed:', err);
+      });
+  });
+}

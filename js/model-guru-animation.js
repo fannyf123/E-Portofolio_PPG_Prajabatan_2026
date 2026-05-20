@@ -98,11 +98,15 @@ export function initModelGuruAnimation(){
     if (window.innerWidth > 768) {
       var tiltRaf = null;
       var tiltLastEvent = null;
+      var rect = null;
+      card.addEventListener('mouseenter', function(){
+        rect = card.getBoundingClientRect();
+      });
       card.addEventListener('mousemove', function(e){
         tiltLastEvent = e;
         if (tiltRaf) return;
         tiltRaf = requestAnimationFrame(function(){
-          var rect = card.getBoundingClientRect();
+          if (!rect) rect = card.getBoundingClientRect();
           var x = (tiltLastEvent.clientX - rect.left) / rect.width - 0.5;
           var y = (tiltLastEvent.clientY - rect.top) / rect.height - 0.5;
           gsap.to(card, {
@@ -114,6 +118,7 @@ export function initModelGuruAnimation(){
         });
       });
       card.addEventListener('mouseleave', function(){
+        rect = null;
         if (tiltRaf) { cancelAnimationFrame(tiltRaf); tiltRaf = null; }
         gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.6, ease: 'elastic.out(1, 0.5)', overwrite: 'auto' });
       });

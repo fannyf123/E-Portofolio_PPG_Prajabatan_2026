@@ -347,8 +347,12 @@
   }
 
   function animate() {
+    if (canvas.offsetWidth === 0) {
+      animationId = setTimeout(animate, 250);
+      return;
+    }
     if (isScrolling) {
-      animationId = requestAnimationFrame(animate);
+      animationId = setTimeout(animate, 100);
       return;
     }
     ctx.clearRect(0, 0, width, height);
@@ -510,8 +514,12 @@
   // Tilt effect on hover for cards
   const tiltCards = document.querySelectorAll('.portfolio-card, .pillar-card, .skill-card, .cert-card');
   tiltCards.forEach(card => {
+    let rect = null;
+    card.addEventListener('mouseenter', () => {
+      rect = card.getBoundingClientRect();
+    });
     card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
+      if (!rect) rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       const centerX = rect.width / 2;
@@ -522,6 +530,7 @@
     });
 
     card.addEventListener('mouseleave', () => {
+      rect = null;
       card.style.transform = '';
       card.style.transition = 'transform 0.4s ease';
       setTimeout(() => { card.style.transition = ''; }, 400);

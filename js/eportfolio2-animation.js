@@ -396,8 +396,13 @@ function initEp2HoverMicroMotion(wrapper) {
     card.style.transformStyle = 'preserve-3d';
     card.style.perspective = '800px';
 
+    var rect = null;
+    card.addEventListener('mouseenter', function() {
+      rect = card.getBoundingClientRect();
+    });
+
     card.addEventListener('mousemove', function(e) {
-      var rect = card.getBoundingClientRect();
+      if (!rect) rect = card.getBoundingClientRect();
       var x = (e.clientX - rect.left) / rect.width - 0.5;
       var y = (e.clientY - rect.top) / rect.height - 0.5;
       gsap.to(card, {
@@ -410,6 +415,7 @@ function initEp2HoverMicroMotion(wrapper) {
     });
 
     card.addEventListener('mouseleave', function() {
+      rect = null;
       gsap.to(card, {
         rotateY: 0,
         rotateX: 0,
@@ -786,7 +792,23 @@ function initEp2Particles() {
 
   var drawFns = { gear: drawGear, hexBolt: drawHexBolt, cube: drawCube, spark: drawSpark, circle: drawCircle };
 
+  var isScrolling = false;
+  var scrollTimeout;
+  wrapper.addEventListener('scroll', function() {
+    isScrolling = true;
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(function() { isScrolling = false; }, 150);
+  }, { passive: true });
+
   function animate() {
+    if (canvas.offsetWidth === 0) {
+      setTimeout(animate, 250);
+      return;
+    }
+    if (isScrolling) {
+      setTimeout(animate, 100);
+      return;
+    }
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Draw ripples (EP1-style expanding rings)
