@@ -82,14 +82,29 @@ export function initGaleriAnimation(){
     if (lightboxCaption) lightboxCaption.innerHTML = '<h3>' + titleText + '</h3><p>' + desc + '</p>';
   }
 
+  var savedScrollY = 0;
+
+  function lockScroll(){
+    savedScrollY = window.scrollY || window.pageYOffset || 0;
+    document.body.style.top = '-' + savedScrollY + 'px';
+    document.body.classList.add('lightbox-open');
+    document.documentElement.classList.add('lightbox-open');
+  }
+
+  function unlockScroll(){
+    document.body.classList.remove('lightbox-open');
+    document.documentElement.classList.remove('lightbox-open');
+    document.body.style.top = '';
+    window.scrollTo(0, savedScrollY);
+  }
+
   function openLightbox(index){
     if (!lightbox) return;
     currentIndex = index;
     updateLightboxContent();
     lightbox.classList.add('active');
     lightbox.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    document.body.classList.add('lightbox-open');
+    lockScroll();
     var navbar = document.getElementById('navbar');
     var scrollProg = document.getElementById('scrollProgress');
     var scrollRail = document.querySelector('.scroll-rail');
@@ -108,8 +123,7 @@ export function initGaleriAnimation(){
       onComplete: function(){
         lightbox.classList.remove('active');
         lightbox.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-        document.body.classList.remove('lightbox-open');
+        unlockScroll();
         var navbar = document.getElementById('navbar');
         var scrollProg = document.getElementById('scrollProgress');
         var scrollRail = document.querySelector('.scroll-rail');

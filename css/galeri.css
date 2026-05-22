@@ -217,6 +217,10 @@ body.lightbox-open {
 }
 
 body.lightbox-open {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  right: 0;
   touch-action: none;
 }
 
