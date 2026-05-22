@@ -1010,10 +1010,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 160px;
+  height: 200px;
   background: linear-gradient(135deg, rgba(46, 196, 182, 0.14), rgba(255, 107, 107, 0.10));
   color: var(--coral-dark, #E24A4A);
   font-size: 3rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.hasil-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.45s var(--ease-smooth, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+.hasil-card-clickable:hover .hasil-card-thumb img {
+  transform: scale(1.05);
 }
 
 .hasil-card-body {
