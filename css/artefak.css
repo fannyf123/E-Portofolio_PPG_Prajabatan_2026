@@ -1010,12 +1010,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 200px;
+  width: 100%;
+  aspect-ratio: 16 / 10;
   background: linear-gradient(135deg, rgba(46, 196, 182, 0.14), rgba(255, 107, 107, 0.10));
   color: var(--coral-dark, #E24A4A);
   font-size: 3rem;
   overflow: hidden;
   position: relative;
+  flex-shrink: 0;
 }
 
 .hasil-card-thumb img {
