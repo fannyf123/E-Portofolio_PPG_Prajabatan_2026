@@ -28,7 +28,16 @@
 }
 
 .gallery-item img {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+  width: auto;
+  min-width: 100%;
+  object-fit: cover;
   filter: grayscale(0%);
+  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 /* Hover & Active States */
@@ -171,7 +180,7 @@
   display: none;
   align-items: center;
   justify-content: center;
-  z-index: 99999;
+  z-index: 10000;
   padding: 0;
   opacity: 0;
   overflow: hidden;
@@ -203,7 +212,6 @@
 
 body.lightbox-open {
   overflow: hidden !important;
-  height: 100vh;
 }
 
 .lightbox-close,
