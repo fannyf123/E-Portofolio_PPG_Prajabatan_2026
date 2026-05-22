@@ -152,6 +152,36 @@ export function initGaleriAnimation(){
   if (nextBtn) nextBtn.addEventListener('click', nextSlide);
   if (prevBtn) prevBtn.addEventListener('click', prevSlide);
 
+  // Video hero (above accordion)
+  var videoHero = document.querySelector('.gallery-video-hero');
+  if (videoHero && lightbox && lightboxContent) {
+    function openVideoHero(){
+      var src = videoHero.getAttribute('data-src');
+      var titleEl = videoHero.querySelector('.gallery-video-text h3');
+      var descEl = videoHero.querySelector('.gallery-video-text p');
+      var titleText = titleEl ? titleEl.textContent : '';
+      var desc = descEl ? descEl.textContent : '';
+      lightboxContent.innerHTML = '<iframe src="' + src + '" style="width:100%;height:70vh;border:none;border-radius:12px;" allowfullscreen></iframe>';
+      if (lightboxCaption) lightboxCaption.innerHTML = '<h3>' + titleText + '</h3><p>' + desc + '</p>';
+      lightbox.classList.add('active');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      document.body.classList.add('lightbox-open');
+      var navbar = document.getElementById('navbar');
+      var scrollProg = document.getElementById('scrollProgress');
+      var scrollRail = document.querySelector('.scroll-rail');
+      if (navbar) navbar.style.display = 'none';
+      if (scrollProg) scrollProg.style.display = 'none';
+      if (scrollRail) scrollRail.style.display = 'none';
+      gsap.fromTo(lightbox, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' });
+      gsap.fromTo(lightboxContent, { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(1.5)', delay: 0.1 });
+    }
+    videoHero.addEventListener('click', openVideoHero);
+    videoHero.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openVideoHero(); }
+    });
+  }
+
   if (lightbox) {
     lightbox.addEventListener('click', function(e){
       if (e.target === lightbox) closeLightbox();
