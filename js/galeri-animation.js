@@ -192,8 +192,7 @@ export function initGaleriAnimation(){
       if (lightboxCaption) lightboxCaption.innerHTML = '<h3>' + titleText + '</h3><p>' + desc + '</p>';
       lightbox.classList.add('active');
       lightbox.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-      document.body.classList.add('lightbox-open');
+      lockScroll();
       var navbar = document.getElementById('navbar');
       var scrollProg = document.getElementById('scrollProgress');
       var scrollRail = document.querySelector('.scroll-rail');
