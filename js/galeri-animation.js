@@ -64,6 +64,13 @@ export function initGaleriAnimation(){
   var nextBtn = lightbox ? lightbox.querySelector('.lightbox-next') : null;
   var currentIndex = 0;
 
+  // Move lightbox to body so position:fixed is relative to viewport,
+  // not to any ancestor with transform/filter/isolation that creates
+  // a containing block.
+  if (lightbox && lightbox.parentNode !== document.body) {
+    document.body.appendChild(lightbox);
+  }
+
   function updateLightboxContent(){
     var item = items[currentIndex];
     if (!item) return;
