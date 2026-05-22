@@ -737,6 +737,46 @@ function initMain() {
       btn.classList.add('active');
       const tab = btn.getAttribute('data-tab');
       applyFilters(tab, getActiveFilter());
+      filterHasilSiswa(tab);
+    });
+  });
+
+  // ---------- Konten Tabs (Artefak / Hasil Siswa) ----------
+  const kontenTabs = document.querySelectorAll('.konten-tab-btn');
+  const hasilSiswaWrapper = document.getElementById('hasilSiswaWrapper');
+  const portfolioFilterEl = document.querySelector('.portfolio-filter');
+
+  function filterHasilSiswa(siklus) {
+    if (!hasilSiswaWrapper) return;
+    const cards = hasilSiswaWrapper.querySelectorAll('.hasil-card');
+    cards.forEach(card => {
+      const cardSiklus = card.getAttribute('data-hasil-siklus') || '';
+      const match = (siklus === 'all' || cardSiklus === siklus);
+      card.style.display = match ? '' : 'none';
+    });
+  }
+
+  kontenTabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      kontenTabs.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+
+      const konten = btn.getAttribute('data-konten');
+      const isHasil = konten === 'hasil-siswa';
+
+      if (portfolioGridWrapper) portfolioGridWrapper.style.display = isHasil ? 'none' : '';
+      if (portfolioFilterEl) portfolioFilterEl.style.display = isHasil ? 'none' : '';
+      if (hasilSiswaWrapper) hasilSiswaWrapper.hidden = !isHasil;
+
+      if (isHasil) filterHasilSiswa(getActiveSiklus());
+
+      if (window.ScrollTrigger && typeof window.ScrollTrigger.refresh === 'function') {
+        requestAnimationFrame(() => window.ScrollTrigger.refresh());
+      }
     });
   });
 
