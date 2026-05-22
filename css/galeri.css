@@ -214,14 +214,10 @@
 html.lightbox-open,
 body.lightbox-open {
   overflow: hidden !important;
-  height: 100% !important;
-  touch-action: none;
 }
 
 body.lightbox-open {
-  position: fixed;
-  width: 100%;
-  inset: 0;
+  touch-action: none;
 }
 
 .lightbox-close,
