@@ -366,7 +366,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .about-image {
@@ -375,6 +375,22 @@
   flex-direction: column;
   gap: 28px;
   padding-bottom: 0;
+  height: 100%;
+}
+
+.about-image .profil-quote {
+  margin-top: auto;
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  height: 100%;
+}
+
+.about-content > *:last-child {
+  margin-bottom: 0;
 }
 
 .about-image-card {
