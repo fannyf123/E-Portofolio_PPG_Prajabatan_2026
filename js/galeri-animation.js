@@ -99,10 +99,16 @@ export function initGaleriAnimation(){
   }
 
   function unlockScroll(){
+    var html = document.documentElement;
+    var prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = 'auto';
     document.body.classList.remove('lightbox-open');
-    document.documentElement.classList.remove('lightbox-open');
+    html.classList.remove('lightbox-open');
     document.body.style.top = '';
     window.scrollTo(0, savedScrollY);
+    requestAnimationFrame(function(){
+      html.style.scrollBehavior = prev;
+    });
   }
 
   function openLightbox(index){
