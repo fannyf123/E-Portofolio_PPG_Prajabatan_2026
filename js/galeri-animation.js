@@ -68,7 +68,8 @@ export function initGaleriAnimation(){
     var item = items[currentIndex];
     if (!item) return;
     var type = item.getAttribute('data-type');
-    var src = item.getAttribute('data-src');
+    var imgEl = item.querySelector('img');
+    var src = (imgEl && imgEl.src) ? imgEl.src : item.getAttribute('data-src');
     var caption = item.querySelector('.gallery-caption');
     var titleText = caption ? (caption.querySelector('h3') ? caption.querySelector('h3').textContent : '') : '';
     var desc = caption ? (caption.querySelector('p') ? caption.querySelector('p').textContent : '') : '';
