@@ -12,11 +12,11 @@ export function initPortfolioChooser() {
   const prefersReducedMotion = false;
   const ep2Wrapper = document.getElementById('eportfolio2Wrapper');
 
-  // Auto-unlock UAS chooser starting 8 June 2026.
+  // Auto-unlock UAS chooser starting 29 May 2026.
   // Pakai server time dari HTTP Date header agar tidak bisa diakali
   // dengan ubah jam PC. Fallback ke client time hanya kalau request gagal.
   (function maybeAutoUnlockEp2() {
-    const UNLOCK_AT = Date.UTC(2026, 5, 7, 17, 0, 0); // 8 Juni 00:00 WIB (UTC+7)
+    const UNLOCK_AT = Date.UTC(2026, 4, 28, 17, 0, 0); // 29 Mei 00:00 WIB (UTC+7)
 
     const ep2Card = chooser.querySelector('.chooser-card[data-portfolio="2"]');
     if (!ep2Card) return;
