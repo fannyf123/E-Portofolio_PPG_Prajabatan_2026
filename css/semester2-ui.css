@@ -59,10 +59,8 @@
 .s2ui-plus::before  { content: '\2713'; color: var(--teal); }
 .s2ui-minus::before { content: '\26A0'; color: var(--rose); }
 
-.s2ui-pratinjau { margin-top: 26px; }
-
 .s2ui-demo-catatan {
-  margin: 0 0 10px;
+  margin: 0 0 12px;
   padding: 8px 12px;
   border-left: 3px solid var(--amber);
   background: color-mix(in srgb, var(--amber) 20%, transparent);
@@ -71,51 +69,121 @@
   line-height: 1.6;
 }
 
-.s2ui-pratinjau-kepala {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+/* ---------- Kartu siklus ----------
+   Praktik mengajar mandiri berjalan empat siklus, jadi tiap artefak
+   memiliki empat berkas. Kartu yang berkasnya ada dapat ditekan untuk
+   membuka pratinjau pada modal milik E-Portfolio 1. */
+
+.s2siklus { margin-top: 28px; }
+
+.s2siklus-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
-  margin-bottom: 10px;
 }
 
-.s2ui-pratinjau-kepala h4 { margin: 0; border: 0; padding: 0; }
-
-.s2ui-pratinjau iframe {
-  width: 100%;
-  height: 60vh;
-  border: 1px solid var(--s2-line);
-  border-radius: var(--s2-r-md);
-}
-
-.s2ui-belum {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin-top: 26px;
-  padding: 14px 16px;
+.s2siklus-kartu {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 18px 12px;
   border: 1px dashed var(--gray-300);
   border-radius: var(--s2-r-md);
   background: var(--s2-surface-alt);
+  font-family: inherit;
+  text-align: center;
   color: var(--s2-muted);
-  font-size: 0.88rem;
-  line-height: 1.65;
 }
 
-.s2ui-belum-tanda {
-  flex: 0 0 auto;
-  width: 8px;
-  height: 8px;
-  margin-top: 0.5em;
-  border-radius: var(--s2-r-pill);
-  background: var(--gray-400);
+.s2siklus-nomor {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.s2ui-belum code {
-  padding: 1px 6px;
-  border-radius: var(--s2-r-sm);
+.s2siklus-ikon { font-size: 1.4rem; opacity: 0.55; }
+.s2siklus-aksi { font-size: 0.78rem; }
+
+.s2siklus-kartu.is-ada {
+  border-style: solid;
+  border-color: var(--s2-line);
   background: var(--s2-surface);
-  font-size: 0.85em;
+  color: var(--s2-ink);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s var(--ease-smooth), box-shadow 0.25s var(--ease-smooth);
+}
+
+.s2siklus-kartu.is-ada .s2siklus-nomor { color: var(--s2-accent); }
+.s2siklus-kartu.is-ada .s2siklus-ikon { opacity: 1; color: var(--s2-accent); }
+
+.s2siklus-kartu.is-ada .s2siklus-aksi {
+  padding: 3px 12px;
+  border-radius: var(--s2-r-pill);
+  background: color-mix(in srgb, var(--s2-accent) 14%, transparent);
+  font-weight: 600;
+}
+
+.s2siklus-kartu.is-ada:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.s2siklus-kartu.is-ada:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+@media (max-width: 720px) {
+  .s2siklus-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---------- Modal pratinjau ---------- */
+
+/* Kunci gulir selama modal terbuka.
+
+   Keduanya dikunci, bukan salah satu. Nilai overflow yang dipakai viewport
+   diambil dari <html>, kecuali <html> bernilai visible — barulah nilai
+   <body> yang merambat. Situs memasang overflow-x: hidden pada keduanya,
+   sehingga mengunci hanya satu sisi selalu disalip yang lain.
+
+   !important diperlukan karena css/responsive.css memasang
+   `html, body { overflow-x: hidden !important; }` dan dimuat setelah
+   berkas ini. */
+html.is-modal-terkunci,
+html.is-modal-terkunci body {
+  overflow: hidden !important;
+}
+
+.s2siklus-modal-kepala {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-right: 34px;
+}
+
+.s2siklus-modal-kepala h3 { margin: 0 0 4px; }
+.s2siklus-modal-kepala p { margin: 0; color: var(--gray-500); font-style: italic; }
+
+.s2siklus-modal-tautan {
+  flex: 0 0 auto;
+  padding: 9px 16px;
+  border-radius: var(--s2-r-sm);
+  background: var(--teal);
+  color: var(--white);
+  font-size: 0.86rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.s2siklus-modal-isi { height: 74vh; padding-top: 16px; }
+
+.s2siklus-modal-isi iframe {
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--s2-r-sm);
 }
 
 /* ---------- Daftar berkas ---------- */
