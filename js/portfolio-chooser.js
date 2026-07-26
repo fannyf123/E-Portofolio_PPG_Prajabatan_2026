@@ -8,7 +8,9 @@ export function initPortfolioChooser() {
   if (!chooser) return;
 
   const STORAGE_KEY = 'selectedPortfolio';
-  const cards = chooser.querySelectorAll('.chooser-card');
+  // Hanya kartu e-portfolio. Kartu pemilih semester ([data-goto-semester])
+  // dan kartu "belum dibuka" tidak boleh ikut memicu selectPortfolio().
+  const cards = chooser.querySelectorAll('.chooser-card[data-portfolio]');
   const prefersReducedMotion = false;
   const ep2Wrapper = document.getElementById('eportfolio2Wrapper');
 
@@ -50,7 +52,44 @@ export function initPortfolioChooser() {
       });
   })();
 
+  // Layar pemilih dua langkah: pilih semester, lalu pilih e-portfolio.
+  const steps = chooser.querySelectorAll('.chooser-step');
+
+  function gotoStep(name) {
+    steps.forEach((step) => {
+      const active = step.dataset.chooserStep === name;
+      step.classList.toggle('is-active', active);
+      step.hidden = !active;
+    });
+
+    if (typeof gsap !== 'undefined' && window.innerWidth > 768) {
+      const active = chooser.querySelector('.chooser-step.is-active');
+      if (active) {
+        gsap.fromTo(
+          active.querySelectorAll('.chooser-title, .chooser-subtitle, .chooser-card, .chooser-step-back'),
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.3, stagger: 0.04, ease: 'power2.out' }
+        );
+      }
+    }
+  }
+
+  function initChooserSteps() {
+    if (!steps.length) return;
+
+    chooser.querySelectorAll('[data-goto-semester]').forEach((card) => {
+      card.addEventListener('click', () => gotoStep(card.dataset.gotoSemester));
+    });
+
+    chooser.querySelectorAll('[data-chooser-back]').forEach((btn) => {
+      btn.addEventListener('click', () => gotoStep('semester'));
+    });
+  }
+
+  initChooserSteps();
+
   function showChooser() {
+    gotoStep('semester');
     chooser.classList.add('active');
     chooser.setAttribute('aria-hidden', 'false');
     chooser.style.opacity = '1';

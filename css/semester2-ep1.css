@@ -57,3 +57,62 @@
   width: min(100% - 2 * var(--s2-gap), var(--container-max));
   margin-inline: auto;
 }
+
+/* ---------- Layar pemilih dua langkah ---------- */
+/* Selektor ini berada di luar .s2ep1-wrapper karena layar pemilih
+   dipakai bersama. Awalan .chooser- menjaga cakupannya. */
+
+.chooser-step { display: none; }
+.chooser-step.is-active { display: block; }
+
+.chooser-step-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 18px;
+  padding: 8px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--s2-r-pill);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s var(--ease-smooth);
+}
+
+.chooser-step-back:hover { background: rgba(255, 255, 255, 0.14); }
+
+.chooser-step-back:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.chooser-cards--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+/* Layar pemilih selalu berlatar gelap, terlepas dari tema situs.
+   Kartu "belum dibuka" karena itu tetap gelap-transparan seperti kartu
+   lainnya — hanya garisnya putus-putus dan isinya diredupkan. */
+.chooser-card.is-upcoming {
+  border: 1px dashed rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: none;
+  cursor: default;
+}
+
+.chooser-card.is-upcoming h3,
+.chooser-card.is-upcoming p { opacity: 0.58; }
+
+.chooser-card.is-upcoming .chooser-card-icon { filter: grayscale(1); opacity: 0.4; }
+.chooser-card.is-upcoming .chooser-card-cta { color: rgba(255, 255, 255, 0.55); }
+
+.chooser-card.is-upcoming .chooser-card-badge {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.72);
+}
+
+@media (max-width: 900px) {
+  .chooser-cards--three { grid-template-columns: 1fr; }
+}
+

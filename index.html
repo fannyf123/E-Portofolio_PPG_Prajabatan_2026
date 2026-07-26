@@ -78,23 +78,83 @@
       <div class="chooser-logo">
         <img src="assets/img/ust-logo.png" alt="Logo UST" width="48" height="48" />
       </div>
-      <h2 class="chooser-title">Pilih E-Portfolio</h2>
-      <p class="chooser-subtitle">Silakan pilih e-portfolio yang ingin Anda lihat</p>
-      <div class="chooser-cards">
-        <button class="chooser-card" data-portfolio="1">
-          <div class="chooser-card-badge">UTS</div>
-          <div class="chooser-card-icon">📚</div>
-          <h3>E-Portfolio 1</h3>
-          <p>Dokumentasi perjalanan profesional, karya, dan refleksi pembelajaran selama PPG Prajabatan 2026</p>
-          <div class="chooser-card-cta">Lihat E-Portfolio 1 →</div>
+      <!-- Langkah 1: pilih semester -->
+      <div class="chooser-step is-active" data-chooser-step="semester">
+        <h2 class="chooser-title">Pilih Semester</h2>
+        <p class="chooser-subtitle">Dua semester perjalanan PPG Prajabatan 2026</p>
+        <div class="chooser-cards">
+          <button class="chooser-card" data-goto-semester="1">
+            <div class="chooser-card-badge">SEMESTER 1</div>
+            <div class="chooser-card-icon">📘</div>
+            <h3>Semester 1</h3>
+            <p>Filosofi pendidikan, pemahaman peserta didik, dan Praktik Pengalaman Lapangan Terbimbing</p>
+            <div class="chooser-card-cta">Lihat Semester 1 →</div>
+          </button>
+          <button class="chooser-card" data-goto-semester="2">
+            <div class="chooser-card-badge">SEMESTER 2</div>
+            <div class="chooser-card-icon">🛠️</div>
+            <h3>Semester 2</h3>
+            <p>Pembelajaran mendalam, projek kepemimpinan, dan Praktik Pengalaman Lapangan Mandiri</p>
+            <div class="chooser-card-cta">Lihat Semester 2 →</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Langkah 2a: e-portfolio Semester 1 -->
+      <div class="chooser-step" data-chooser-step="1" hidden>
+        <button class="chooser-step-back" type="button" data-chooser-back>
+          <span aria-hidden="true">←</span> Pilih semester lain
         </button>
-        <button class="chooser-card" data-portfolio="2">
-          <div class="chooser-card-badge">UAS</div>
-          <div class="chooser-card-icon">🎯</div>
-          <h3>E-Portfolio 2</h3>
-          <p>Refleksi akhir Praktik Pengalaman Lapangan Terbimbing dan Filosofi Mengajar</p>
-          <div class="chooser-card-cta">Lihat E-Portfolio 2 →</div>
+        <h2 class="chooser-title">E-Portfolio Semester 1</h2>
+        <p class="chooser-subtitle">Silakan pilih e-portfolio yang ingin Anda lihat</p>
+        <div class="chooser-cards">
+          <button class="chooser-card" data-portfolio="1">
+            <div class="chooser-card-badge">UTS</div>
+            <div class="chooser-card-icon">📚</div>
+            <h3>E-Portfolio 1</h3>
+            <p>Dokumentasi perjalanan profesional, karya, dan refleksi pembelajaran selama PPG Prajabatan 2026</p>
+            <div class="chooser-card-cta">Lihat E-Portfolio 1 →</div>
+          </button>
+          <button class="chooser-card" data-portfolio="2">
+            <div class="chooser-card-badge">UAS</div>
+            <div class="chooser-card-icon">🎯</div>
+            <h3>E-Portfolio 2</h3>
+            <p>Refleksi akhir Praktik Pengalaman Lapangan Terbimbing dan Filosofi Mengajar</p>
+            <div class="chooser-card-cta">Lihat E-Portfolio 2 →</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Langkah 2b: e-portfolio Semester 2 -->
+      <div class="chooser-step" data-chooser-step="2" hidden>
+        <button class="chooser-step-back" type="button" data-chooser-back>
+          <span aria-hidden="true">←</span> Pilih semester lain
         </button>
+        <h2 class="chooser-title">E-Portfolio Semester 2</h2>
+        <p class="chooser-subtitle">Praktik Pengalaman Lapangan Mandiri di SMK N 2 Depok</p>
+        <div class="chooser-cards chooser-cards--three">
+          <button class="chooser-card" data-portfolio="s2ep1">
+            <div class="chooser-card-badge">TERSEDIA</div>
+            <div class="chooser-card-icon">📋</div>
+            <h3>E-Portfolio 1</h3>
+            <p>Enam analisis praktik mengajar mandiri</p>
+            <div class="chooser-card-cta">Buka E-Portfolio 1 →</div>
+          </button>
+          <div class="chooser-card is-upcoming" aria-disabled="true">
+            <div class="chooser-card-badge">BELUM DIBUKA</div>
+            <div class="chooser-card-icon" aria-hidden="true">🎯</div>
+            <h3>E-Portfolio 2</h3>
+            <p>Refleksi akhir Praktik Pengalaman Lapangan Mandiri</p>
+            <div class="chooser-card-cta">Menyusul pada akhir semester</div>
+          </div>
+          <div class="chooser-card is-upcoming" aria-disabled="true">
+            <div class="chooser-card-badge">BELUM DIBUKA</div>
+            <div class="chooser-card-icon" aria-hidden="true">🎓</div>
+            <h3>Seminar PPG</h3>
+            <p>Karya inovasi pendidikan dan seminar akhir program</p>
+            <div class="chooser-card-cta">Menyusul pada akhir semester</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
