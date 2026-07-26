@@ -138,6 +138,223 @@
    sepenuhnya; ketiganya sudah terdaftar di MOTION_TARGETS sehingga
    geraknya ikut mesin yang sama. Tidak ada gaya tambahan yang diperlukan. */
 
+/* ---------- Responsif ---------- */
+
+/* Di bawah 1024px: rel berubah menjadi baris chip mendatar. */
+@media (max-width: 1023px) {
+
+  .s2ep1-rail {
+    position: sticky;
+    top: 64px;
+    z-index: 50;
+    padding-block: 10px;
+    background: color-mix(in srgb, var(--s2-surface) 92%, transparent);
+    backdrop-filter: blur(var(--glass-blur));
+    border-bottom: 1px solid var(--s2-line);
+  }
+
+  .s2ep1-rail-heading { display: none; }
+
+  .s2ep1-rail ul {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .s2ep1-rail ul::-webkit-scrollbar { display: none; }
+
+  .s2ep1-rail a {
+    flex: 0 0 auto;
+    padding: 7px 14px;
+    border-left: 0;
+    border-radius: var(--s2-r-pill);
+    background: var(--s2-surface-alt);
+    white-space: nowrap;
+  }
+
+  .s2ep1-rail a[aria-current='true'] {
+    background: color-mix(in srgb, var(--primary) 14%, transparent);
+    color: var(--primary);
+  }
+
+}
+
+/* Di bawah 768px: nomor selalu di atas judul, tata letak satu kolom. */
+@media (max-width: 767px) {
+
+
+
+  .s2ep1-navbar-meta { display: none; }
+  .s2ep1-footer-back { margin-left: 0; }
+}
+
+/* Di bawah 640px: rel disembunyikan sepenuhnya. */
+@media (max-width: 639px) {
+  .s2ep1-rail { display: none; }
+}
+
+/* Hormati preferensi pengurangan gerak. */
+@media (prefers-reduced-motion: reduce) {
+  .s2ep1-wrapper *,
+  .s2ep1-wrapper *::before,
+  .s2ep1-wrapper *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ============================================
+   LAPISAN GERAK
+   ============================================ */
+
+/* Sapuan warna latar yang mengikuti bagian aktif.
+   Hanya aktif pada mode gerak penuh. */
+.s2ep1-wash {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: transparent;
+  transition: background-color 0.8s var(--ease-smooth);
+}
+
+body[data-s2-motion="tenang"] .s2ep1-wash { display: none; }
+
+/* Kanvas partikel: dimatikan hanya pada mode tenang. */
+body[data-portfolio="s2ep1"][data-s2-motion="tenang"] #particleCanvas { display: none; }
+
+/* Rel navigasi memakai position: sticky, dan sticky mati bila salah satu
+   leluhurnya menjadi kontainer gulir. Situs memasang overflow-x: hidden
+   pada body, yang membuat browser menghitung overflow-y menjadi auto —
+   body pun berubah menjadi kontainer gulir dan rel ikut tergulir hilang.
+   overflow-x: clip memotong luapan mendatar tanpa membuat kontainer gulir,
+   sehingga sticky kembali bekerja. Dibatasi pada halaman Semester 2 saja
+   agar perilaku E-Portfolio 1 dan 2 tidak tersentuh.
+
+   !important diperlukan karena css/responsive.css baris 16 memasang
+   `html, body { overflow-x: hidden !important; }` dan dimuat setelah
+   berkas ini. Selektor di bawah lebih spesifik, jadi ia yang menang. */
+html:has(body[data-portfolio="s2ep1"]),
+body[data-portfolio="s2ep1"] { overflow-x: clip !important; }
+
+/* Isi halaman harus berada di atas lapisan sapuan. */
+.s2ep1-navbar,
+.s2ep1-hero,
+.s2ep1-analisis,
+.s2ep1-refleksi,
+.s2ep1-footer { position: relative; z-index: 1; }
+
+.pillar-card { will-change: transform; }
+
+
+/* ---------- Penanda draf ----------
+   Ditempatkan menempel di bawah layar, bukan mengalir di atas halaman.
+   Navbar E-Portfolio 1 berposisi fixed di puncak, sehingga bilah yang
+   mengalir di awal wrapper akan tertindih olehnya. */
+.s2ep1-draf {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 70;
+  background: color-mix(in srgb, var(--rose) 16%, var(--s2-surface));
+  border-top: 1px solid color-mix(in srgb, var(--rose) 34%, transparent);
+  backdrop-filter: blur(var(--glass-blur));
+}
+
+.s2ep1-draf-inner {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding-block: 10px;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: var(--s2-ink);
+}
+
+.s2ep1-draf strong {
+  flex: 0 0 auto;
+  padding: 3px 12px;
+  border-radius: var(--s2-r-pill);
+  background: var(--rose);
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---------- Rel navigasi melayang ----------
+   Dibuat position: fixed, bukan sticky di dalam grid. Sticky bergantung
+   pada tidak adanya leluhur yang menjadi kontainer gulir, dan situs ini
+   memasang overflow-x: hidden pada body — syarat yang rapuh. Fixed tidak
+   bergantung pada rantai leluhur sama sekali. */
+.s2ep1-rail {
+  position: fixed;
+  left: clamp(12px, 2vw, 28px);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 55;
+  padding: 16px 14px;
+  border: 1px solid var(--s2-line);
+  border-radius: var(--s2-r-md);
+  background: color-mix(in srgb, var(--s2-surface) 85%, transparent);
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--shadow-md);
+}
+
+.s2ep1-rail-heading {
+  display: block;
+  margin-bottom: 10px;
+  padding-left: 12px;
+  color: var(--s2-muted);
+  font-family: var(--font-heading);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.s2ep1-rail ul { margin: 0; padding: 0; list-style: none; }
+
+.s2ep1-rail a {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 12px;
+  border-left: 2px solid transparent;
+  color: var(--s2-muted);
+  font-size: 0.84rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.25s var(--ease-smooth), border-color 0.25s var(--ease-smooth);
+}
+
+.s2ep1-rail a span {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 800;
+  opacity: 0.6;
+}
+
+.s2ep1-rail a:hover { color: var(--s2-ink); }
+
+.s2ep1-rail a[aria-current='true'] {
+  border-left-color: var(--primary);
+  color: var(--s2-ink);
+  font-weight: 700;
+}
+
+.s2ep1-rail a[aria-current='true'] span { opacity: 1; }
+.s2ep1-rail a:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; }
+
+/* Rel disembunyikan bila layar tidak cukup lebar untuk menampungnya
+   tanpa menindih isi. */
+@media (max-width: 1279px) {
+  .s2ep1-rail { display: none; }
+}
+
 /* ---------- Kartu artefak ----------
    Berkas menjadi objek utama tiap komponen, persis pola artefak EP1:
    kartu dengan tag, lalu tombol "Lihat Analisis" yang membuka modal
