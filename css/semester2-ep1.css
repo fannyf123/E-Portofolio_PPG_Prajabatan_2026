@@ -557,3 +557,86 @@ body[data-portfolio="s2ep1"] #particleCanvas { display: none; }
 
 .s2ep1-footer-back:hover { background: rgba(255, 255, 255, 0.2); }
 .s2ep1-footer-back:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- Responsif ---------- */
+
+/* Di bawah 1024px: rel berubah menjadi baris chip mendatar. */
+@media (max-width: 1023px) {
+  .s2ep1-analisis-grid { grid-template-columns: minmax(0, 1fr); }
+
+  .s2ep1-rail {
+    position: sticky;
+    top: 64px;
+    z-index: 50;
+    padding-block: 10px;
+    background: color-mix(in srgb, var(--s2-surface) 92%, transparent);
+    backdrop-filter: blur(var(--glass-blur));
+    border-bottom: 1px solid var(--s2-line);
+  }
+
+  .s2ep1-rail-heading { display: none; }
+
+  .s2ep1-rail ul {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .s2ep1-rail ul::-webkit-scrollbar { display: none; }
+
+  .s2ep1-rail a {
+    flex: 0 0 auto;
+    padding: 7px 14px;
+    border-left: 0;
+    border-radius: var(--s2-r-pill);
+    background: var(--s2-surface-alt);
+    white-space: nowrap;
+  }
+
+  .s2ep1-rail a[aria-current='true'] {
+    background: color-mix(in srgb, var(--primary) 14%, transparent);
+    color: var(--primary);
+  }
+
+  .s2ep1-hero-grid { grid-template-columns: minmax(0, 1fr); }
+  .s2ep1-refleksi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Di bawah 768px: nomor selalu di atas judul, tata letak satu kolom. */
+@media (max-width: 767px) {
+  .s2ep1-item,
+  .s2ep1-item--alt {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .s2ep1-item--alt .s2ep1-item-num { order: 0; }
+  .s2ep1-item--alt .s2ep1-item-text { order: 1; text-align: left; }
+
+  .s2ep1-item--alt .s2ep1-item-text > p,
+  .s2ep1-item--alt .s2ep1-fokus { margin-left: 0; margin-right: auto; }
+
+  .s2ep1-item--alt .s2ep1-fokus li { padding-left: 22px; padding-right: 0; }
+  .s2ep1-item--alt .s2ep1-fokus li::before { left: 0; right: auto; }
+
+  .s2ep1-profil-grid { grid-template-columns: minmax(0, 1fr); }
+  .s2ep1-refleksi-grid { grid-template-columns: minmax(0, 1fr); }
+  .s2ep1-navbar-meta { display: none; }
+  .s2ep1-footer-back { margin-left: 0; }
+}
+
+/* Di bawah 640px: rel disembunyikan sepenuhnya. */
+@media (max-width: 639px) {
+  .s2ep1-rail { display: none; }
+}
+
+/* Hormati preferensi pengurangan gerak. */
+@media (prefers-reduced-motion: reduce) {
+  .s2ep1-wrapper *,
+  .s2ep1-wrapper *::before,
+  .s2ep1-wrapper *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
