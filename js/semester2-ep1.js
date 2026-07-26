@@ -39,7 +39,7 @@ let built = false;
 
 /* ---------- Utilitas ---------- */
 
-
+/** Menyorot satu butir pada rel navigasi dan melepas sorotan butir lain. */
 function highlight(id) {
   document.querySelectorAll('#s2ep1Rail a[data-rail]').forEach((link) => {
     if (link.dataset.rail === id) link.setAttribute('aria-current', 'true');
@@ -47,23 +47,8 @@ function highlight(id) {
   });
 }
 
-function buildRefleksi(wrapper) {
-  const cards = wrapper.querySelectorAll('.s2ep1-refleksi-card');
-  if (!cards.length) return;
-
-  gsap.from(cards, {
-    opacity: 0,
-    y: 30,
-    scale: 0.96,
-    duration: 0.6,
-    stagger: 0.1,
-    ease: 'back.out(1.5)',
-    scrollTrigger: { trigger: '.s2ep1-refleksi', start: 'top 78%', once: true },
-  });
-}
-
 function buildHover(wrapper) {
-  wrapper.querySelectorAll('.s2ep1-refleksi-card').forEach((card) => {
+  wrapper.querySelectorAll('.pillar-card').forEach((card) => {
     card.addEventListener('mouseenter', () => {
       gsap.to(card, { y: -6, scale: 1.015, duration: 0.3, ease: 'power2.out' });
     });
@@ -135,7 +120,7 @@ function buildRail(wrapper) {
 
 /** Tanpa GSAP atau saat pengguna meminta gerak dikurangi: tampilkan langsung. */
 function revealStatic(wrapper) {
-  wrapper.querySelectorAll('.analisis.section, .analisis-card, .s2ep1-refleksi-card, .section-header').forEach((el) => {
+  wrapper.querySelectorAll('.analisis.section, .analisis-card, .pillar-card, .philosophy-card, .section-header').forEach((el) => {
     el.style.opacity = '1';
     el.style.transform = 'none';
     el.style.visibility = 'visible';
@@ -181,7 +166,7 @@ export function refreshSemester2Ep1() {
   // Hero kini beranatomi EP1 (.hero-greeting, .hero-name, .hero-desc,
   // .hero-badge), yang seluruhnya sudah terdaftar di MOTION_TARGETS milik
   // scroll-experience.js — jadi ia ikut digerakkan mesin yang sama.
-  wrapper.querySelectorAll('.s2ep1-hero, .analisis.section').forEach((section, i) => {
+  wrapper.querySelectorAll('.s2ep1-hero, .analisis.section, .s2ep1-refleksi').forEach((section, i) => {
     applyScrollExperienceTo(section, i);
     ScrollTrigger.create({
       trigger: section,
@@ -190,7 +175,6 @@ export function refreshSemester2Ep1() {
       onEnter: () => section.classList.add('is-in'),
     });
   });
-  buildRefleksi(wrapper);
   buildHover(wrapper);
   if (!isCalm()) buildWash(wrapper);
 
