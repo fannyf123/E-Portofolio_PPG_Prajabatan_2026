@@ -23,6 +23,25 @@ export function varianUi() {
   return VARIAN.includes(pilihan) ? pilihan : null;
 }
 
+/* ---------- Mode demo berkas ----------
+   ?demo=berkas memperlihatkan tampilan setelah dokumen benar-benar
+   diunggah, memakai satu berkas nyata dari artefak Semester 1 sebagai
+   contoh. Hanya berlaku selama kunjungan; data pada
+   js/semester2-artefak-data.js tidak diubah, sehingga tidak ada tautan
+   contoh yang ikut terkirim ketika portofolio dinilai. */
+const BERKAS_CONTOH =
+  'https://drive.google.com/file/d/13HtahKdlZsOCvZQitf-nsfdewEUgTeHT/view?usp=sharing';
+
+function modeDemo() {
+  return new URLSearchParams(window.location.search).get('demo') === 'berkas';
+}
+
+/** Mengembalikan tautan berkas: yang sebenarnya, atau contoh saat mode demo. */
+function tautanBerkas(a) {
+  if (a && a.fileUrl) return a.fileUrl;
+  return modeDemo() ? BERKAS_CONTOH : '';
+}
+
 /* ---------- Utilitas ---------- */
 
 function aman(teks) {
@@ -50,13 +69,15 @@ export function analisisHtml(id) {
   const pros = a.pros.map((t) => `<li class="s2ui-plus">${aman(t)}</li>`).join('');
   const cons = a.cons.map((t) => `<li class="s2ui-minus">${aman(t)}</li>`).join('');
 
-  const pratinjau = a.fileUrl
+  const berkas = tautanBerkas(a);
+  const pratinjau = berkas
     ? `<div class="s2ui-pratinjau">
          <div class="s2ui-pratinjau-kepala">
            <h4>Pratinjau Dokumen</h4>
-           <a href="${aman(a.fileUrl)}" target="_blank" rel="noopener noreferrer">Buka di tab baru &nearr;</a>
+           <a href="${aman(berkas)}" target="_blank" rel="noopener noreferrer">Buka di tab baru &nearr;</a>
          </div>
-         <iframe src="${aman(tautanSemat(a.fileUrl))}" title="Pratinjau ${aman(a.title)}" loading="lazy"></iframe>
+         ${!a.fileUrl ? '<p class="s2ui-demo-catatan">Contoh tampilan. Dokumen di bawah masih milik artefak Semester 1, dipakai sekadar memperlihatkan bentuk pratinjau.</p>' : ''}
+         <iframe src="${aman(tautanSemat(berkas))}" title="Pratinjau ${aman(a.title)}" loading="lazy"></iframe>
        </div>`
     : `<div class="s2ui-belum">
          <span class="s2ui-belum-tanda"></span>
@@ -216,7 +237,7 @@ function bangunDosir(wrapper) {
             <span class="s2dosir-panah" aria-hidden="true"></span>
             <span class="s2dosir-judul">${aman(a ? a.title : id)}</span>
             <span class="s2dosir-jenis">${aman(a ? a.type : '')}</span>
-            <span class="s2dosir-tanda">${a && a.fileUrl ? 'Ada berkas' : 'Belum diunggah'}</span>
+            <span class="s2dosir-tanda${tautanBerkas(a) ? ' is-ada' : ''}">${tautanBerkas(a) ? 'Ada berkas' : 'Belum diunggah'}</span>
           </button>
           <div class="s2dosir-isi" hidden></div>
         </div>`;

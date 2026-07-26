@@ -81,6 +81,16 @@
 
 .s2ui-pratinjau { margin-top: 26px; }
 
+.s2ui-demo-catatan {
+  margin: 0 0 10px;
+  padding: 8px 12px;
+  border-left: 3px solid var(--amber);
+  background: color-mix(in srgb, var(--amber) 20%, transparent);
+  color: var(--s2-ink);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
 .s2ui-pratinjau-kepala {
   display: flex;
   align-items: center;
@@ -395,11 +405,18 @@ body[data-s2-ui="dosir"] .s2ep1-wrapper .s2ep1-artefak-grid { display: none; }
 .s2dosir-tanda {
   padding: 4px 12px;
   border-radius: var(--s2-r-pill);
-  background: color-mix(in srgb, var(--s2-accent) 12%, transparent);
-  color: var(--s2-ink);
+  background: var(--s2-surface-alt);
+  color: var(--s2-muted);
   font-size: 0.72rem;
   font-weight: 600;
   white-space: nowrap;
+}
+
+/* Berkas yang sudah ada ditandai dengan warna aksen bagiannya, sehingga
+   satu pandangan cukup untuk melihat komponen mana yang sudah lengkap. */
+.s2dosir-tanda.is-ada {
+  background: color-mix(in srgb, var(--s2-accent) 16%, transparent);
+  color: var(--s2-ink);
 }
 
 .s2dosir-isi { padding: 4px 20px 24px 52px; }

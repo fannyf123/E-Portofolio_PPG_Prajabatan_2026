@@ -188,6 +188,12 @@ export function initPortfolioChooser() {
   const navLinks = document.getElementById('navLinks');
   const footerEp1 = document.querySelector('body > footer');
   const footerSitemap = footerEp1 ? footerEp1.querySelector('.footer-sitemap ul') : null;
+  // Simpul asli disimpan sebagai elemen, bukan sebagai string HTML.
+  // js/main.js menangkap `.nav-links a` sebagai NodeList statis saat halaman
+  // dimuat dan mengikat pendengar klik langsung pada tiap <a>. Memulihkan
+  // daftar lewat innerHTML akan membuat simpul baru, sehingga penyorotan
+  // tautan aktif dan penutupan menu ponsel di E-Portfolio 1 berhenti bekerja
+  // setelah pengunjung sempat membuka halaman Semester 2.
   let navAsli = null;
   let footerAsli = null;
 
@@ -211,23 +217,35 @@ export function initPortfolioChooser() {
     penandaFooter.parentNode.insertBefore(footerEp1, penandaFooter);
   }
 
-  function tulisTautan(list, aktifPertama) {
-    return list
-      .map(([href, label], i) =>
-        `<li><a href="${href}"${i === 0 && aktifPertama ? ' class="active"' : ''}>${label}</a></li>`)
-      .join('');
+  /** Membuat simpul <li> baru untuk daftar tautan Semester 2. */
+  function simpulTautan(list, aktifPertama) {
+    return list.map(([href, label], i) => {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = href;
+      a.textContent = label;
+      if (i === 0 && aktifPertama) a.className = 'active';
+      li.appendChild(a);
+      return li;
+    });
   }
 
   function pakaiTautanSemester2() {
-    if (navLinks && navAsli === null) navAsli = navLinks.innerHTML;
-    if (footerSitemap && footerAsli === null) footerAsli = footerSitemap.innerHTML;
-    if (navLinks) navLinks.innerHTML = tulisTautan(S2_LINKS, true);
-    if (footerSitemap) footerSitemap.innerHTML = tulisTautan(S2_LINKS, false);
+    if (navLinks) {
+      if (navAsli === null) navAsli = [...navLinks.children];
+      navLinks.replaceChildren(...simpulTautan(S2_LINKS, true));
+    }
+    if (footerSitemap) {
+      if (footerAsli === null) footerAsli = [...footerSitemap.children];
+      footerSitemap.replaceChildren(...simpulTautan(S2_LINKS, false));
+    }
   }
 
   function pulihkanTautan() {
-    if (navLinks && navAsli !== null) navLinks.innerHTML = navAsli;
-    if (footerSitemap && footerAsli !== null) footerSitemap.innerHTML = footerAsli;
+    // Simpul yang sama dipasang kembali, jadi pendengar klik yang terikat
+    // padanya sejak halaman dimuat tetap hidup.
+    if (navLinks && navAsli) navLinks.replaceChildren(...navAsli);
+    if (footerSitemap && footerAsli) footerSitemap.replaceChildren(...footerAsli);
   }
 
   function showS2Ep1() {
