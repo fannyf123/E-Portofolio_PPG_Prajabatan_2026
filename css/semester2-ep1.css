@@ -125,39 +125,12 @@
 /* ---------- Hero ----------
    Hero memakai kelas .hero.section milik E-Portfolio 1 sepenuhnya, jadi
    tata letak, ukuran, dan latarnya diwarisi dari sana. Yang ditambahkan di
-   sini hanya daftar enam butir analisis di bawah lencana. */
+   sini hanya gaya baris peran. Daftar enam butir analisis tidak dipasang di
+   hero karena mengulang rel navigasi yang sudah menetap di sisi kiri. */
 
 .s2ep1-hero-role {
   color: var(--s2-muted);
   font-weight: 600;
-}
-
-.s2ep1-hero-index {
-  display: grid;
-  gap: 8px;
-  width: 100%;
-  max-width: 320px;
-  margin: 22px auto 0;
-  padding: 16px 18px;
-  border: 1px solid var(--s2-line);
-  border-radius: var(--s2-r-md);
-  background: color-mix(in srgb, var(--s2-surface) 70%, transparent);
-  backdrop-filter: blur(var(--glass-blur));
-  list-style: none;
-}
-
-.s2ep1-hero-index li {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 0.88rem;
-  color: var(--s2-ink);
-}
-
-.s2ep1-hero-index span {
-  font-family: var(--font-heading);
-  font-weight: 800;
-  color: var(--s2-accent);
 }
 
 /* ---------- Label unsur penilaian ---------- */
