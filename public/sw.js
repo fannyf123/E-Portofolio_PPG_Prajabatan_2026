@@ -1,4 +1,7 @@
-const CACHE_NAME = 'eportfolio-v1';
+/* Naikkan nomor ini setiap kali isi situs berubah. Handler 'activate'
+   di bawah menghapus seluruh cache yang namanya tidak cocok, sehingga
+   pengunjung lama tidak tertinggal pada versi usang. */
+const CACHE_NAME = 'eportfolio-v2-semester2';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -51,6 +54,27 @@ self.addEventListener('fetch', (event) => {
     event.request.method !== 'GET'
   ) {
     return; // Let browser handle it directly via network
+  }
+
+  // Dokumen HTML selalu diambil dari jaringan lebih dulu. Tanpa ini,
+  // strategi stale-while-revalidate di bawah menyajikan halaman lama pada
+  // muat pertama — pengunjung baru melihat versi terbaru setelah memuat
+  // ulang untuk kedua kalinya. Untuk portofolio yang isinya bertambah
+  // bertahap, itu berarti penilai bisa membaca versi usang.
+  // Cache tetap dipakai sebagai cadangan bila jaringan gagal.
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const copy = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+          }
+          return networkResponse;
+        })
+        .catch(() => caches.match(event.request).then((cached) => cached || caches.match('./index.html')))
+    );
+    return;
   }
 
   event.respondWith(
