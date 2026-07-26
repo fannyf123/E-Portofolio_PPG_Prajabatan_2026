@@ -1,0 +1,416 @@
+/* ============================================
+   SEMESTER 2 — VARIAN NUANSA UI
+   Tiga susunan halaman untuk dibandingkan:
+     body[data-s2-ui="meja"]     berkas kiri, analisis di panel kanan
+     body[data-s2-ui="langkah"]  satu komponen per layar
+     body[data-s2-ui="dosir"]    baris ringkas, membuka di tempat
+
+   Seluruh warna melewati token yang sudah ada di semester2-ep1.css.
+   Tidak ada palet baru: yang berubah hanya susunan dan cara berpindah.
+   Semua aturan bersarang di dalam .s2ep1-wrapper atau body[data-s2-ui],
+   sehingga E-Portfolio 1 dan 2 tidak tersentuh.
+   ============================================ */
+
+/* ---------- Bagian analisis bersama ---------- */
+
+.s2ui-kepala h3 {
+  margin: 0 0 4px;
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--s2-ink);
+}
+
+.s2ui-jenis {
+  margin: 0 0 20px;
+  color: var(--s2-muted);
+  font-size: 0.86rem;
+  font-style: italic;
+}
+
+.s2ui-isi h4 {
+  margin: 22px 0 8px;
+  padding-left: 10px;
+  border-left: 3px solid var(--s2-accent);
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--s2-ink);
+}
+
+.s2ui-isi p {
+  margin: 0;
+  color: var(--s2-muted);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.s2ui-teori {
+  padding-left: 12px;
+  border-left: 2px solid var(--s2-line);
+  font-style: italic;
+}
+
+.s2ui-nilai {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.s2ui-nilai li {
+  position: relative;
+  padding-left: 26px;
+  color: var(--s2-ink);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.s2ui-nilai li::before {
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  font-weight: 800;
+}
+
+.s2ui-plus::before  { content: '\2713'; color: var(--teal); }
+.s2ui-minus::before { content: '\26A0'; color: var(--rose); }
+
+.s2ui-pratinjau { margin-top: 26px; }
+
+.s2ui-pratinjau-kepala {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.s2ui-pratinjau-kepala h4 { margin: 0; border: 0; padding: 0; }
+
+.s2ui-pratinjau iframe {
+  width: 100%;
+  height: 60vh;
+  border: 1px solid var(--s2-line);
+  border-radius: var(--s2-r-md);
+}
+
+.s2ui-belum {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 26px;
+  padding: 14px 16px;
+  border: 1px dashed var(--gray-300);
+  border-radius: var(--s2-r-md);
+  background: var(--s2-surface-alt);
+  color: var(--s2-muted);
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+.s2ui-belum-tanda {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  margin-top: 0.5em;
+  border-radius: var(--s2-r-pill);
+  background: var(--gray-400);
+}
+
+.s2ui-belum code {
+  padding: 1px 6px;
+  border-radius: var(--s2-r-sm);
+  background: var(--s2-surface);
+  font-size: 0.85em;
+}
+
+/* ============================================================
+   VARIAN A — MEJA KERJA
+   Bagian analisis bawaan disembunyikan; isinya tampil pada panel
+   kanan yang tetap di tempat. Tidak ada modal sama sekali.
+   ============================================================ */
+
+body[data-s2-ui="meja"] .s2ep1-wrapper .analisis.section,
+body[data-s2-ui="meja"] .s2ep1-rail { display: none; }
+
+.s2meja {
+  padding-block: var(--s2-section-y);
+  background: var(--s2-surface);
+  border-top: 1px solid var(--s2-line);
+}
+
+.s2meja-grid {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: var(--s2-gap);
+  align-items: start;
+}
+
+.s2meja-daftar {
+  position: sticky;
+  top: 96px;
+  max-height: calc(100vh - 130px);
+  overflow-y: auto;
+  padding: 18px 14px;
+  border: 1px solid var(--s2-line);
+  border-radius: var(--s2-r-md);
+  background: var(--s2-surface-alt);
+}
+
+.s2meja-grup + .s2meja-grup { margin-top: 18px; }
+
+.s2meja-grup-judul {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--s2-muted);
+}
+
+.s2meja-grup-judul span { color: var(--primary); }
+
+.s2meja-daftar ul { margin: 0; padding: 0; list-style: none; }
+
+.s2meja-item {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  border: 0;
+  border-left: 2px solid transparent;
+  border-radius: 0 var(--s2-r-sm) var(--s2-r-sm) 0;
+  background: transparent;
+  color: var(--s2-muted);
+  font-family: inherit;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s var(--ease-smooth), color 0.2s var(--ease-smooth);
+}
+
+.s2meja-item:hover { background: var(--s2-surface); color: var(--s2-ink); }
+
+.s2meja-item[aria-current="true"] {
+  border-left-color: var(--primary);
+  background: var(--s2-surface);
+  color: var(--s2-ink);
+  font-weight: 600;
+}
+
+.s2meja-item:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; }
+
+.s2meja-panel {
+  padding: 30px 32px;
+  border: 1px solid var(--s2-line);
+  border-radius: var(--s2-r-md);
+  background: var(--s2-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 1023px) {
+  .s2meja-grid { grid-template-columns: minmax(0, 1fr); }
+  .s2meja-daftar { position: static; max-height: none; }
+  .s2meja-panel { padding: 22px; }
+}
+
+/* ============================================================
+   VARIAN B — LANGKAH 01 SAMPAI 06
+   Hanya satu komponen tampil; sisanya disembunyikan sampai
+   pembaca menekan maju, mundur, atau titik langkah.
+   ============================================================ */
+
+body[data-s2-ui="langkah"] .s2ep1-wrapper .analisis.section { display: none; }
+body[data-s2-ui="langkah"] .s2ep1-wrapper .analisis.section.is-langkah-aktif { display: block; }
+
+.s2langkah-bar {
+  position: sticky;
+  top: 76px;
+  z-index: 55;
+  padding-block: 14px;
+  border-block: 1px solid var(--s2-line);
+  background: color-mix(in srgb, var(--s2-surface) 92%, transparent);
+  backdrop-filter: blur(var(--glass-blur));
+}
+
+.s2langkah-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.s2langkah-titik {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.s2langkah-titik li { display: flex; align-items: center; }
+
+.s2langkah-titik li + li::before {
+  content: '';
+  width: 28px;
+  height: 2px;
+  background: var(--s2-line);
+}
+
+.s2langkah-titik li.is-lewat + li::before { background: var(--primary); }
+
+.s2langkah-titik button {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--s2-line);
+  border-radius: var(--s2-r-pill);
+  background: var(--s2-surface);
+  color: var(--s2-muted);
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-smooth);
+}
+
+.s2langkah-titik li.is-lewat button {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.s2langkah-titik button[aria-current="true"] {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--white);
+}
+
+.s2langkah-titik button:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+.s2langkah-label {
+  font-family: var(--font-heading);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--s2-muted);
+}
+
+.s2langkah-nav { padding-block: 8px var(--s2-section-y); }
+
+.s2langkah-nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.s2langkah-tombol {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border: 1px solid var(--s2-line);
+  border-radius: var(--s2-r-pill);
+  background: var(--s2-surface);
+  color: var(--s2-ink);
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s var(--ease-smooth);
+}
+
+.s2langkah-tombol:hover { background: var(--s2-surface-alt); }
+.s2langkah-tombol--maju { margin-left: auto; }
+.s2langkah-tombol:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+/* ============================================================
+   VARIAN C — DOSIR ARSIP
+   Kartu 2x2 diganti baris ringkas yang membuka analisis di tempat.
+   ============================================================ */
+
+body[data-s2-ui="dosir"] .s2ep1-wrapper .s2ep1-artefak-grid { display: none; }
+
+.s2dosir {
+  border: 1px solid var(--s2-line);
+  border-radius: var(--s2-r-md);
+  overflow: hidden;
+  background: var(--s2-surface);
+}
+
+.s2dosir-baris + .s2dosir-baris { border-top: 1px solid var(--s2-line); }
+.s2dosir-baris.is-buka { background: var(--s2-surface-alt); }
+
+.s2dosir-kepala {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1.4fr) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 15px 20px;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s var(--ease-smooth);
+}
+
+.s2dosir-kepala:hover { background: var(--s2-surface-alt); }
+.s2dosir-kepala:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; }
+
+.s2dosir-panah {
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--s2-accent);
+  border-bottom: 2px solid var(--s2-accent);
+  transform: rotate(-45deg);
+  transition: transform 0.25s var(--ease-smooth);
+}
+
+.s2dosir-kepala[aria-expanded="true"] .s2dosir-panah { transform: rotate(45deg); }
+
+.s2dosir-judul {
+  font-family: var(--font-heading);
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--s2-ink);
+}
+
+.s2dosir-jenis {
+  color: var(--s2-muted);
+  font-size: 0.84rem;
+}
+
+.s2dosir-tanda {
+  padding: 4px 12px;
+  border-radius: var(--s2-r-pill);
+  background: color-mix(in srgb, var(--s2-accent) 12%, transparent);
+  color: var(--s2-ink);
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.s2dosir-isi { padding: 4px 20px 24px 52px; }
+
+/* Baris sudah menampilkan judul dan jenis berkas, jadi kepala analisis
+   di dalam panel hanya mengulang. */
+.s2dosir-isi .s2ui-kepala { display: none; }
+.s2dosir-isi .s2ui-isi h4:first-child { margin-top: 6px; }
+
+@media (max-width: 860px) {
+  .s2dosir-kepala { grid-template-columns: 18px minmax(0, 1fr); row-gap: 6px; }
+  .s2dosir-jenis, .s2dosir-tanda { grid-column: 2; justify-self: start; }
+  .s2dosir-isi { padding-left: 20px; }
+}
