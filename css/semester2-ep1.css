@@ -473,3 +473,87 @@ body[data-portfolio="s2ep1"] #particleCanvas { display: none; }
 .s2ep1-item--alt .s2ep1-fokus { margin-left: auto; }
 .s2ep1-item--alt .s2ep1-fokus li { padding-left: 0; padding-right: 22px; }
 .s2ep1-item--alt .s2ep1-fokus li::before { left: auto; right: 0; }
+
+/* ---------- Refleksi ---------- */
+.s2ep1-refleksi {
+  padding-block: var(--s2-section-y);
+  border-top: 1px solid var(--s2-line);
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--coral) 7%, var(--s2-surface)) 0%,
+      color-mix(in srgb, var(--lavender) 9%, var(--s2-surface)) 100%);
+}
+
+.s2ep1-refleksi-title {
+  margin: 10px 0 26px;
+  font-size: clamp(1.5rem, 3.2vw, 2.2rem);
+  font-weight: 700;
+}
+
+.s2ep1-refleksi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.s2ep1-refleksi-card {
+  padding: 24px;
+  border-top: 3px solid var(--s2-accent);
+  border-radius: var(--s2-r-md);
+  background: color-mix(in srgb, var(--s2-surface) 82%, transparent);
+  backdrop-filter: blur(var(--glass-blur));
+}
+
+.s2ep1-refleksi-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.s2ep1-refleksi-card p {
+  margin: 0;
+  color: var(--s2-muted);
+  font-size: 0.94rem;
+  line-height: 1.75;
+}
+
+/* ---------- Footer ---------- */
+.s2ep1-footer {
+  padding-block: 34px;
+  background: var(--gray-800);
+  color: var(--white);
+}
+
+.s2ep1-footer-inner {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.s2ep1-footer strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+}
+
+.s2ep1-footer span {
+  color: var(--gray-300);
+  font-size: 0.84rem;
+}
+
+.s2ep1-footer-back {
+  margin-left: auto;
+  padding: 10px 20px;
+  border-radius: var(--s2-r-pill);
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.25s var(--ease-smooth);
+}
+
+.s2ep1-footer-back:hover { background: rgba(255, 255, 255, 0.2); }
+.s2ep1-footer-back:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
