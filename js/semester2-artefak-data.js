@@ -6,16 +6,26 @@
    E-Portfolio 1 (yang menggabungkannya ke artifactData) dan varian
    nuansa UI yang menampilkan analisis tanpa modal.
 
-   fileUrl sengaja dikosongkan. Begitu sebuah berkas diunggah, isi
-   fileUrl dengan tautan Google Drive-nya; pratinjau dokumen akan
-   muncul dengan sendirinya di bawah analisis.
+   Tiap artefak memiliki empat berkas — satu per siklus praktik.
+   `siklus` sengaja dikosongkan. Begitu sebuah dokumen diunggah, isi
+   posisinya dengan tautan Google Drive, misalnya:
+
+     siklus: [
+       'https://drive.google.com/file/d/ID_SIKLUS_1/view?usp=sharing',
+       '',   // siklus 2 belum ada
+       '',
+       '',
+     ],
+
+   Kartu siklusnya langsung dapat ditekan dan penanda "n dari 4 siklus"
+   pada barisnya ikut menghitung dengan sendirinya.
    ============================================ */
 
 export const SEMESTER2_ARTEFAK = {
   's2-atp': {
     title: 'Alur Tujuan Pembelajaran',
     type: 'Rancangan / Perencanaan Pembelajaran',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'Alur tujuan pembelajaran menurunkan capaian pembelajaran menjadi tujuan yang berurutan untuk praktik mengajar mandiri Teknik Pemesinan.',
     purpose: 'Saya menyusunnya agar urutan tujuan mengikuti alur kerja nyata di bengkel, bukan urutan bab pada buku, sehingga tiap tujuan menjadi pijakan bagi tujuan berikutnya.',
     pros: [
@@ -32,7 +42,7 @@ export const SEMESTER2_ARTEFAK = {
   's2-rencana-asesmen': {
     title: 'Rencana Asesmen',
     type: 'Rancangan / Perencanaan Pembelajaran',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'Rencana asesmen memetakan setiap tujuan pembelajaran terhadap bentuk asesmen yang mengukurnya, mencakup asesmen awal, formatif, dan sumatif.',
     purpose: 'Pemetaan ini menutup dua celah sekaligus: tujuan yang tidak pernah diukur, dan penilaian atas hal yang tidak pernah diajarkan.',
     pros: [
@@ -49,7 +59,7 @@ export const SEMESTER2_ARTEFAK = {
   's2-k3': {
     title: 'Handout Keselamatan Kerja',
     type: 'Materi Pembelajaran',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'Panduan keselamatan dan kesehatan kerja yang khusus disusun untuk praktik pemesinan, mencakup alat pelindung diri, prosedur aman, dan penanganan keadaan darurat.',
     purpose: 'Keselamatan kerja saya perlakukan sebagai kompetensi yang diajarkan dan dinilai, bukan sebagai peringatan yang dibacakan di awal pertemuan lalu dilupakan.',
     pros: [
@@ -66,7 +76,7 @@ export const SEMESTER2_ARTEFAK = {
   's2-pengayaan': {
     title: 'Materi Pengayaan',
     type: 'Materi Pembelajaran',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'Bahan lanjutan bagi murid yang menyelesaikan pekerjaan lebih cepat dari perkiraan, berisi tantangan tambahan pada tingkat kesulitan yang lebih tinggi.',
     purpose: 'Pengayaan disiapkan agar murid yang cepat tidak menganggur menunggu temannya, dan tetap memperoleh tantangan yang sepadan dengan kemampuannya.',
     pros: [
@@ -83,7 +93,7 @@ export const SEMESTER2_ARTEFAK = {
   's2-model3d': {
     title: 'Model Tiga Dimensi dan Animasi Langkah',
     type: 'Media Pembelajaran',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'Model tiga dimensi dan animasi langkah pengerjaan yang dipakai sebelum murid menyentuh mesin, untuk menjembatani gambar kerja dua dimensi dengan benda yang akan dihasilkan.',
     purpose: 'Kesulitan terbesar murid adalah membayangkan bentuk tiga dimensi dari gambar dua dimensi. Media ini dipilih justru karena menjawab kesulitan itu.',
     pros: [
@@ -100,7 +110,7 @@ export const SEMESTER2_ARTEFAK = {
   's2-media-cetak': {
     title: 'Media Cetak Cadangan',
     type: 'Media Pembelajaran',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'Versi cetak dari setiap media digital yang dipakai, disiapkan untuk berjaga bila perangkat atau jaringan di bengkel tidak tersedia.',
     purpose: 'Keterbatasan perangkat di bengkel adalah kondisi yang harus diterima, bukan dijadikan alasan. Cadangan cetak menjaga pembelajaran tetap berjalan.',
     pros: [
@@ -117,7 +127,7 @@ export const SEMESTER2_ARTEFAK = {
   's2-catatan-video': {
     title: 'Catatan Pengamatan Rekaman',
     type: 'Instrumen Refleksi',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'Penandaan momen kunci pada rekaman praktik mengajar mandiri beserta penelusuran penyebabnya, disusun sebagai catatan berwaktu.',
     purpose: 'Catatan berwaktu membuat temuan dapat ditunjukkan kembali, bukan sekadar diingat. Setiap momen ketika murid berhenti bekerja saya telusuri penyebabnya.',
     pros: [
@@ -134,7 +144,7 @@ export const SEMESTER2_ARTEFAK = {
   's2-umpan-balik': {
     title: 'Umpan Balik Guru Pamong',
     type: 'Catatan Pembimbingan',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'Catatan masukan guru pamong atas pelaksanaan praktik mengajar mandiri, dikumpulkan setelah tiap siklus praktik.',
     purpose: 'Umpan balik guru pamong memberi sudut pandang yang tidak dapat saya peroleh dari rekaman maupun refleksi sendiri, karena beliau mengenal murid jauh lebih lama.',
     pros: [
@@ -151,7 +161,7 @@ export const SEMESTER2_ARTEFAK = {
   's2-jurnal': {
     title: 'Catatan Harian PPL Mandiri',
     type: 'Jurnal Kegiatan',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'Jurnal harian kegiatan selama menjalani Praktik Pengalaman Lapangan Mandiri di SMK N 2 Depok, mencakup kegiatan mengajar dan nonmengajar.',
     purpose: 'Jurnal menjaga agar peristiwa kecil yang mudah terlupakan tetap tercatat, dan menjadi bahan ketika menyusun refleksi tiap siklus.',
     pros: [
@@ -168,7 +178,7 @@ export const SEMESTER2_ARTEFAK = {
   's2-inventaris': {
     title: 'Administrasi dan Inventaris Bengkel',
     type: 'Dokumen Administrasi',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'Pencatatan alat dan bahan bengkel beserta administrasi pendukung praktik, yang saya kerjakan sebagai bagian dari kegiatan nonmengajar.',
     purpose: 'Awalnya administrasi terasa terpisah dari mengajar. Setelah menjalaninya, saya memahami ketertiban pencatatan alat berdampak langsung pada kelancaran praktik.',
     pros: [
@@ -185,7 +195,7 @@ export const SEMESTER2_ARTEFAK = {
   's2-rekap': {
     title: 'Rekap Hasil Penilaian',
     type: 'Dokumen Penilaian',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'Rekapitulasi nilai murid per aspek pada tiap siklus praktik, mencakup ketepatan ukuran, ketepatan prosedur, dan keselamatan kerja.',
     purpose: 'Rekap per aspek memperlihatkan pola yang tidak terlihat pada nilai gabungan, misalnya murid dengan hasil kerja tepat tetapi prosedur yang belum aman.',
     pros: [
@@ -202,7 +212,7 @@ export const SEMESTER2_ARTEFAK = {
   's2-tindak-lanjut': {
     title: 'Analisis Butir dan Tindak Lanjut',
     type: 'Dokumen Penilaian',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'Pembacaan pola kekeliruan murid pada hasil penilaian beserta rencana perbaikan pengajaran untuk siklus berikutnya.',
     purpose: 'Hasil penilaian saya baca sebagai umpan balik atas pengajaran saya, bukan semata penilaian atas murid. Ketika sebagian besar murid keliru pada aspek yang sama, yang perlu diperbaiki adalah cara saya mengajarkannya.',
     pros: [
@@ -219,7 +229,7 @@ export const SEMESTER2_ARTEFAK = {
   's2-modul-ajar': {
     title: 'Modul Ajar Praktik Mengajar Mandiri',
     type: 'Rancangan / Perencanaan Pembelajaran',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'Modul ajar ini saya susun untuk praktik mengajar mandiri mata pelajaran produktif Teknik Pemesinan di SMK N 2 Depok. Rancangannya menuntut tujuan yang terukur pada dua dimensi sekaligus, yaitu ketepatan hasil kerja dan sikap kerja yang aman.',
     purpose: 'Saya ingin tujuan, kegiatan, dan asesmen dapat ditelusuri bolak-balik: setiap kegiatan inti merujuk pada satu tujuan tertentu, dan setiap tujuan memiliki instrumen yang mengukurnya. Pemeriksaan keselarasan saya lakukan sebelum modul diterapkan dengan memetakan ketiganya pada satu tabel.',
     pros: [
@@ -236,7 +246,7 @@ export const SEMESTER2_ARTEFAK = {
   's2-jobsheet': {
     title: 'Jobsheet dan Gambar Kerja',
     type: 'Perangkat Praktik',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'Jobsheet dan gambar kerja menjadi pegangan murid selama praktik di bengkel. Keduanya memuat urutan langkah, alat yang dibutuhkan, serta toleransi yang harus dicapai.',
     purpose: 'Saya menyusunnya agar murid dapat bekerja tanpa harus menunggu instruksi lisan saya pada setiap langkah, sehingga perhatian saya dapat diarahkan pada murid yang benar-benar memerlukan pendampingan.',
     pros: [
@@ -253,7 +263,7 @@ export const SEMESTER2_ARTEFAK = {
   's2-bahan-ajar': {
     title: 'Bahan Ajar Pemesinan',
     type: 'Materi Pembelajaran',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'Bahan ajar ini disusun dan diterapkan pada praktik mengajar mandiri. Materi praktik pemesinan mudah melebar ke hal teknis yang belum diperlukan, sehingga kedalamannya perlu dibatasi secara sadar.',
     purpose: 'Saya membatasi kedalaman materi pada apa yang benar-benar dituntut capaian pembelajaran, lalu menyediakan pengayaan terpisah bagi murid yang bergerak lebih cepat.',
     pros: [
@@ -270,7 +280,7 @@ export const SEMESTER2_ARTEFAK = {
   's2-lkpd': {
     title: 'Lembar Kerja Peserta Didik',
     type: 'Materi Pembelajaran',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'LKPD menuntun murid dari membaca gambar kerja menuju benda kerja jadi. Kemampuan awal murid dalam membaca gambar teknik berbeda cukup jauh, sehingga lembar ini disiapkan berlapis.',
     purpose: 'Saya ingin setiap murid menuju benda kerja yang sama tanpa ada yang merasa dikerjakan pada tugas yang lebih rendah dari temannya.',
     pros: [
@@ -287,7 +297,7 @@ export const SEMESTER2_ARTEFAK = {
   's2-media': {
     title: 'Media Pembelajaran',
     type: 'Media Pembelajaran',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'Media yang dipergunakan dalam praktik mengajar mandiri, berupa tayangan, model tiga dimensi, dan animasi langkah pengerjaan. Media dipilih berdasarkan kesulitan yang benar-benar dihadapi murid, bukan berdasarkan kebaruan teknologinya.',
     purpose: 'Kesulitan terbesar dalam pemesinan adalah membayangkan bentuk tiga dimensi dari gambar dua dimensi. Media yang saya pilih harus menjembatani persoalan itu; yang tidak menjawab kesulitan tertentu saya tinggalkan.',
     pros: [
@@ -304,7 +314,7 @@ export const SEMESTER2_ARTEFAK = {
   's2-dok-media': {
     title: 'Dokumentasi Penggunaan Media',
     type: 'Dokumentasi',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'Foto dan catatan penggunaan media selama praktik berlangsung di bengkel, diambil pada tiap siklus praktik mengajar mandiri.',
     purpose: 'Dokumentasi ini menjadi bukti bahwa media benar-benar dipakai dalam pembelajaran, sekaligus bahan untuk menilai apakah penggunaannya berjalan seperti yang saya rancang.',
     pros: [
@@ -321,7 +331,7 @@ export const SEMESTER2_ARTEFAK = {
   's2-video': {
     title: 'Rekaman Praktik Mengajar Mandiri',
     type: 'Video Pelaksanaan Pembelajaran',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'Rekaman utuh pelaksanaan praktik mengajar mandiri, dari kegiatan pembuka hingga penutup. Menonton rekaman diri sendiri memperlihatkan hal yang tidak terasa saat sedang mengajar.',
     purpose: 'Saya memakai rekaman ini untuk memeriksa apakah apersepsi benar-benar mengantar murid pada tujuan, bagian mana dari kegiatan inti yang tersendat, serta bagaimana perhatian saya tersebar di dalam bengkel.',
     pros: [
@@ -338,7 +348,7 @@ export const SEMESTER2_ARTEFAK = {
   's2-lk4': {
     title: 'Lembar Refleksi Praktik Pembelajaran Mandiri',
     type: 'Lembar Kerja Refleksi',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'LK 4 Refleksi Praktik Pembelajaran Mandiri diisi pada tiap siklus praktik. Isinya menautkan pengamatan atas rekaman dengan rencana perbaikan pada siklus berikutnya.',
     purpose: 'Refleksi tertulis memaksa saya menyatakan temuan secara spesifik, bukan berhenti pada kesan umum bahwa pembelajaran berjalan lancar atau kurang lancar.',
     pros: [
@@ -355,7 +365,7 @@ export const SEMESTER2_ARTEFAK = {
   's2-dok-nonmengajar': {
     title: 'Dokumentasi Kegiatan Nonmengajar',
     type: 'Dokumentasi Kegiatan',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'Catatan dan foto keterlibatan saya dalam kegiatan sekolah di luar jam mengajar, mencakup pendampingan guru pamong, administrasi, dan kegiatan sekolah lainnya.',
     purpose: 'Keterlibatan nonmengajar memberi akses pada pengetahuan yang tidak tertulis di modul mana pun, dan memperluas pandangan saya tentang murid di luar peran mereka di bengkel.',
     pros: [
@@ -372,7 +382,7 @@ export const SEMESTER2_ARTEFAK = {
   's2-lk12': {
     title: 'Orientasi dan Observasi Lingkungan Belajar',
     type: 'Lembar Kerja Observasi',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'LK 1 Orientasi Manajemen Sekolah dan LK 2 Observasi Lingkungan Belajar, disusun pada awal masa PPL Mandiri di SMK N 2 Depok.',
     purpose: 'Kedua lembar ini memetakan konteks tempat saya mengajar sebelum menyusun rancangan pembelajaran, agar rencana yang saya buat berpijak pada keadaan sekolah yang sebenarnya.',
     pros: [
@@ -389,7 +399,7 @@ export const SEMESTER2_ARTEFAK = {
   's2-instrumen': {
     title: 'Instrumen Penilaian Praktik Mandiri',
     type: 'Instrumen Penilaian',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'Kisi-kisi, soal, dan lembar penilaian yang saya rancang untuk mengukur ketercapaian tujuan pembelajaran pada praktik mengajar mandiri.',
     purpose: 'Instrumen diturunkan langsung dari tujuan pembelajaran agar tidak ada yang dinilai tanpa pernah diajarkan, dan tidak ada tujuan yang lolos tanpa diukur.',
     pros: [
@@ -406,7 +416,7 @@ export const SEMESTER2_ARTEFAK = {
   's2-rubrik': {
     title: 'Rubrik Penilaian Keterampilan Praktik',
     type: 'Rubrik Penilaian',
-    fileUrl: '',
+    siklus: ['', '', '', ''],
     context: 'Rubrik keterampilan pemesinan beserta patokan teramatinya, disusun dengan bahasa yang dapat dibaca murid dan bukan hanya oleh penilai.',
     purpose: 'Saya ingin murid dapat memeriksa hasil kerjanya sendiri sebelum menyerahkan, sehingga penilaian ikut berfungsi sebagai alat belajar.',
     pros: [

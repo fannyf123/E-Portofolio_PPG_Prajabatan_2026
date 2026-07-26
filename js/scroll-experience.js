@@ -11,13 +11,6 @@ const motionQuery = { matches: false };
 window.__portfolioScrollExperience = true;
 
 const SECTION_PALETTES = {
-  /* Semester 2 — bagian 01, dipakai untuk perbandingan berdampingan. */
-  's2ep1-rancangan': {
-    accent: '#0F5EA8',
-    rgb: '15, 94, 168',
-    wash: 'rgba(15, 94, 168, 0.15)',
-    sweep: 'rgba(15, 94, 168, 0.22)'
-  },
   hero: {
     accent: '#39BDEB',
     rgb: '57, 189, 235',
@@ -109,12 +102,7 @@ const MOTION_TARGETS = [
   '.gallery-item',
   '.contact-info',
   '.contact-detail-item',
-  '.contact-form',
-  /* Halaman Semester 2. Selektor ini tidak cocok dengan apa pun pada
-     E-Portfolio 1, jadi menambahkannya tidak mengubah perilaku di sana. */
-  '.s2ep1-item-label',
-  '.s2ep1-item-text > p',
-  '.s2ep1-fokus li'
+  '.contact-form'
 ];
 
 const CARD_TARGETS = [

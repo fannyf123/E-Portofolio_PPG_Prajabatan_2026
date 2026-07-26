@@ -2,15 +2,16 @@
    SEMESTER 2 — SUSUNAN DOSIR ARSIP
 
    Tiap komponen menampilkan berkasnya sebagai baris ringkas. Baris yang
-   diklik membuka analisis dan pratinjau dokumen di tempat, tanpa modal
-   dan tanpa berpindah halaman.
+   diklik membuka analisisnya di tempat, berikut empat kartu siklus;
+   kartu yang berkasnya ada membuka pratinjau dokumen pada modal milik
+   E-Portfolio 1.
 
    Daftar baris dibangun dari js/semester2-artefak-data.js, bukan ditulis
    di index.html, supaya judul dan urutan berkas hanya perlu diubah di
    satu tempat.
 
      ?demo=berkas   memperlihatkan tampilan setelah dokumen benar-benar
-                    diunggah, memakai satu berkas nyata sebagai contoh
+                    diunggah, memakai empat berkas nyata sebagai contoh
    ============================================ */
 
 import { SEMESTER2_ARTEFAK, SEMESTER2_KOMPONEN } from './semester2-artefak-data.js';

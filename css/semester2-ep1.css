@@ -139,60 +139,8 @@
    geraknya ikut mesin yang sama. Tidak ada gaya tambahan yang diperlukan. */
 
 /* ---------- Responsif ---------- */
-
-/* Di bawah 1024px: rel berubah menjadi baris chip mendatar. */
-@media (max-width: 1023px) {
-
-  .s2ep1-rail {
-    position: sticky;
-    top: 64px;
-    z-index: 50;
-    padding-block: 10px;
-    background: color-mix(in srgb, var(--s2-surface) 92%, transparent);
-    backdrop-filter: blur(var(--glass-blur));
-    border-bottom: 1px solid var(--s2-line);
-  }
-
-  .s2ep1-rail-heading { display: none; }
-
-  .s2ep1-rail ul {
-    display: flex;
-    gap: 6px;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .s2ep1-rail ul::-webkit-scrollbar { display: none; }
-
-  .s2ep1-rail a {
-    flex: 0 0 auto;
-    padding: 7px 14px;
-    border-left: 0;
-    border-radius: var(--s2-r-pill);
-    background: var(--s2-surface-alt);
-    white-space: nowrap;
-  }
-
-  .s2ep1-rail a[aria-current='true'] {
-    background: color-mix(in srgb, var(--primary) 14%, transparent);
-    color: var(--primary);
-  }
-
-}
-
-/* Di bawah 768px: nomor selalu di atas judul, tata letak satu kolom. */
-@media (max-width: 767px) {
-
-
-
-  .s2ep1-navbar-meta { display: none; }
-  .s2ep1-footer-back { margin-left: 0; }
-}
-
-/* Di bawah 640px: rel disembunyikan sepenuhnya. */
-@media (max-width: 639px) {
-  .s2ep1-rail { display: none; }
-}
+/* Rel navigasi punya aturan responsifnya sendiri pada blok
+   "Rel navigasi melayang" di bawah: tersembunyi di bawah 1280px. */
 
 /* Hormati preferensi pengurangan gerak. */
 @media (prefers-reduced-motion: reduce) {
@@ -238,12 +186,9 @@ body[data-portfolio="s2ep1"][data-s2-motion="tenang"] #particleCanvas { display:
 html:has(body[data-portfolio="s2ep1"]),
 body[data-portfolio="s2ep1"] { overflow-x: clip !important; }
 
-/* Isi halaman harus berada di atas lapisan sapuan. */
-.s2ep1-navbar,
-.s2ep1-hero,
-.s2ep1-analisis,
-.s2ep1-refleksi,
-.s2ep1-footer { position: relative; z-index: 1; }
+/* Isi halaman berada di atas lapisan sapuan tanpa aturan tambahan:
+   seluruh bagian memakai kelas .section milik E-Portfolio 1, yang sudah
+   position: relative; z-index: 1 di css/base.css. */
 
 .pillar-card { will-change: transform; }
 

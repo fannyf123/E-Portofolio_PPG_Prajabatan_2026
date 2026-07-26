@@ -1,15 +1,15 @@
 /* ============================================
    SEMESTER 2 — E-PORTFOLIO 1
-   Modul gerak halaman, mengikuti kosakata yang
-   sudah dipakai EP1 (scroll-experience.js) dan
-   EP2 (eportfolio2-animation.js): split-text,
-   scrub parallax, entrance berjenjang, dan
-   micro-motion pada hover.
+   Pendaftar halaman ke mesin gerak E-Portfolio 1
+   (scroll-experience.js), plus rel navigasi kiri,
+   sapuan warna latar, dan micro-motion hover.
 
-   Dua mode tersedia untuk dibandingkan:
+   Susunan dosir arsipnya sendiri (baris berkas,
+   kartu siklus, modal pratinjau) hidup di
+   js/semester2-ui.js.
+
      ?tenang  → tanpa sapuan warna latar dan
                 tanpa kanvas partikel
-     bawaan   → gerak penuh
    ============================================ */
 
 import { gsap, ScrollTrigger } from './gsap-init.js';
@@ -121,7 +121,7 @@ function buildRail(wrapper) {
 
 /** Tanpa GSAP atau saat pengguna meminta gerak dikurangi: tampilkan langsung. */
 function revealStatic(wrapper) {
-  wrapper.querySelectorAll('.analisis.section, .analisis-card, .pillar-card, .philosophy-card, .section-header').forEach((el) => {
+  wrapper.querySelectorAll('.analisis.section, .pillar-card, .philosophy-card, .section-header').forEach((el) => {
     el.style.opacity = '1';
     el.style.transform = 'none';
     el.style.visibility = 'visible';

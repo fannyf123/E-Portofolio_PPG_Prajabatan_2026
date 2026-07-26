@@ -322,13 +322,15 @@ export function initPortfolioChooser() {
     });
   }
 
-  if (s2ep1Wrapper) {
-    s2ep1Wrapper.querySelectorAll('#s2ep1BackBtn, #s2ep1FooterBack').forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        hideS2Ep1();
-        showChooser();
-      });
+  // Menu ponsel: main.js mengikat penutup menu pada tiap <a> milik
+  // E-Portfolio 1 saat halaman dimuat. Tautan Semester 2 dibuat belakangan
+  // oleh pakaiTautanSemester2(), jadi tanpa delegasi ini menu hamburger
+  // tidak menutup ketika tautan Semester 2 diklik.
+  if (navLinks) {
+    navLinks.addEventListener('click', (e) => {
+      if (!e.target.closest('a')) return;
+      document.getElementById('hamburger')?.classList.remove('active');
+      navLinks.classList.remove('open');
     });
   }
 
