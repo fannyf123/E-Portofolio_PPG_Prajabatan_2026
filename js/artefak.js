@@ -3,8 +3,6 @@
    Portfolio modal popup for artifact analysis
    ============================================ */
 
-import { SEMESTER2_ARTEFAK } from './semester2-artefak-data.js';
-
 document.addEventListener('DOMContentLoaded', () => {
 
   const modalOverlay = document.getElementById('modalOverlay');
@@ -13,10 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalTriggers = document.querySelectorAll('.btn-modal');
 
   const artifactData = {
-    /* Analisis Semester 2 hidup di modulnya sendiri; lihat
-       js/semester2-artefak-data.js. */
-    ...SEMESTER2_ARTEFAK,
-
     'modal-rpp1': {
       title: 'RPP Siklus 1 Deep Learning Assembly Tool Post',
       type: 'Rencana Pelaksanaan Pembelajaran (RPP)',

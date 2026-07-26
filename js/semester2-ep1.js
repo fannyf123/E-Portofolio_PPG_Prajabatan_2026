@@ -14,7 +14,7 @@
 
 import { gsap, ScrollTrigger } from './gsap-init.js';
 import { applyScrollExperienceTo } from './scroll-experience.js';
-import { pasangVarianUi, varianUi } from './semester2-ui.js';
+import { pasangDosir } from './semester2-ui.js';
 
 /* Seluruh bagian analisis digerakkan mesin asli E-Portfolio 1
    (scroll-experience.js), bukan tiruan. Modul ini kini hanya mengurus
@@ -152,7 +152,7 @@ export function refreshSemester2Ep1() {
   if (!wrapper) return;
 
   document.body.dataset.s2Motion = isCalm() ? 'tenang' : 'penuh';
-  pasangVarianUi();
+  pasangDosir();
 
   if (REDUCED_MOTION) {
     revealStatic(wrapper);
@@ -169,18 +169,7 @@ export function refreshSemester2Ep1() {
   // .hero-badge), yang seluruhnya sudah terdaftar di MOTION_TARGETS milik
   // scroll-experience.js — jadi ia ikut digerakkan mesin yang sama.
   //
-  // Pada varian meja dan langkah, bagian analisis tersembunyi saat pemicu
-  // seharusnya menyala, sehingga entrance-nya tidak pernah berjalan dan isi
-  // tetap tak terlihat ketika pembaca berpindah ke sana. Karena itu bagian
-  // analisis dikeluarkan dari mesin gerak pada kedua varian dan langsung
-  // ditampilkan. Varian dosir tetap memakai gulir biasa, jadi tidak terdampak.
-  const varian = varianUi();
-  const pakaiGerakBagian = !varian || varian === 'dosir';
-  const sasaran = pakaiGerakBagian
-    ? '.s2ep1-hero, .analisis.section, .s2ep1-refleksi'
-    : '.s2ep1-hero, .s2ep1-refleksi';
-
-  wrapper.querySelectorAll(sasaran).forEach((section, i) => {
+  wrapper.querySelectorAll('.s2ep1-hero, .analisis.section, .s2ep1-refleksi').forEach((section, i) => {
     applyScrollExperienceTo(section, i);
     ScrollTrigger.create({
       trigger: section,
@@ -190,17 +179,8 @@ export function refreshSemester2Ep1() {
     });
   });
 
-  if (!pakaiGerakBagian) {
-    wrapper.querySelectorAll('.analisis.section, .analisis-card, .section-header').forEach((el) => {
-      el.style.opacity = '1';
-      el.style.transform = 'none';
-      el.style.visibility = 'visible';
-    });
-    wrapper.querySelectorAll('.analisis.section').forEach((el) => el.classList.add('is-in'));
-  }
-
   buildHover(wrapper);
-  if (!isCalm() && pakaiGerakBagian) buildWash(wrapper);
+  if (!isCalm()) buildWash(wrapper);
 
   ScrollTrigger.refresh();
 }
