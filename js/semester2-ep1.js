@@ -25,6 +25,17 @@ function isCalm() {
   return new URLSearchParams(window.location.search).has('tenang');
 }
 
+/* Varian nuansa yang sedang dibandingkan. Nilai di luar daftar ini
+   diabaikan, sehingga alamat yang keliru ketik tetap menampilkan
+   tampilan bawaan, bukan halaman tanpa gaya. */
+const NUANSA = ['teduh', 'bengkel', 'gelap'];
+
+function pasangNuansa() {
+  const pilihan = new URLSearchParams(window.location.search).get('nuansa');
+  if (NUANSA.includes(pilihan)) document.body.dataset.s2Nuansa = pilihan;
+  else delete document.body.dataset.s2Nuansa;
+}
+
 /* Warna sapuan per bagian, memakai token yang sama dengan [data-accent]. */
 const WASH = {
   's2ep1-rancangan':   'rgba(15, 94, 168, 0.13)',
@@ -137,6 +148,7 @@ export function initSemester2Ep1() {
   if (!wrapper) return;
 
   document.body.dataset.s2Motion = isCalm() ? 'tenang' : 'penuh';
+  pasangNuansa();
   buildRail(wrapper);
 }
 
@@ -151,6 +163,7 @@ export function refreshSemester2Ep1() {
   if (!wrapper) return;
 
   document.body.dataset.s2Motion = isCalm() ? 'tenang' : 'penuh';
+  pasangNuansa();
 
   if (REDUCED_MOTION) {
     revealStatic(wrapper);

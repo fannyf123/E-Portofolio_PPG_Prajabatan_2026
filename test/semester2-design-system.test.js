@@ -31,6 +31,29 @@ test('setiap border-radius memakai token radius', () => {
   );
 });
 
+/* Berkas varian nuansa memang memperkenalkan warna baru, jadi ia tidak
+   tunduk pada aturan nol-hex. Yang dijaga di sini adalah warna baru hanya
+   boleh muncul sebagai definisi custom property; seluruh aturan lain wajib
+   memakai var(), agar sebuah nuansa tetap dapat diubah dari satu tempat. */
+test('varian nuansa hanya menulis hex pada definisi token', () => {
+  const nuansa = readFileSync(
+    new URL('../css/semester2-nuansa.css', import.meta.url),
+    'utf8'
+  ).replace(/\/\*[\s\S]*?\*\//g, '');
+
+  const menyimpang = nuansa
+    .split('\n')
+    .filter((baris) => /#[0-9A-Fa-f]{3,8}\b/.test(baris))
+    .filter((baris) => !/^\s*--[\w-]+:\s*#[0-9A-Fa-f]{3,8};/.test(baris))
+    .map((baris) => baris.trim());
+
+  assert.deepEqual(
+    menyimpang,
+    [],
+    `Hex hanya boleh pada definisi custom property. Menyimpang:\n${menyimpang.join('\n')}`
+  );
+});
+
 test('token lokal dipetakan dari token global', () => {
   assert.match(css, /--s2-ink:\s*var\(--gray-800\)/);
   assert.match(css, /--s2-r-sm:\s*12px/);
