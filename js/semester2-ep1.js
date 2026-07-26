@@ -13,6 +13,12 @@
    ============================================ */
 
 import { gsap, ScrollTrigger } from './gsap-init.js';
+import { applyScrollExperienceTo } from './scroll-experience.js';
+
+/* Bagian yang diserahkan ke mesin gerak asli E-Portfolio 1, bukan ke modul
+   ini. Dipakai untuk perbandingan berdampingan: 01 memakai mesin EP1,
+   02–06 memakai modul ini. */
+const PAKAI_MESIN_EP1 = new Set(['s2ep1-rancangan']);
 
 const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -285,7 +291,24 @@ export function refreshSemester2Ep1() {
   built = true;
 
   buildHero(wrapper);
-  wrapper.querySelectorAll('.s2ep1-item, .s2ep1-profil').forEach(buildSection);
+
+  wrapper.querySelectorAll('.s2ep1-item, .s2ep1-profil').forEach((section, i) => {
+    if (PAKAI_MESIN_EP1.has(section.id)) {
+      applyScrollExperienceTo(section, i);
+      // Kelas ini milik CSS berkas ini, bukan milik mesin EP1. Tanpa
+      // menambahkannya, garis aksen pada daftar fokus tetap scaleX(0)
+      // dan bagian 01 terlihat rusak, bukan sekadar berbeda.
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top 78%',
+        once: true,
+        onEnter: () => section.classList.add('is-in'),
+      });
+    } else {
+      buildSection(section);
+    }
+  });
+
   buildNumberParallax(wrapper);
   buildRefleksi(wrapper);
   buildHover(wrapper);

@@ -11,6 +11,13 @@ const motionQuery = { matches: false };
 window.__portfolioScrollExperience = true;
 
 const SECTION_PALETTES = {
+  /* Semester 2 — bagian 01, dipakai untuk perbandingan berdampingan. */
+  's2ep1-rancangan': {
+    accent: '#0F5EA8',
+    rgb: '15, 94, 168',
+    wash: 'rgba(15, 94, 168, 0.15)',
+    sweep: 'rgba(15, 94, 168, 0.22)'
+  },
   hero: {
     accent: '#39BDEB',
     rgb: '57, 189, 235',
@@ -102,7 +109,12 @@ const MOTION_TARGETS = [
   '.gallery-item',
   '.contact-info',
   '.contact-detail-item',
-  '.contact-form'
+  '.contact-form',
+  /* Halaman Semester 2. Selektor ini tidak cocok dengan apa pun pada
+     E-Portfolio 1, jadi menambahkannya tidak mengubah perilaku di sana. */
+  '.s2ep1-item-label',
+  '.s2ep1-item-text > p',
+  '.s2ep1-fokus li'
 ];
 
 const CARD_TARGETS = [
@@ -578,3 +590,26 @@ function initScrollExperience() {
 onReady(() => {
   waitForIntroReady(initScrollExperience);
 });
+
+/**
+ * Menerapkan mesin gerak yang sama persis seperti E-Portfolio 1 pada satu
+ * bagian yang baru terlihat belakangan.
+ *
+ * initScrollExperience() di atas hanya berjalan sekali saat halaman dimuat,
+ * pada bagian yang sudah tampak. Halaman Semester 2 berada di dalam wrapper
+ * ber-display:none pada saat itu, sehingga bagiannya terlewat dan
+ * ScrollTrigger tidak dapat menghitung posisinya. Fungsi ini memungkinkan
+ * bagian tersebut mendaftar sendiri setelah wrappernya ditampilkan.
+ *
+ * Murni tambahan — tidak mengubah perilaku E-Portfolio 1 maupun 2.
+ */
+export function applyScrollExperienceTo(section, index = 0) {
+  if (!section || section.dataset.scrollFxApplied === 'true') return;
+  section.dataset.scrollFxApplied = 'true';
+
+  const prepared = prepareSection(section, index);
+  buildSectionEntrance(section, prepared, index);
+  buildSectionScrub(section);
+  section.classList.add('scroll-fx-current');
+  ScrollTrigger.refresh();
+}
