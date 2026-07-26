@@ -21,6 +21,7 @@ import { initFooterAnimation } from './footer-animation.js';
 import { initPortfolioChooser } from './portfolio-chooser.js';
 import { initSertifikatModal } from './sertifikat-modal.js';
 import { refreshEp2Animation } from './eportfolio2-animation.js';
+import { initSemester2Ep1 } from './semester2-ep1.js';
 
 window.refreshEp2Animation = refreshEp2Animation;
 
@@ -845,6 +846,7 @@ function initMain() {
   initKontakAnimation();
   initFooterAnimation();
   initPortfolioChooser();
+  initSemester2Ep1();
   initSertifikatModal();
 
 }
