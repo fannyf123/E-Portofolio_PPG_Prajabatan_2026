@@ -609,6 +609,14 @@ onReady(() => {
  * bagian tersebut mendaftar sendiri setelah wrappernya ditampilkan.
  *
  * Murni tambahan — tidak mengubah perilaku E-Portfolio 1 maupun 2.
+ *
+ * Fungsi ini sengaja TIDAK memanggil ScrollTrigger.refresh(). Refresh
+ * menghitung ulang posisi seluruh pemicu di halaman, dan pemanggil biasanya
+ * mendaftarkan beberapa bagian sekaligus. Menaruh refresh di sini membuatnya
+ * berjalan sekali per bagian: pada halaman Semester 2 itu berarti delapan
+ * refresh atas 71 pemicu, sekitar sepuluh detik halaman membeku.
+ * Pemanggil yang tahu kapan seluruh bagian selesai didaftarkanlah yang
+ * memanggil ScrollTrigger.refresh() satu kali di akhir.
  */
 export function applyScrollExperienceTo(section, index = 0) {
   if (!section || section.dataset.scrollFxApplied === 'true') return;
@@ -618,5 +626,4 @@ export function applyScrollExperienceTo(section, index = 0) {
   buildSectionEntrance(section, prepared, index);
   buildSectionScrub(section);
   section.classList.add('scroll-fx-current');
-  ScrollTrigger.refresh();
 }
