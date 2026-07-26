@@ -525,3 +525,92 @@ body[data-portfolio="s2ep1"] { overflow-x: clip !important; }
 @media (max-width: 1279px) {
   .s2ep1-rail { display: none; }
 }
+
+/* ---------- Lampiran berkas ----------
+   Memakai .portfolio-grid dan .portfolio-card milik E-Portfolio 1, sehingga
+   begitu sebuah slot diganti kartu berkas sungguhan, tampilannya langsung
+   sama persis dengan artefak di Semester 1. Yang ditambahkan di sini hanya
+   keadaan "belum diunggah". */
+
+.s2ep1-lampiran {
+  margin-top: 44px;
+  padding-top: 30px;
+  border-top: 1px solid var(--s2-line);
+}
+
+.s2ep1-lampiran-title {
+  margin: 0 0 18px;
+  color: var(--s2-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.s2ep1-lampiran-grid { gap: 20px; }
+
+.s2ep1-slot {
+  border: 1px dashed var(--gray-300);
+  background: color-mix(in srgb, var(--s2-surface-alt) 60%, transparent);
+  box-shadow: none;
+}
+
+.s2ep1-slot:hover { transform: none; box-shadow: none; }
+
+.s2ep1-slot-thumb {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--s2-r-md);
+  background: color-mix(in srgb, var(--s2-accent) 8%, transparent);
+  color: color-mix(in srgb, var(--s2-accent) 60%, var(--s2-muted));
+  font-size: 2rem;
+}
+
+.s2ep1-slot-thumb .card-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 11px;
+  border-radius: var(--s2-r-pill);
+  background: color-mix(in srgb, var(--s2-surface) 90%, transparent);
+  color: var(--s2-ink);
+  font-family: var(--font-heading);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.s2ep1-slot .portfolio-card-body h3 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.s2ep1-slot .portfolio-card-body p {
+  color: var(--s2-muted);
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+.s2ep1-slot-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 4px 12px;
+  border-radius: var(--s2-r-pill);
+  background: color-mix(in srgb, var(--gray-400) 16%, transparent);
+  color: var(--s2-muted);
+  font-size: 0.74rem;
+  font-weight: 600;
+}
+
+.s2ep1-slot-state::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: var(--s2-r-pill);
+  background: var(--gray-400);
+}
