@@ -39,75 +39,11 @@ let built = false;
 
 /* ---------- Utilitas ---------- */
 
-/**
- * Membungkus tiap kata dalam dua span bersarang. Span luar memotong
- * (overflow hidden), span dalam yang digerakkan — sehingga kata terlihat
- * naik dari balik garis, bukan sekadar memudar. Teknik yang sama dipakai
- * splitTextReveal() pada eportfolio2-animation.js.
- */
-function splitWords(el) {
-  if (!el || el.dataset.split === 'true') return [];
-  const words = el.textContent.trim().split(/\s+/);
-  el.textContent = '';
-  const inner = words.map((word, i) => {
-    const outer = document.createElement('span');
-    outer.className = 's2ep1-word';
-    const span = document.createElement('span');
-    span.textContent = word;
-    outer.appendChild(span);
-    el.appendChild(outer);
-    if (i < words.length - 1) el.appendChild(document.createTextNode(' '));
-    return span;
-  });
-  el.dataset.split = 'true';
-  return inner;
-}
 
 function highlight(id) {
   document.querySelectorAll('#s2ep1Rail a[data-rail]').forEach((link) => {
     if (link.dataset.rail === id) link.setAttribute('aria-current', 'true');
     else link.removeAttribute('aria-current');
-  });
-}
-
-/* ---------- Bagian-bagian gerak ---------- */
-
-function buildHero(wrapper) {
-  const hero = wrapper.querySelector('.s2ep1-hero');
-  if (!hero) return;
-
-  const title = hero.querySelector('.s2ep1-hero-title');
-  const words = [];
-  title.querySelectorAll('br').forEach(() => {});
-  // Judul memuat <br> dan <em>; pecah tiap simpul teks secara terpisah
-  // agar penggalan baris dan penekanan warnanya tetap utuh.
-  title.childNodes.forEach((node) => {
-    if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
-      const holder = document.createElement('span');
-      holder.textContent = node.textContent;
-      node.replaceWith(holder);
-      words.push(...splitWords(holder));
-    } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'EM') {
-      words.push(...splitWords(node));
-    }
-  });
-
-  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-  tl.from(hero.querySelector('.s2ep1-eyebrow'), {
-    opacity: 0, y: 14, scale: 0.94, duration: 0.5, ease: 'back.out(1.7)',
-  })
-    .from(words, { yPercent: 115, opacity: 0, duration: 0.75, stagger: 0.035 }, '-=0.25')
-    .from(hero.querySelector('.s2ep1-hero-lead'), { opacity: 0, y: 18, duration: 0.6 }, '-=0.4')
-    .from(hero.querySelectorAll('.s2ep1-hero-index li'), {
-      opacity: 0, x: 26, duration: 0.5, stagger: 0.06, ease: 'back.out(1.4)',
-    }, '-=0.45');
-
-  // Parallax lembut: daftar enam butir bergerak lebih lambat dari judul.
-  gsap.to(hero.querySelector('.s2ep1-hero-index'), {
-    yPercent: -14,
-    ease: 'none',
-    scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: 0.6 },
   });
 }
 
@@ -242,9 +178,10 @@ export function refreshSemester2Ep1() {
   }
   built = true;
 
-  buildHero(wrapper);
-
-  wrapper.querySelectorAll('.analisis.section, .s2ep1-profil').forEach((section, i) => {
+  // Hero kini beranatomi EP1 (.hero-greeting, .hero-name, .hero-desc,
+  // .hero-badge), yang seluruhnya sudah terdaftar di MOTION_TARGETS milik
+  // scroll-experience.js — jadi ia ikut digerakkan mesin yang sama.
+  wrapper.querySelectorAll('.s2ep1-hero, .analisis.section, .s2ep1-profil').forEach((section, i) => {
     applyScrollExperienceTo(section, i);
     ScrollTrigger.create({
       trigger: section,

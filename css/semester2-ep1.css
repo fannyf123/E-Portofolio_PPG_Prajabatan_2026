@@ -122,104 +122,27 @@
 }
 
 
-/* ---------- Navbar ---------- */
-.s2ep1-navbar {
-  position: sticky;
-  top: 0;
-  z-index: 60;
-  background: color-mix(in srgb, var(--s2-surface) 88%, transparent);
-  backdrop-filter: blur(var(--glass-blur));
-  border-bottom: 1px solid var(--s2-line);
-}
+/* ---------- Hero ----------
+   Hero memakai kelas .hero.section milik E-Portfolio 1 sepenuhnya, jadi
+   tata letak, ukuran, dan latarnya diwarisi dari sana. Yang ditambahkan di
+   sini hanya daftar enam butir analisis di bawah lencana. */
 
-.s2ep1-navbar-inner {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  height: 64px;
-}
-
-.s2ep1-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  border: 1px solid var(--s2-line);
-  border-radius: var(--s2-r-pill);
-  background: transparent;
-  color: var(--primary);
-  font-family: var(--font-heading);
-  font-size: 0.88rem;
+.s2ep1-hero-role {
+  color: var(--s2-muted);
   font-weight: 600;
-  cursor: pointer;
-  transition: background 0.25s var(--ease-smooth);
-}
-
-.s2ep1-back:hover { background: color-mix(in srgb, var(--primary) 10%, transparent); }
-.s2ep1-back:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
-
-.s2ep1-navbar-title {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 0.95rem;
-}
-
-.s2ep1-navbar-meta {
-  margin-left: auto;
-  color: var(--s2-muted);
-  font-size: 0.82rem;
-}
-
-/* ---------- Hero ---------- */
-.s2ep1-hero {
-  padding-block: var(--s2-section-y);
-  background:
-    linear-gradient(115deg,
-      var(--s2-surface) 0%,
-      color-mix(in srgb, var(--lavender) 12%, var(--s2-surface)) 100%);
-}
-
-.s2ep1-hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
-  gap: var(--s2-gap);
-  align-items: center;
-}
-
-.s2ep1-eyebrow {
-  display: inline-block;
-  padding: 5px 14px;
-  border-radius: var(--s2-r-pill);
-  background: color-mix(in srgb, var(--primary) 12%, transparent);
-  color: var(--primary);
-  font-family: var(--font-heading);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.s2ep1-hero-title {
-  margin: 18px 0 14px;
-  font-size: clamp(2rem, 5vw, 3.4rem);
-  font-weight: 800;
-  line-height: 1.12;
-}
-
-.s2ep1-wrapper .s2ep1-hero-title em { color: var(--primary); font-style: normal; }
-
-.s2ep1-hero-lead {
-  max-width: 46ch;
-  color: var(--s2-muted);
-  font-size: 1.02rem;
-  line-height: 1.75;
 }
 
 .s2ep1-hero-index {
   display: grid;
-  gap: 10px;
-  margin: 0;
-  padding: 0;
+  gap: 8px;
+  width: 100%;
+  max-width: 320px;
+  margin: 22px auto 0;
+  padding: 16px 18px;
+  border: 1px solid var(--s2-line);
+  border-radius: var(--s2-r-md);
+  background: color-mix(in srgb, var(--s2-surface) 70%, transparent);
+  backdrop-filter: blur(var(--glass-blur));
   list-style: none;
 }
 
@@ -227,9 +150,8 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--s2-line);
-  font-size: 0.94rem;
+  font-size: 0.88rem;
+  color: var(--s2-ink);
 }
 
 .s2ep1-hero-index span {
@@ -357,56 +279,6 @@
   font-size: 0.94rem;
   line-height: 1.75;
 }
-
-/* ---------- Footer ---------- */
-.s2ep1-footer {
-  padding-block: 34px;
-  background: var(--gray-800);
-  color: var(--white);
-}
-
-.s2ep1-footer-inner {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  flex-wrap: wrap;
-}
-
-.s2ep1-footer strong {
-  display: block;
-  font-family: var(--font-heading);
-  font-size: 1rem;
-}
-
-.s2ep1-footer span {
-  color: var(--gray-300);
-  font-size: 0.84rem;
-}
-
-.s2ep1-footer-back {
-  margin-left: auto;
-  padding: 10px 20px;
-  border-radius: var(--s2-r-pill);
-  background: rgba(255, 255, 255, 0.12);
-  color: var(--white);
-  font-family: var(--font-heading);
-  font-size: 0.88rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background 0.25s var(--ease-smooth);
-}
-
-.s2ep1-footer-back:hover { background: rgba(255, 255, 255, 0.2); }
-.s2ep1-footer-back:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-
-/* Footer harus tetap gelap pada kedua tema. Karena skala abu-abu dibalik
-   di mode gelap, --gray-800 di sana justru terang, sehingga ditimpa. */
-[data-theme="dark"] .s2ep1-footer {
-  background: var(--off-white);
-  color: var(--gray-800);
-}
-
-[data-theme="dark"] .s2ep1-footer span { color: var(--gray-600); }
 
 /* ---------- Responsif ---------- */
 
@@ -574,18 +446,27 @@ body[data-portfolio="s2ep1"] { overflow-x: clip !important; }
   }
 }
 
-/* ---------- Penanda draf ---------- */
+/* ---------- Penanda draf ----------
+   Ditempatkan menempel di bawah layar, bukan mengalir di atas halaman.
+   Navbar E-Portfolio 1 berposisi fixed di puncak, sehingga bilah yang
+   mengalir di awal wrapper akan tertindih olehnya. */
 .s2ep1-draf {
-  background: color-mix(in srgb, var(--rose) 14%, var(--s2-surface));
-  border-bottom: 1px solid color-mix(in srgb, var(--rose) 30%, transparent);
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 70;
+  background: color-mix(in srgb, var(--rose) 16%, var(--s2-surface));
+  border-top: 1px solid color-mix(in srgb, var(--rose) 34%, transparent);
+  backdrop-filter: blur(var(--glass-blur));
 }
 
 .s2ep1-draf-inner {
   display: flex;
   align-items: baseline;
   gap: 12px;
-  padding-block: 12px;
-  font-size: 0.86rem;
+  padding-block: 10px;
+  font-size: 0.84rem;
   line-height: 1.6;
   color: var(--s2-ink);
 }

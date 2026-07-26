@@ -168,14 +168,76 @@ export function initPortfolioChooser() {
     window.scrollTo({ top: 0, behavior: 'auto' });
   }
 
-  const HIDEABLE =
-    'body > section, body > footer, .floating-shapes, .scroll-progress, #navbar, .back-to-top, .scroll-rail';
+  // Halaman Semester 2 memakai ulang navbar, footer, bilah kemajuan, dan
+  // tombol kembali-ke-atas milik E-Portfolio 1 — bukan salinannya. Dengan
+  // begitu penukar tema, Performance Mode, dan tombol home bekerja tanpa
+  // ID ganda. Hanya daftar tautannya yang ditukar.
+  const HIDEABLE = 'body > section, .floating-shapes, .scroll-rail';
+
+  const S2_LINKS = [
+    ['#s2ep1-hero', 'Beranda'],
+    ['#s2ep1-profil', 'Profil'],
+    ['#s2ep1-rancangan', 'Rancangan'],
+    ['#s2ep1-materi', 'Materi'],
+    ['#s2ep1-media', 'Media'],
+    ['#s2ep1-video', 'Video'],
+    ['#s2ep1-nonmengajar', 'Nonmengajar'],
+    ['#s2ep1-penilaian', 'Penilaian'],
+    ['#s2ep1-refleksi', 'Refleksi'],
+  ];
+
+  const navLinks = document.getElementById('navLinks');
+  const footerEp1 = document.querySelector('body > footer');
+  const footerSitemap = footerEp1 ? footerEp1.querySelector('.footer-sitemap ul') : null;
+  let navAsli = null;
+  let footerAsli = null;
+
+  // Footer E-Portfolio 1 berada di DOM sebelum wrapper Semester 2, sehingga
+  // bila hanya dibiarkan tampil ia muncul di atas isi halaman. Penanda ini
+  // merekam posisi aslinya agar footer dapat dipindahkan ke akhir wrapper
+  // saat halaman Semester 2 dibuka, lalu dikembalikan persis ke tempatnya.
+  let penandaFooter = null;
+
+  function pindahkanFooterKeSemester2() {
+    if (!footerEp1 || !s2ep1Wrapper) return;
+    if (!penandaFooter) {
+      penandaFooter = document.createComment('posisi-asli-footer-ep1');
+      footerEp1.parentNode.insertBefore(penandaFooter, footerEp1);
+    }
+    s2ep1Wrapper.appendChild(footerEp1);
+  }
+
+  function kembalikanFooter() {
+    if (!footerEp1 || !penandaFooter || !penandaFooter.parentNode) return;
+    penandaFooter.parentNode.insertBefore(footerEp1, penandaFooter);
+  }
+
+  function tulisTautan(list, aktifPertama) {
+    return list
+      .map(([href, label], i) =>
+        `<li><a href="${href}"${i === 0 && aktifPertama ? ' class="active"' : ''}>${label}</a></li>`)
+      .join('');
+  }
+
+  function pakaiTautanSemester2() {
+    if (navLinks && navAsli === null) navAsli = navLinks.innerHTML;
+    if (footerSitemap && footerAsli === null) footerAsli = footerSitemap.innerHTML;
+    if (navLinks) navLinks.innerHTML = tulisTautan(S2_LINKS, true);
+    if (footerSitemap) footerSitemap.innerHTML = tulisTautan(S2_LINKS, false);
+  }
+
+  function pulihkanTautan() {
+    if (navLinks && navAsli !== null) navLinks.innerHTML = navAsli;
+    if (footerSitemap && footerAsli !== null) footerSitemap.innerHTML = footerAsli;
+  }
 
   function showS2Ep1() {
     if (!s2ep1Wrapper) return;
     document.querySelectorAll(HIDEABLE).forEach((el) => { el.style.display = 'none'; });
     if (ep2Wrapper) ep2Wrapper.style.display = 'none';
 
+    pakaiTautanSemester2();
+    pindahkanFooterKeSemester2();
     s2ep1Wrapper.style.display = 'block';
     document.body.style.overflow = '';
     document.body.style.position = '';
@@ -187,6 +249,8 @@ export function initPortfolioChooser() {
   function hideS2Ep1() {
     if (!s2ep1Wrapper) return;
     s2ep1Wrapper.style.display = 'none';
+    kembalikanFooter();
+    pulihkanTautan();
     document.querySelectorAll(HIDEABLE).forEach((el) => { el.style.display = ''; });
     window.scrollTo({ top: 0, behavior: 'auto' });
   }
@@ -214,11 +278,16 @@ export function initPortfolioChooser() {
     });
   });
 
-  // EP1 home button & footer switch -> back to chooser
+  // Tombol home dan penukar portofolio di footer -> kembali ke pemilih.
+  // Keduanya kini dipakai bersama oleh E-Portfolio 1 dan halaman Semester 2,
+  // jadi halaman Semester 2 harus ditutup lebih dahulu bila sedang terbuka —
+  // tanpa ini, wrappernya tetap tampak di balik layar pemilih dan daftar
+  // tautan navbar tidak pernah dipulihkan.
   var ep1BackTriggers = document.querySelectorAll('#homeBtn, #ep1FooterBack');
   ep1BackTriggers.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
+      if (s2ep1Wrapper && s2ep1Wrapper.style.display === 'block') hideS2Ep1();
       window.scrollTo({ top: 0, behavior: 'auto' });
       showChooser();
     });
