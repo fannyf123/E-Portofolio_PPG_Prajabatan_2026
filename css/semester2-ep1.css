@@ -315,158 +315,6 @@
   font-weight: 500;
 }
 
-/* ---------- Tata letak analisis ---------- */
-.s2ep1-analisis { background: var(--s2-surface); }
-
-.s2ep1-analisis-grid {
-  display: grid;
-  grid-template-columns: 190px minmax(0, 1fr);
-  gap: var(--s2-gap);
-  align-items: start;
-}
-
-/* ---------- Rel navigasi ---------- */
-.s2ep1-rail {
-  position: sticky;
-  top: 96px;
-  padding-block: 32px;
-}
-
-.s2ep1-rail-heading {
-  display: block;
-  margin-bottom: 14px;
-  padding-left: 14px;
-  color: var(--s2-muted);
-  font-family: var(--font-heading);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.s2ep1-rail ul { margin: 0; padding: 0; list-style: none; }
-
-.s2ep1-rail a {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 14px;
-  border-left: 2px solid transparent;
-  color: var(--s2-muted);
-  font-size: 0.9rem;
-  text-decoration: none;
-  transition: color 0.25s var(--ease-smooth), border-color 0.25s var(--ease-smooth);
-}
-
-.s2ep1-rail a span {
-  font-family: var(--font-heading);
-  font-size: 0.78rem;
-  font-weight: 800;
-  opacity: 0.65;
-}
-
-.s2ep1-rail a:hover { color: var(--s2-ink); }
-
-.s2ep1-rail a[aria-current='true'] {
-  border-left-color: var(--primary);
-  color: var(--s2-ink);
-  font-weight: 700;
-}
-
-.s2ep1-rail a[aria-current='true'] span { opacity: 1; }
-.s2ep1-rail a:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; }
-
-/* ---------- Satu bagian analisis ---------- */
-.s2ep1-item {
-  display: grid;
-  grid-template-columns: 120px minmax(0, 1fr);
-  gap: var(--s2-gap);
-  align-items: start;
-  padding: var(--s2-section-y) var(--s2-gap);
-  scroll-margin-top: 88px;
-  border-top: 1px solid var(--s2-line);
-}
-
-.s2ep1-item:first-child { border-top: 0; }
-
-.s2ep1-item-num {
-  font-family: var(--font-heading);
-  font-size: clamp(3rem, 7vw, 5.2rem);
-  font-weight: 800;
-  line-height: 0.82;
-  color: var(--s2-accent);
-  opacity: 0.28;
-}
-
-.s2ep1-item-label {
-  display: inline-block;
-  margin-bottom: 8px;
-  color: var(--s2-ink);
-  font-family: var(--font-heading);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.s2ep1-item-text h2 {
-  margin: 0 0 12px;
-  font-size: clamp(1.3rem, 2.6vw, 1.85rem);
-  font-weight: 700;
-}
-
-.s2ep1-item-text > p {
-  max-width: 62ch;
-  margin: 0;
-  color: var(--s2-muted);
-  font-size: 1rem;
-  line-height: 1.8;
-}
-
-.s2ep1-fokus {
-  display: grid;
-  gap: 9px;
-  max-width: 62ch;
-  margin: 18px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.s2ep1-fokus li {
-  position: relative;
-  padding-left: 22px;
-  color: var(--s2-ink);
-  font-size: 0.94rem;
-  line-height: 1.65;
-}
-
-.s2ep1-fokus li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.62em;
-  width: 9px;
-  height: 3px;
-  border-radius: var(--s2-r-pill);
-  background: var(--s2-accent);
-}
-
-/* Bagian genap: nomor pindah ke kanan, latar berganti.
-   Latar .s2ep1-item--alt hanya selebar kolom isi, bukan selebar layar,
-   supaya rel navigasi tetap berdiri di atas latar tunggal. */
-.s2ep1-item--alt {
-  grid-template-columns: minmax(0, 1fr) 120px;
-  border-radius: var(--s2-r-md);
-  background: var(--s2-surface-alt);
-}
-
-.s2ep1-item--alt .s2ep1-item-num { order: 2; }
-.s2ep1-item--alt .s2ep1-item-text { order: 1; text-align: right; }
-.s2ep1-item--alt .s2ep1-item-text > p { margin-left: auto; }
-.s2ep1-item--alt .s2ep1-fokus { margin-left: auto; }
-.s2ep1-item--alt .s2ep1-fokus li { padding-left: 0; padding-right: 22px; }
-.s2ep1-item--alt .s2ep1-fokus li::before { left: auto; right: 0; }
-
 /* ---------- Refleksi ---------- */
 .s2ep1-refleksi {
   padding-block: var(--s2-section-y);
@@ -724,4 +572,102 @@ body[data-portfolio="s2ep1"] { overflow-x: clip !important; }
     transform: scaleX(1);
     transition: none;
   }
+}
+
+/* ---------- Penanda draf ---------- */
+.s2ep1-draf {
+  background: color-mix(in srgb, var(--rose) 14%, var(--s2-surface));
+  border-bottom: 1px solid color-mix(in srgb, var(--rose) 30%, transparent);
+}
+
+.s2ep1-draf-inner {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding-block: 12px;
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: var(--s2-ink);
+}
+
+.s2ep1-draf strong {
+  flex: 0 0 auto;
+  padding: 3px 12px;
+  border-radius: var(--s2-r-pill);
+  background: var(--rose);
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---------- Rel navigasi melayang ----------
+   Dibuat position: fixed, bukan sticky di dalam grid. Sticky bergantung
+   pada tidak adanya leluhur yang menjadi kontainer gulir, dan situs ini
+   memasang overflow-x: hidden pada body — syarat yang rapuh. Fixed tidak
+   bergantung pada rantai leluhur sama sekali. */
+.s2ep1-rail {
+  position: fixed;
+  left: clamp(12px, 2vw, 28px);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 55;
+  padding: 16px 14px;
+  border: 1px solid var(--s2-line);
+  border-radius: var(--s2-r-md);
+  background: color-mix(in srgb, var(--s2-surface) 85%, transparent);
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--shadow-md);
+}
+
+.s2ep1-rail-heading {
+  display: block;
+  margin-bottom: 10px;
+  padding-left: 12px;
+  color: var(--s2-muted);
+  font-family: var(--font-heading);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.s2ep1-rail ul { margin: 0; padding: 0; list-style: none; }
+
+.s2ep1-rail a {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 12px;
+  border-left: 2px solid transparent;
+  color: var(--s2-muted);
+  font-size: 0.84rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.25s var(--ease-smooth), border-color 0.25s var(--ease-smooth);
+}
+
+.s2ep1-rail a span {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 800;
+  opacity: 0.6;
+}
+
+.s2ep1-rail a:hover { color: var(--s2-ink); }
+
+.s2ep1-rail a[aria-current='true'] {
+  border-left-color: var(--primary);
+  color: var(--s2-ink);
+  font-weight: 700;
+}
+
+.s2ep1-rail a[aria-current='true'] span { opacity: 1; }
+.s2ep1-rail a:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; }
+
+/* Rel disembunyikan bila layar tidak cukup lebar untuk menampungnya
+   tanpa menindih isi. */
+@media (max-width: 1279px) {
+  .s2ep1-rail { display: none; }
 }

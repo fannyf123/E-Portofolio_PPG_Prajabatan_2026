@@ -15,10 +15,9 @@
 import { gsap, ScrollTrigger } from './gsap-init.js';
 import { applyScrollExperienceTo } from './scroll-experience.js';
 
-/* Bagian yang diserahkan ke mesin gerak asli E-Portfolio 1, bukan ke modul
-   ini. Dipakai untuk perbandingan berdampingan: 01 memakai mesin EP1,
-   02–06 memakai modul ini. */
-const PAKAI_MESIN_EP1 = new Set(['s2ep1-rancangan']);
+/* Seluruh bagian analisis digerakkan mesin asli E-Portfolio 1
+   (scroll-experience.js), bukan tiruan. Modul ini kini hanya mengurus
+   hero, rel navigasi, dan micro-motion pada kartu refleksi. */
 
 const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -112,54 +111,6 @@ function buildHero(wrapper) {
   });
 }
 
-function buildSection(section) {
-  const label = section.querySelector('.s2ep1-item-label, .s2ep1-rubrik-label');
-  const heading = section.querySelector('h2');
-  const lead = section.querySelector(':scope .s2ep1-item-text > p, :scope .s2ep1-profil-lead');
-  const points = section.querySelectorAll('.s2ep1-fokus li, .s2ep1-chips li');
-  const words = splitWords(heading);
-
-  const tl = gsap.timeline({
-    defaults: { ease: 'power3.out' },
-    scrollTrigger: { trigger: section, start: 'top 78%', once: true },
-    onStart: () => section.classList.add('is-in'),
-  });
-
-  if (label) {
-    tl.from(label, { opacity: 0, x: -18, duration: 0.45, ease: 'back.out(1.6)' });
-  }
-  tl.from(words, { yPercent: 110, opacity: 0, duration: 0.6, stagger: 0.03 }, '-=0.2');
-  if (lead) tl.from(lead, { opacity: 0, y: 16, duration: 0.5 }, '-=0.35');
-  if (points.length) {
-    tl.from(points, {
-      opacity: 0, y: 14, duration: 0.45, stagger: 0.07, ease: 'back.out(1.4)',
-    }, '-=0.3');
-  }
-}
-
-function buildNumberParallax(wrapper) {
-  wrapper.querySelectorAll('.s2ep1-item-num').forEach((num) => {
-    const section = num.closest('.s2ep1-item');
-
-    // Muncul dengan skala dan putaran halus.
-    gsap.from(num, {
-      opacity: 0,
-      scale: 0.6,
-      rotate: -8,
-      duration: 0.9,
-      ease: 'elastic.out(1, 0.65)',
-      scrollTrigger: { trigger: section, start: 'top 80%', once: true },
-    });
-
-    // Lalu hanyut lebih lambat dari teks selama bagian dilewati.
-    gsap.to(num, {
-      yPercent: -34,
-      ease: 'none',
-      scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: 0.7 },
-    });
-  });
-}
-
 function buildRefleksi(wrapper) {
   const cards = wrapper.querySelectorAll('.s2ep1-refleksi-card');
   if (!cards.length) return;
@@ -229,7 +180,7 @@ function buildRail(wrapper) {
 
   if (typeof IntersectionObserver !== 'function') return;
 
-  const sections = wrapper.querySelectorAll('.s2ep1-item[id]');
+  const sections = wrapper.querySelectorAll('.analisis.section[id]');
   if (!sections.length) return;
 
   const observer = new IntersectionObserver(
@@ -248,11 +199,12 @@ function buildRail(wrapper) {
 
 /** Tanpa GSAP atau saat pengguna meminta gerak dikurangi: tampilkan langsung. */
 function revealStatic(wrapper) {
-  wrapper.querySelectorAll('.s2ep1-item, .s2ep1-profil, .s2ep1-refleksi-card').forEach((el) => {
+  wrapper.querySelectorAll('.analisis.section, .analisis-card, .s2ep1-profil, .s2ep1-refleksi-card, .section-header').forEach((el) => {
     el.style.opacity = '1';
     el.style.transform = 'none';
+    el.style.visibility = 'visible';
   });
-  wrapper.querySelectorAll('.s2ep1-item, .s2ep1-profil, .s2ep1-refleksi').forEach((el) => {
+  wrapper.querySelectorAll('.analisis.section, .s2ep1-profil, .s2ep1-refleksi').forEach((el) => {
     el.classList.add('is-in');
   });
 }
@@ -292,24 +244,15 @@ export function refreshSemester2Ep1() {
 
   buildHero(wrapper);
 
-  wrapper.querySelectorAll('.s2ep1-item, .s2ep1-profil').forEach((section, i) => {
-    if (PAKAI_MESIN_EP1.has(section.id)) {
-      applyScrollExperienceTo(section, i);
-      // Kelas ini milik CSS berkas ini, bukan milik mesin EP1. Tanpa
-      // menambahkannya, garis aksen pada daftar fokus tetap scaleX(0)
-      // dan bagian 01 terlihat rusak, bukan sekadar berbeda.
-      ScrollTrigger.create({
-        trigger: section,
-        start: 'top 78%',
-        once: true,
-        onEnter: () => section.classList.add('is-in'),
-      });
-    } else {
-      buildSection(section);
-    }
+  wrapper.querySelectorAll('.analisis.section, .s2ep1-profil').forEach((section, i) => {
+    applyScrollExperienceTo(section, i);
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top 78%',
+      once: true,
+      onEnter: () => section.classList.add('is-in'),
+    });
   });
-
-  buildNumberParallax(wrapper);
   buildRefleksi(wrapper);
   buildHover(wrapper);
   if (!isCalm()) buildWash(wrapper);
