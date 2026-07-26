@@ -1,0 +1,59 @@
+/* ============================================
+   SEMESTER 2 — E-PORTFOLIO 1 (PPL MANDIRI)
+   Seluruh warna melewati token css/base.css.
+   Tidak boleh ada nilai heksadesimal di berkas ini.
+   ============================================ */
+
+.s2ep1-wrapper {
+  /* Permukaan dan teks */
+  --s2-ink:         var(--gray-800);
+  --s2-muted:       var(--gray-500);
+  --s2-surface:     var(--white);
+  --s2-surface-alt: var(--gray-50);
+  --s2-line:        var(--gray-100);
+
+  /* Radius — hanya tiga nilai ini yang boleh dipakai */
+  --s2-r-sm:   12px;
+  --s2-r-md:   20px;
+  --s2-r-pill: 999px;
+
+  /* Ritme ruang */
+  --s2-gap:       clamp(20px, 4vw, 40px);
+  --s2-section-y: clamp(48px, 7vw, 96px);
+
+  /* Aksen bawaan; tiap bagian menimpanya lewat [data-accent] */
+  --s2-accent: var(--primary);
+
+  font-family: var(--font-body);
+  color: var(--s2-ink);
+  background: var(--s2-surface);
+}
+
+/* Peta aksen. Satu-satunya tempat warna aksen ditetapkan.
+   Dipakai bersama oleh daftar hero dan bagian analisis. */
+.s2ep1-wrapper [data-accent="coral"]    { --s2-accent: var(--coral); }
+.s2ep1-wrapper [data-accent="amber"]    { --s2-accent: var(--amber); }
+.s2ep1-wrapper [data-accent="teal"]     { --s2-accent: var(--teal); }
+.s2ep1-wrapper [data-accent="sky"]      { --s2-accent: var(--sky); }
+.s2ep1-wrapper [data-accent="lavender"] { --s2-accent: var(--lavender); }
+.s2ep1-wrapper [data-accent="primary"]  { --s2-accent: var(--primary); }
+
+[data-theme="dark"] .s2ep1-wrapper {
+  --s2-ink:         var(--gray-100);
+  --s2-muted:       var(--gray-400);
+  --s2-surface:     var(--gray-900);
+  --s2-surface-alt: var(--gray-800);
+  --s2-line:        rgba(255, 255, 255, 0.08);
+}
+
+.s2ep1-wrapper h1,
+.s2ep1-wrapper h2,
+.s2ep1-wrapper h3 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+.s2ep1-container {
+  width: min(100% - 2 * var(--s2-gap), var(--container-max));
+  margin-inline: auto;
+}
