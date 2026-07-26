@@ -13,7 +13,7 @@ export function initPortfolioChooser() {
   // Hanya kartu e-portfolio. Kartu pemilih semester ([data-goto-semester])
   // dan kartu "belum dibuka" tidak boleh ikut memicu selectPortfolio().
   const cards = chooser.querySelectorAll('.chooser-card[data-portfolio]');
-  const prefersReducedMotion = false;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ep2Wrapper = document.getElementById('eportfolio2Wrapper');
   const s2ep1Wrapper = document.getElementById('s2ep1Wrapper');
 
@@ -278,6 +278,7 @@ export function initPortfolioChooser() {
     const ep2Card = chooser.querySelector('.chooser-card[data-portfolio="2"]');
     const ep2Locked = ep2Card && (ep2Card.classList.contains('is-locked') || ep2Card.dataset.locked === 'true');
     const isEp2Hash = hash.startsWith('#ep2-');
+    const isS2Hash = hash.startsWith('#s2ep1-');
 
     // EP2 hash but card is locked: ignore deep link, show chooser instead
     if (isEp2Hash && ep2Locked) {
@@ -285,12 +286,9 @@ export function initPortfolioChooser() {
       return false;
     }
 
-    if (isEp2Hash) {
-      hideChooser();
-      showEP2();
-    } else {
-      hideChooser();
-    }
+    hideChooser();
+    if (isEp2Hash) showEP2();
+    else if (isS2Hash) showS2Ep1();
 
     setTimeout(() => {
       const target = document.querySelector(hash);
