@@ -15,6 +15,210 @@ document.addEventListener('DOMContentLoaded', () => {
        fileUrl sengaja dikosongkan. Saat sebuah berkas sudah diunggah,
        isi fileUrl dengan tautan Google Drive-nya; modal akan otomatis
        menampilkan pratinjau dokumen di bawah analisis. */
+    's2-atp': {
+      title: 'Alur Tujuan Pembelajaran',
+      type: 'Rancangan / Perencanaan Pembelajaran',
+      fileUrl: '',
+      context: 'Alur tujuan pembelajaran menurunkan capaian pembelajaran menjadi tujuan yang berurutan untuk praktik mengajar mandiri Teknik Pemesinan.',
+      purpose: 'Saya menyusunnya agar urutan tujuan mengikuti alur kerja nyata di bengkel, bukan urutan bab pada buku, sehingga tiap tujuan menjadi pijakan bagi tujuan berikutnya.',
+      pros: [
+        'Tiap tujuan dinyatakan dengan kata kerja yang dapat diamati, sehingga dapat diukur tanpa penafsiran tambahan.',
+        'Urutan tujuan mengikuti alur pekerjaan pemesinan: membaca gambar, merencanakan, menyiapkan, mengerjakan, memeriksa.',
+        'Kompetensi sikap kerja dan keselamatan ditempatkan sejajar dengan kompetensi keterampilan, bukan sebagai pelengkap.'
+      ],
+      cons: [
+        'Alur ini belum diuji terhadap murid dengan kemampuan awal yang jauh berbeda, sehingga loncatan antartujuan mungkin terlalu jauh bagi sebagian murid.',
+        'Perkiraan waktu tiap tujuan masih berdasarkan asumsi, belum berdasarkan catatan pelaksanaan.'
+      ],
+      theory: 'Memakai backward design: capaian pembelajaran diturunkan lebih dahulu menjadi bukti yang diterima, baru menjadi urutan kegiatan.'
+    },
+    's2-rencana-asesmen': {
+      title: 'Rencana Asesmen',
+      type: 'Rancangan / Perencanaan Pembelajaran',
+      fileUrl: '',
+      context: 'Rencana asesmen memetakan setiap tujuan pembelajaran terhadap bentuk asesmen yang mengukurnya, mencakup asesmen awal, formatif, dan sumatif.',
+      purpose: 'Pemetaan ini menutup dua celah sekaligus: tujuan yang tidak pernah diukur, dan penilaian atas hal yang tidak pernah diajarkan.',
+      pros: [
+        'Setiap tujuan dipasangkan dengan bentuk asesmennya pada satu tabel, sehingga celah langsung terlihat.',
+        'Asesmen awal dipakai untuk memetakan kesiapan murid, bukan untuk memberi nilai.',
+        'Asesmen formatif dirancang berjalan di tengah praktik tanpa menghentikan pekerjaan murid.'
+      ],
+      cons: [
+        'Pelaksanaan asesmen formatif sambil mendampingi murid menuntut perhatian ganda yang tidak selalu dapat saya penuhi.',
+        'Belum ada perkiraan waktu yang dibutuhkan untuk menilai seluruh murid dalam satu blok praktik.'
+      ],
+      theory: 'Menerapkan keselarasan konstruktif Biggs, yakni tujuan, kegiatan, dan asesmen yang dirancang sebagai satu garis lurus.'
+    },
+    's2-k3': {
+      title: 'Handout Keselamatan Kerja',
+      type: 'Materi Pembelajaran',
+      fileUrl: '',
+      context: 'Panduan keselamatan dan kesehatan kerja yang khusus disusun untuk praktik pemesinan, mencakup alat pelindung diri, prosedur aman, dan penanganan keadaan darurat.',
+      purpose: 'Keselamatan kerja saya perlakukan sebagai kompetensi yang diajarkan dan dinilai, bukan sebagai peringatan yang dibacakan di awal pertemuan lalu dilupakan.',
+      pros: [
+        'Prosedur aman dikaitkan dengan alasan teknisnya, sehingga murid memahami sebab, bukan sekadar mematuhi aturan.',
+        'Memuat daftar periksa yang dapat dipakai murid sendiri sebelum menyalakan mesin.',
+        'Keselamatan kerja masuk sebagai aspek terpisah dalam rubrik penilaian.'
+      ],
+      cons: [
+        'Handout belum menyertakan foto keadaan berbahaya yang nyata di bengkel sekolah sebagai contoh konkret.',
+        'Penerapannya masih bergantung pada pengawasan saya, belum menjadi kebiasaan mandiri murid.'
+      ],
+      theory: 'Berpijak pada standar keselamatan kerja industri manufaktur yang diperkenalkan sebagaimana berlaku di tempat kerja, bukan sebagai aturan sekolah.'
+    },
+    's2-pengayaan': {
+      title: 'Materi Pengayaan',
+      type: 'Materi Pembelajaran',
+      fileUrl: '',
+      context: 'Bahan lanjutan bagi murid yang menyelesaikan pekerjaan lebih cepat dari perkiraan, berisi tantangan tambahan pada tingkat kesulitan yang lebih tinggi.',
+      purpose: 'Pengayaan disiapkan agar murid yang cepat tidak menganggur menunggu temannya, dan tetap memperoleh tantangan yang sepadan dengan kemampuannya.',
+      pros: [
+        'Tantangan pengayaan tetap bertumpu pada kompetensi yang sama, sehingga bukan materi terpisah yang membingungkan.',
+        'Dirancang dapat dikerjakan mandiri tanpa menambah beban pendampingan saya.',
+        'Menutup masalah nyata di bengkel, yakni murid cepat yang menganggur menunggu giliran mesin berikutnya.'
+      ],
+      cons: [
+        'Pengayaan masih berupa lembar tugas; belum tersedia bentuk yang memanfaatkan murid cepat sebagai pendamping sebaya.',
+        'Belum ada patokan yang jelas kapan seorang murid dinyatakan siap menerima pengayaan.'
+      ],
+      theory: 'Menerapkan pembelajaran berdiferensiasi pada proses dan tingkat tantangan, dengan capaian pembelajaran yang tetap sama.'
+    },
+    's2-model3d': {
+      title: 'Model Tiga Dimensi dan Animasi Langkah',
+      type: 'Media Pembelajaran',
+      fileUrl: '',
+      context: 'Model tiga dimensi dan animasi langkah pengerjaan yang dipakai sebelum murid menyentuh mesin, untuk menjembatani gambar kerja dua dimensi dengan benda yang akan dihasilkan.',
+      purpose: 'Kesulitan terbesar murid adalah membayangkan bentuk tiga dimensi dari gambar dua dimensi. Media ini dipilih justru karena menjawab kesulitan itu.',
+      pros: [
+        'Setelah penjembatanan ini, penjelasan lisan yang semula berulang menjadi jauh lebih singkat karena murid memiliki bayangan yang sama.',
+        'Murid dapat memutar dan memeriksa model dari berbagai sisi, yang tidak mungkin dilakukan pada gambar cetak.',
+        'Animasi langkah memperlihatkan urutan pengerjaan sebagai rangkaian, bukan sebagai daftar instruksi terpisah.'
+      ],
+      cons: [
+        'Pemakaiannya bergantung pada ketersediaan perangkat di bengkel yang jumlahnya terbatas.',
+        'Belum ada pengukuran yang memisahkan sumbangan media ini dari sumbangan pendampingan langsung.'
+      ],
+      theory: 'Mengacu pada teori beban kognitif: representasi visual yang tepat mengurangi beban ekstra sehingga perhatian murid tersedia untuk memahami inti pekerjaan.'
+    },
+    's2-media-cetak': {
+      title: 'Media Cetak Cadangan',
+      type: 'Media Pembelajaran',
+      fileUrl: '',
+      context: 'Versi cetak dari setiap media digital yang dipakai, disiapkan untuk berjaga bila perangkat atau jaringan di bengkel tidak tersedia.',
+      purpose: 'Keterbatasan perangkat di bengkel adalah kondisi yang harus diterima, bukan dijadikan alasan. Cadangan cetak menjaga pembelajaran tetap berjalan.',
+      pros: [
+        'Pembelajaran tidak pernah terhenti karena masalah teknis pada perangkat.',
+        'Versi cetak dapat dibawa murid ke sisi mesin, tempat perangkat digital justru berisiko.',
+        'Menyamakan akses bagi murid yang tidak membawa perangkat sendiri.'
+      ],
+      cons: [
+        'Penyiapan cadangan menambah beban persiapan yang cukup besar pada setiap pertemuan.',
+        'Versi cetak kehilangan keunggulan model tiga dimensi yang dapat diputar.'
+      ],
+      theory: 'Berpijak pada prinsip perancangan pembelajaran yang tahan terhadap keadaan, yakni rencana yang tetap berjalan ketika satu komponennya gagal.'
+    },
+    's2-catatan-video': {
+      title: 'Catatan Pengamatan Rekaman',
+      type: 'Instrumen Refleksi',
+      fileUrl: '',
+      context: 'Penandaan momen kunci pada rekaman praktik mengajar mandiri beserta penelusuran penyebabnya, disusun sebagai catatan berwaktu.',
+      purpose: 'Catatan berwaktu membuat temuan dapat ditunjukkan kembali, bukan sekadar diingat. Setiap momen ketika murid berhenti bekerja saya telusuri penyebabnya.',
+      pros: [
+        'Temuan ditautkan pada waktu tertentu di rekaman sehingga dapat diperiksa ulang oleh guru pamong maupun dosen.',
+        'Penyebab murid berhenti bekerja dibedakan: instruksi kurang jelas, alat tidak tersedia, atau tugas terlalu jauh dari kemampuan.',
+        'Pola persebaran perhatian saya di dalam bengkel ikut tercatat, hal yang tidak terasa saat mengajar.'
+      ],
+      cons: [
+        'Penandaan dilakukan setelah pembelajaran, sehingga konteks yang tidak terekam kamera bergantung pada ingatan.',
+        'Sudut pengambilan tunggal membuat sebagian kegiatan murid di sisi bengkel yang berlawanan tidak teramati.'
+      ],
+      theory: 'Menerapkan reflection-on-action Schon, yakni meninjau tindakan setelah peristiwa berlangsung dengan bukti yang dapat diperiksa ulang.'
+    },
+    's2-umpan-balik': {
+      title: 'Umpan Balik Guru Pamong',
+      type: 'Catatan Pembimbingan',
+      fileUrl: '',
+      context: 'Catatan masukan guru pamong atas pelaksanaan praktik mengajar mandiri, dikumpulkan setelah tiap siklus praktik.',
+      purpose: 'Umpan balik guru pamong memberi sudut pandang yang tidak dapat saya peroleh dari rekaman maupun refleksi sendiri, karena beliau mengenal murid jauh lebih lama.',
+      pros: [
+        'Masukan dicatat berdampingan dengan pengamatan saya sendiri, sehingga perbedaan sudut pandang terlihat jelas.',
+        'Memuat pengetahuan yang tidak tertulis di modul mana pun, seperti kebiasaan murid tertentu dan batas aman mesin.',
+        'Tiap masukan ditindaklanjuti dengan satu perubahan konkret pada siklus berikutnya.'
+      ],
+      cons: [
+        'Sebagian masukan disampaikan lisan setelah jam praktik dan baru dicatat kemudian, sehingga rinciannya bisa berkurang.',
+        'Belum ada format tetap sehingga masukan antarsiklus sulit dibandingkan secara langsung.'
+      ],
+      theory: 'Bertumpu pada pembelajaran melalui pemagangan kognitif, yakni calon guru belajar dari praktisi berpengalaman melalui pengamatan dan umpan balik.'
+    },
+    's2-jurnal': {
+      title: 'Catatan Harian PPL Mandiri',
+      type: 'Jurnal Kegiatan',
+      fileUrl: '',
+      context: 'Jurnal harian kegiatan selama menjalani Praktik Pengalaman Lapangan Mandiri di SMK N 2 Depok, mencakup kegiatan mengajar dan nonmengajar.',
+      purpose: 'Jurnal menjaga agar peristiwa kecil yang mudah terlupakan tetap tercatat, dan menjadi bahan ketika menyusun refleksi tiap siklus.',
+      pros: [
+        'Mencatat kegiatan mengajar dan nonmengajar dalam satu rangkaian waktu, sehingga keterkaitan keduanya terlihat.',
+        'Pencatatan harian menangkap peristiwa saat masih segar, bukan setelah berlalu berminggu-minggu.',
+        'Menjadi rujukan ketika menyusun LK refleksi maupun laporan akhir.'
+      ],
+      cons: [
+        'Sebagian besar catatan masih bersifat naratif dan belum dirangkum menjadi temuan yang dapat ditindaklanjuti.',
+        'Konsistensi pengisian menurun pada hari dengan jadwal praktik yang padat.'
+      ],
+      theory: 'Mengikuti praktik penjurnalan reflektif yang menempatkan pencatatan berkala sebagai bahan mentah bagi refleksi yang lebih dalam.'
+    },
+    's2-inventaris': {
+      title: 'Administrasi dan Inventaris Bengkel',
+      type: 'Dokumen Administrasi',
+      fileUrl: '',
+      context: 'Pencatatan alat dan bahan bengkel beserta administrasi pendukung praktik, yang saya kerjakan sebagai bagian dari kegiatan nonmengajar.',
+      purpose: 'Awalnya administrasi terasa terpisah dari mengajar. Setelah menjalaninya, saya memahami ketertiban pencatatan alat berdampak langsung pada kelancaran praktik.',
+      pros: [
+        'Bengkel dengan inventaris rapi memungkinkan pembelajaran dimulai tepat waktu tanpa kehilangan menit-menit awal.',
+        'Pencatatan alat yang rusak atau hilang mencegah gangguan yang berulang pada pertemuan berikutnya.',
+        'Memberi gambaran nyata tentang keterbatasan sumber daya yang harus diperhitungkan saat menyusun rencana pembelajaran.'
+      ],
+      cons: [
+        'Pencatatan masih dikerjakan manual sehingga menyita waktu yang cukup banyak.',
+        'Belum ada mekanisme yang melibatkan murid dalam merawat inventaris sebagai bagian dari kompetensi kerja.'
+      ],
+      theory: 'Memandang sekolah sebagai satu sistem, tempat keberhasilan pembelajaran turut ditentukan oleh hal-hal di luar ruang kelas.'
+    },
+    's2-rekap': {
+      title: 'Rekap Hasil Penilaian',
+      type: 'Dokumen Penilaian',
+      fileUrl: '',
+      context: 'Rekapitulasi nilai murid per aspek pada tiap siklus praktik, mencakup ketepatan ukuran, ketepatan prosedur, dan keselamatan kerja.',
+      purpose: 'Rekap per aspek memperlihatkan pola yang tidak terlihat pada nilai gabungan, misalnya murid dengan hasil kerja tepat tetapi prosedur yang belum aman.',
+      pros: [
+        'Nilai dipisah per aspek sehingga kekuatan dan kelemahan murid dapat dibaca terpisah.',
+        'Perbandingan antarsiklus memperlihatkan apakah perbaikan pengajaran saya benar-benar berdampak.',
+        'Dapat ditunjukkan kepada murid sebagai dasar percakapan tentang apa yang perlu mereka perbaiki.'
+      ],
+      cons: [
+        'Rekap masih disusun manual sehingga rawan keliru salin ketika jumlah murid banyak.',
+        'Belum menyertakan catatan kualitatif yang menjelaskan angka pada kasus murid tertentu.'
+      ],
+      theory: 'Menempatkan data penilaian sebagai bahan pengambilan keputusan pembelajaran, bukan sebagai catatan administratif semata.'
+    },
+    's2-tindak-lanjut': {
+      title: 'Analisis Butir dan Tindak Lanjut',
+      type: 'Dokumen Penilaian',
+      fileUrl: '',
+      context: 'Pembacaan pola kekeliruan murid pada hasil penilaian beserta rencana perbaikan pengajaran untuk siklus berikutnya.',
+      purpose: 'Hasil penilaian saya baca sebagai umpan balik atas pengajaran saya, bukan semata penilaian atas murid. Ketika sebagian besar murid keliru pada aspek yang sama, yang perlu diperbaiki adalah cara saya mengajarkannya.',
+      pros: [
+        'Kekeliruan yang terjadi serentak pada banyak murid diperlakukan sebagai masalah pengajaran, bukan masalah murid.',
+        'Setiap pola kekeliruan diikuti satu langkah perbaikan yang konkret pada siklus berikutnya.',
+        'Menghubungkan instrumen penilaian kembali ke perencanaan, sehingga siklus perbaikan tertutup.'
+      ],
+      cons: [
+        'Analisis masih bertumpu pada jumlah kekeliruan, belum menelusuri penyebabnya melalui wawancara dengan murid.',
+        'Rentang satu siklus terlalu pendek untuk memastikan perbaikan benar-benar berdampak, bukan sekadar kebetulan.'
+      ],
+      theory: 'Mengikuti siklus penelitian tindakan kelas: rencana, tindakan, pengamatan, refleksi, lalu rencana berikutnya.'
+    },
     's2-modul-ajar': {
       title: 'Modul Ajar Praktik Mengajar Mandiri',
       type: 'Rancangan / Perencanaan Pembelajaran',

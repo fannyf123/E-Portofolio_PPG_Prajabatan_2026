@@ -176,7 +176,6 @@ export function initPortfolioChooser() {
 
   const S2_LINKS = [
     ['#s2ep1-hero', 'Beranda'],
-    ['#s2ep1-profil', 'Profil'],
     ['#s2ep1-rancangan', 'Rancangan'],
     ['#s2ep1-materi', 'Materi'],
     ['#s2ep1-media', 'Media'],

@@ -154,62 +154,6 @@
   background: var(--s2-accent);
 }
 
-/* ---------- Profil ---------- */
-.s2ep1-profil {
-  padding-block: var(--s2-section-y);
-  background: var(--s2-surface);
-  border-top: 1px solid var(--s2-line);
-}
-
-.s2ep1-profil-grid {
-  display: grid;
-  grid-template-columns: 96px minmax(0, 1fr);
-  gap: var(--s2-gap);
-  align-items: start;
-}
-
-.s2ep1-profil-avatar {
-  display: grid;
-  place-items: center;
-  width: 96px;
-  height: 96px;
-  border-radius: var(--s2-r-md);
-  background: var(--gradient-warm);
-  font-size: 2.4rem;
-}
-
-.s2ep1-profil-title {
-  margin: 10px 0 12px;
-  font-size: clamp(1.4rem, 3vw, 2rem);
-  font-weight: 700;
-}
-
-.s2ep1-profil-lead {
-  max-width: 68ch;
-  color: var(--s2-muted);
-  font-size: 1rem;
-  line-height: 1.8;
-}
-
-/* ---------- Chip ---------- */
-.s2ep1-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 18px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.s2ep1-chips li {
-  padding: 6px 14px;
-  border-radius: var(--s2-r-pill);
-  background: color-mix(in srgb, var(--s2-accent) 14%, transparent);
-  color: var(--s2-ink);
-  font-size: 0.84rem;
-  font-weight: 500;
-}
-
 /* ---------- Refleksi ---------- */
 .s2ep1-refleksi {
   padding-block: var(--s2-section-y);
@@ -314,8 +258,6 @@
 
   .s2ep1-item--alt .s2ep1-fokus li { padding-left: 22px; padding-right: 0; }
   .s2ep1-item--alt .s2ep1-fokus li::before { left: 0; right: auto; }
-
-  .s2ep1-profil-grid { grid-template-columns: minmax(0, 1fr); }
   .s2ep1-refleksi-grid { grid-template-columns: minmax(0, 1fr); }
   .s2ep1-navbar-meta { display: none; }
   .s2ep1-footer-back { margin-left: 0; }
@@ -373,7 +315,6 @@ body[data-portfolio="s2ep1"] { overflow-x: clip !important; }
 /* Isi halaman harus berada di atas lapisan sapuan. */
 .s2ep1-navbar,
 .s2ep1-hero,
-.s2ep1-profil,
 .s2ep1-analisis,
 .s2ep1-refleksi,
 .s2ep1-footer { position: relative; z-index: 1; }
@@ -401,7 +342,6 @@ body[data-portfolio="s2ep1"] { overflow-x: clip !important; }
 .s2ep1-item--alt .s2ep1-fokus li::before { transform-origin: right center; }
 
 .is-in .s2ep1-fokus li::before,
-.s2ep1-profil.is-in .s2ep1-rubrik-label::before,
 .s2ep1-refleksi.is-in .s2ep1-rubrik-label::before { transform: scaleX(1); }
 
 /* Jeda bertingkat supaya garis tidak menggambar serentak. */
@@ -533,17 +473,37 @@ body[data-portfolio="s2ep1"] { overflow-x: clip !important; }
    pratinjau dokumen. Kelas .portfolio-card dipakai apa adanya, sehingga
    begitu thumbnail Drive dipasang tampilannya sama dengan Semester 1. */
 
-.s2ep1-artefak-grid { gap: 26px; }
+/* Dua kolom tetap, bukan auto-fit. Dengan empat artefak per komponen,
+   tiga kolom membuat kartu keempat menggantung sendirian; dua kolom
+   memberi susunan 2x2 yang rapi dan sama dengan .analisis-grid milik
+   E-Portfolio 1.
 
+   Selektor sengaja disarangkan di bawah .s2ep1-wrapper agar spesifisitasnya
+   0,2,0. css/responsive.css dimuat setelah berkas ini dan memasang
+   `@media (min-width: 1024px) .portfolio-grid { repeat(3, 1fr) }`
+   dengan spesifisitas 0,1,0 — tanpa penyarangan, aturan itu yang menang. */
+.s2ep1-wrapper .s2ep1-artefak-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px;
+}
+
+@media (max-width: 860px) {
+  .s2ep1-wrapper .s2ep1-artefak-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Tinggi tetap dan ringkas, bukan aspect-ratio. Pada grid dua kolom,
+   rasio 16:10 menghasilkan bidang setinggi 350px hanya untuk menampung
+   satu ikon, sehingga kartu terasa melar. Begitu thumbnail Drive dipasang,
+   kartu memakai .portfolio-card-img milik EP1 yang punya rasionya sendiri. */
 .s2ep1-artefak-thumb {
   position: relative;
   display: grid;
   place-items: center;
-  aspect-ratio: 16 / 10;
+  height: 132px;
   border-radius: var(--s2-r-md);
   background: color-mix(in srgb, var(--s2-accent) 10%, transparent);
   color: color-mix(in srgb, var(--s2-accent) 65%, var(--s2-muted));
-  font-size: 2.2rem;
+  font-size: 1.9rem;
 }
 
 .s2ep1-artefak-thumb .card-tag {

@@ -135,12 +135,12 @@ function buildRail(wrapper) {
 
 /** Tanpa GSAP atau saat pengguna meminta gerak dikurangi: tampilkan langsung. */
 function revealStatic(wrapper) {
-  wrapper.querySelectorAll('.analisis.section, .analisis-card, .s2ep1-profil, .s2ep1-refleksi-card, .section-header').forEach((el) => {
+  wrapper.querySelectorAll('.analisis.section, .analisis-card, .s2ep1-refleksi-card, .section-header').forEach((el) => {
     el.style.opacity = '1';
     el.style.transform = 'none';
     el.style.visibility = 'visible';
   });
-  wrapper.querySelectorAll('.analisis.section, .s2ep1-profil, .s2ep1-refleksi').forEach((el) => {
+  wrapper.querySelectorAll('.analisis.section, .s2ep1-refleksi').forEach((el) => {
     el.classList.add('is-in');
   });
 }
@@ -181,7 +181,7 @@ export function refreshSemester2Ep1() {
   // Hero kini beranatomi EP1 (.hero-greeting, .hero-name, .hero-desc,
   // .hero-badge), yang seluruhnya sudah terdaftar di MOTION_TARGETS milik
   // scroll-experience.js — jadi ia ikut digerakkan mesin yang sama.
-  wrapper.querySelectorAll('.s2ep1-hero, .analisis.section, .s2ep1-profil').forEach((section, i) => {
+  wrapper.querySelectorAll('.s2ep1-hero, .analisis.section').forEach((section, i) => {
     applyScrollExperienceTo(section, i);
     ScrollTrigger.create({
       trigger: section,
