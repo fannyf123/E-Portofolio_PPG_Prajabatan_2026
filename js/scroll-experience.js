@@ -557,7 +557,14 @@ function getInitialSection(sections) {
 }
 
 function initScrollExperience() {
-  const sections = gsap.utils.toArray('section.section[id]').filter(s => !s.closest('.eportfolio2-wrapper'));
+  // Halaman Semester 2 memakai anatomi yang sama dengan E-Portfolio 1
+  // (section.section[id]), sehingga tanpa pengecualian ini kedelapan
+  // bagiannya ikut terhitung: rel titik menampilkan 19 butir untuk 11
+  // bagian dan tingginya melampaui layar. Bagiannya didaftarkan sendiri
+  // lewat applyScrollExperienceTo() setelah wrappernya ditampilkan.
+  const sections = gsap.utils
+    .toArray('section.section[id]')
+    .filter((s) => !s.closest('.eportfolio2-wrapper') && !s.closest('#s2ep1Wrapper'));
   if (!sections.length) return;
 
   document.body.classList.add('gsap-ready', 'scroll-fx-ready');
