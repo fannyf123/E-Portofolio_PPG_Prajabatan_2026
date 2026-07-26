@@ -244,3 +244,80 @@ body[data-portfolio="s2ep1"] #particleCanvas { display: none; }
   font-weight: 800;
   color: var(--s2-accent);
 }
+
+/* ---------- Label unsur penilaian ---------- */
+.s2ep1-rubrik-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--s2-ink);
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.s2ep1-rubrik-label::before {
+  content: '';
+  width: 20px;
+  height: 3px;
+  border-radius: var(--s2-r-pill);
+  background: var(--s2-accent);
+}
+
+/* ---------- Profil ---------- */
+.s2ep1-profil {
+  padding-block: var(--s2-section-y);
+  background: var(--s2-surface);
+  border-top: 1px solid var(--s2-line);
+}
+
+.s2ep1-profil-grid {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: var(--s2-gap);
+  align-items: start;
+}
+
+.s2ep1-profil-avatar {
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  border-radius: var(--s2-r-md);
+  background: var(--gradient-warm);
+  font-size: 2.4rem;
+}
+
+.s2ep1-profil-title {
+  margin: 10px 0 12px;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 700;
+}
+
+.s2ep1-profil-lead {
+  max-width: 68ch;
+  color: var(--s2-muted);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+/* ---------- Chip ---------- */
+.s2ep1-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.s2ep1-chips li {
+  padding: 6px 14px;
+  border-radius: var(--s2-r-pill);
+  background: color-mix(in srgb, var(--s2-accent) 14%, transparent);
+  color: var(--s2-ink);
+  font-size: 0.84rem;
+  font-weight: 500;
+}
