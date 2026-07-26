@@ -30,13 +30,20 @@
 }
 
 /* Peta aksen. Satu-satunya tempat warna aksen ditetapkan.
-   Dipakai bersama oleh daftar hero dan bagian analisis. */
-.s2ep1-wrapper [data-accent="coral"]    { --s2-accent: var(--coral); }
-.s2ep1-wrapper [data-accent="amber"]    { --s2-accent: var(--amber); }
-.s2ep1-wrapper [data-accent="teal"]     { --s2-accent: var(--teal); }
-.s2ep1-wrapper [data-accent="sky"]      { --s2-accent: var(--sky); }
-.s2ep1-wrapper [data-accent="lavender"] { --s2-accent: var(--lavender); }
+   Dipakai bersama oleh daftar hero dan bagian analisis.
+
+   Catatan: css/style.css menimpa palet css/base.css — situs sudah
+   di-rebrand ke biru, sehingga --coral bernilai #39BDEB, bukan merah.
+   Enam warna di bawah dipilih karena benar-benar berbeda rona setelah
+   penimpaan itu: biru tua, biru terang, teal, hijau, ungu, merah muda.
+   --amber dan --sky sengaja tidak dipakai; --amber terlalu pucat dan
+   --sky nyaris sama dengan --coral. */
 .s2ep1-wrapper [data-accent="primary"]  { --s2-accent: var(--primary); }
+.s2ep1-wrapper [data-accent="coral"]    { --s2-accent: var(--coral); }
+.s2ep1-wrapper [data-accent="teal"]     { --s2-accent: var(--teal); }
+.s2ep1-wrapper [data-accent="mint"]     { --s2-accent: var(--mint); }
+.s2ep1-wrapper [data-accent="lavender"] { --s2-accent: var(--lavender); }
+.s2ep1-wrapper [data-accent="rose"]     { --s2-accent: var(--rose); }
 
 [data-theme="dark"] .s2ep1-wrapper {
   --s2-ink:         var(--gray-100);
@@ -201,7 +208,12 @@
   line-height: 1.12;
 }
 
-.s2ep1-hero-title em { color: var(--coral); font-style: normal; }
+.s2ep1-wrapper .s2ep1-hero-title em { color: var(--primary); font-style: normal; }
+
+/* Kanvas partikel melayang di atas isi dan membuat halaman editorial ini
+   terasa ramai. Disembunyikan selama halaman Semester 2 aktif; kesatuan
+   dengan situs tetap terjaga lewat palet, tipografi, dan layar pemilih. */
+body[data-portfolio="s2ep1"] #particleCanvas { display: none; }
 
 .s2ep1-hero-lead {
   max-width: 46ch;

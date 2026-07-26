@@ -1,3 +1,5 @@
+import { refreshSemester2Ep1 } from './semester2-ep1.js';
+
 /* ============================================
    PORTFOLIO CHOOSER SCREEN
    Show 2 portfolio options after intro loading
@@ -13,6 +15,7 @@ export function initPortfolioChooser() {
   const cards = chooser.querySelectorAll('.chooser-card[data-portfolio]');
   const prefersReducedMotion = false;
   const ep2Wrapper = document.getElementById('eportfolio2Wrapper');
+  const s2ep1Wrapper = document.getElementById('s2ep1Wrapper');
 
   // Auto-unlock UAS chooser starting 27 May 2026.
   // Pakai server time dari HTTP Date header agar tidak bisa diakali
@@ -165,15 +168,35 @@ export function initPortfolioChooser() {
     window.scrollTo({ top: 0, behavior: 'auto' });
   }
 
+  const HIDEABLE =
+    'body > section, body > footer, .floating-shapes, .scroll-progress, #navbar, .back-to-top, .scroll-rail';
+
+  function showS2Ep1() {
+    if (!s2ep1Wrapper) return;
+    document.querySelectorAll(HIDEABLE).forEach((el) => { el.style.display = 'none'; });
+    if (ep2Wrapper) ep2Wrapper.style.display = 'none';
+
+    s2ep1Wrapper.style.display = 'block';
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+    window.scrollTo({ top: 0, behavior: 'auto' });
+
+    setTimeout(() => refreshSemester2Ep1(), 0);
+  }
+
+  function hideS2Ep1() {
+    if (!s2ep1Wrapper) return;
+    s2ep1Wrapper.style.display = 'none';
+    document.querySelectorAll(HIDEABLE).forEach((el) => { el.style.display = ''; });
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+
   function selectPortfolio(num) {
     document.body.setAttribute('data-portfolio', num);
+    hideChooser();
 
-    if (num === '2') {
-      hideChooser();
-      showEP2();
-    } else {
-      hideChooser();
-    }
+    if (num === '2') showEP2();
+    else if (num === 's2ep1') showS2Ep1();
   }
 
   cards.forEach(card => {
@@ -208,6 +231,16 @@ export function initPortfolioChooser() {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
         hideEP2();
+        showChooser();
+      });
+    });
+  }
+
+  if (s2ep1Wrapper) {
+    s2ep1Wrapper.querySelectorAll('#s2ep1BackBtn, #s2ep1FooterBack').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        hideS2Ep1();
         showChooser();
       });
     });
