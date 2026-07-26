@@ -208,11 +208,6 @@
 
 .s2ep1-wrapper .s2ep1-hero-title em { color: var(--primary); font-style: normal; }
 
-/* Kanvas partikel melayang di atas isi dan membuat halaman editorial ini
-   terasa ramai. Disembunyikan selama halaman Semester 2 aktif; kesatuan
-   dengan situs tetap terjaga lewat palet, tipografi, dan layar pemilih. */
-body[data-portfolio="s2ep1"] #particleCanvas { display: none; }
-
 .s2ep1-hero-lead {
   max-width: 46ch;
   color: var(--s2-muted);
@@ -645,5 +640,88 @@ body[data-portfolio="s2ep1"] #particleCanvas { display: none; }
   .s2ep1-wrapper *::after {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
+  }
+}
+
+/* ============================================
+   LAPISAN GERAK
+   ============================================ */
+
+/* Sapuan warna latar yang mengikuti bagian aktif.
+   Hanya aktif pada mode gerak penuh. */
+.s2ep1-wash {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: transparent;
+  transition: background-color 0.8s var(--ease-smooth);
+}
+
+body[data-s2-motion="tenang"] .s2ep1-wash { display: none; }
+
+/* Kanvas partikel: dimatikan hanya pada mode tenang. */
+body[data-portfolio="s2ep1"][data-s2-motion="tenang"] #particleCanvas { display: none; }
+
+/* Rel navigasi memakai position: sticky, dan sticky mati bila salah satu
+   leluhurnya menjadi kontainer gulir. Situs memasang overflow-x: hidden
+   pada body, yang membuat browser menghitung overflow-y menjadi auto —
+   body pun berubah menjadi kontainer gulir dan rel ikut tergulir hilang.
+   overflow-x: clip memotong luapan mendatar tanpa membuat kontainer gulir,
+   sehingga sticky kembali bekerja. Dibatasi pada halaman Semester 2 saja
+   agar perilaku E-Portfolio 1 dan 2 tidak tersentuh.
+
+   !important diperlukan karena css/responsive.css baris 16 memasang
+   `html, body { overflow-x: hidden !important; }` dan dimuat setelah
+   berkas ini. Selektor di bawah lebih spesifik, jadi ia yang menang. */
+html:has(body[data-portfolio="s2ep1"]),
+body[data-portfolio="s2ep1"] { overflow-x: clip !important; }
+
+/* Isi halaman harus berada di atas lapisan sapuan. */
+.s2ep1-navbar,
+.s2ep1-hero,
+.s2ep1-profil,
+.s2ep1-analisis,
+.s2ep1-refleksi,
+.s2ep1-footer { position: relative; z-index: 1; }
+
+/* Pemecahan kata: span luar memotong, span dalam yang bergerak. */
+.s2ep1-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.s2ep1-word > span {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* Garis aksen menggambar dirinya saat bagian masuk pandangan. */
+.s2ep1-rubrik-label::before,
+.s2ep1-fokus li::before {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.55s var(--ease-bounce);
+}
+
+.s2ep1-item--alt .s2ep1-fokus li::before { transform-origin: right center; }
+
+.is-in .s2ep1-fokus li::before,
+.s2ep1-profil.is-in .s2ep1-rubrik-label::before,
+.s2ep1-refleksi.is-in .s2ep1-rubrik-label::before { transform: scaleX(1); }
+
+/* Jeda bertingkat supaya garis tidak menggambar serentak. */
+.s2ep1-fokus li:nth-child(2)::before { transition-delay: 0.08s; }
+.s2ep1-fokus li:nth-child(3)::before { transition-delay: 0.16s; }
+
+.s2ep1-refleksi-card { will-change: transform; }
+
+/* Bila pengguna meminta gerak dikurangi, garis langsung utuh. */
+@media (prefers-reduced-motion: reduce) {
+  .s2ep1-rubrik-label::before,
+  .s2ep1-fokus li::before {
+    transform: scaleX(1);
+    transition: none;
   }
 }
