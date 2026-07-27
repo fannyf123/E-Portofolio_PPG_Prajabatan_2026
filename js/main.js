@@ -22,6 +22,7 @@ import { initPortfolioChooser } from './portfolio-chooser.js';
 import { initSertifikatModal } from './sertifikat-modal.js';
 import { refreshEp2Animation } from './eportfolio2-animation.js';
 import { initSemester2Ep1 } from './semester2-ep1.js';
+import { initSeminarPpg } from './seminar-ppg.js';
 
 window.refreshEp2Animation = refreshEp2Animation;
 
@@ -35,7 +36,7 @@ function waitForWindowLoad() {
 function preloadPageContent() {
   const loadingFill = document.querySelector('.intro-panel-loading-fill');
   const loadingStatus = document.getElementById('introLoadingStatus');
-  const images = Array.from(document.images);
+  const images = Array.from(document.images).filter(img => img.loading !== 'lazy');
   const tasks = [];
   let completed = 0;
 
@@ -73,8 +74,6 @@ function preloadPageContent() {
 
   images.forEach(img => {
     if (img.dataset && img.dataset.src && !img.src) img.src = img.dataset.src;
-    img.loading = 'eager';
-
     if (img.complete && img.naturalWidth > 0) {
       tasks.push(Promise.resolve().then(updateProgress));
       return;
@@ -453,7 +452,7 @@ function initMain() {
 
   // ---------- Hero Background Parallax ----------
   const heroSection = document.querySelector('#hero.hero.section');
-  const reducedMotionQuery = { matches: false };
+  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   if (heroSection && !reducedMotionQuery.matches) {
     const getShift = () => (window.innerWidth < 768 ? -34 : -96);
@@ -847,6 +846,7 @@ function initMain() {
   initFooterAnimation();
   initPortfolioChooser();
   initSemester2Ep1();
+  initSeminarPpg();
   initSertifikatModal();
 
 }

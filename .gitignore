@@ -17,6 +17,11 @@ Thumbs.db
 
 # Stray shell artefacts
 p
-{
-{,
+[{]
+[{],
 _backup_originals/
+
+# Local working files that are never deployed.
+/.superpowers/
+/Semester 1/
+/public/assets/seminar/

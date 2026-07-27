@@ -1238,7 +1238,7 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) and (max-width: 0px) {
+@media (prefers-reduced-motion: reduce) {
   .scroll-fx-current .scroll-fx-item,
   .scroll-fx-current .scroll-fx-card {
     will-change: auto;
@@ -1510,7 +1510,7 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) and (max-width: 0px) {
+@media (prefers-reduced-motion: reduce) {
   #hero.hero.section {
     --hero-scroll-shift: 0px !important;
   }
@@ -1661,7 +1661,7 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) and (max-width: 0px) {
+@media (prefers-reduced-motion: reduce) {
   #about.section::before,
   #education.section::before,
   #portfolio.section::before,

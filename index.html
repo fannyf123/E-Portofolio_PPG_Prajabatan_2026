@@ -133,12 +133,16 @@
         <h2 class="chooser-title">E-Portfolio Semester 2</h2>
         <p class="chooser-subtitle">Praktik Pengalaman Lapangan Mandiri di SMK N 2 Depok</p>
         <div class="chooser-cards chooser-cards--three">
-          <button class="chooser-card" data-portfolio="s2ep1">
-            <div class="chooser-card-badge">TERSEDIA</div>
-            <div class="chooser-card-icon">📋</div>
+          <button class="chooser-card is-locked" data-portfolio="s2ep1" data-locked="true" aria-disabled="true">
+            <div class="chooser-card-badge">BELUM DIBUKA</div>
+            <div class="chooser-card-icon" aria-hidden="true">📋</div>
             <h3>E-Portfolio 1</h3>
             <p>Enam analisis praktik mengajar mandiri</p>
-            <div class="chooser-card-cta">Buka E-Portfolio 1 →</div>
+            <div class="chooser-card-lock" aria-hidden="true">
+              <i class="fas fa-lock"></i>
+              <span>Terkunci</span>
+            </div>
+            <div class="chooser-card-cta">Akan dibuka kemudian</div>
           </button>
           <div class="chooser-card is-upcoming" aria-disabled="true">
             <div class="chooser-card-badge">BELUM DIBUKA</div>
@@ -147,13 +151,13 @@
             <p>Refleksi akhir Praktik Pengalaman Lapangan Mandiri</p>
             <div class="chooser-card-cta">Menyusul pada akhir semester</div>
           </div>
-          <div class="chooser-card is-upcoming" aria-disabled="true">
-            <div class="chooser-card-badge">BELUM DIBUKA</div>
+          <button class="chooser-card" data-portfolio="seminar">
+            <div class="chooser-card-badge">PROTOTIPE</div>
             <div class="chooser-card-icon" aria-hidden="true">🎓</div>
             <h3>Seminar PPG</h3>
-            <p>Karya inovasi pendidikan dan seminar akhir program</p>
-            <div class="chooser-card-cta">Menyusul pada akhir semester</div>
-          </div>
+            <p>Galeri presentasi reflektif dan karya inovasi pendidikan</p>
+            <div class="chooser-card-cta">Buka Ruang Presentasi →</div>
+          </button>
         </div>
       </div>
     </div>
@@ -2150,15 +2154,6 @@
 
     <div class="s2ep1-wash" aria-hidden="true"></div>
 
-
-    <!-- Penanda draf. Hapus seluruh elemen ini setelah isi diperiksa. -->
-    <div class="s2ep1-draf" id="s2ep1Draf" role="status">
-      <div class="s2ep1-container s2ep1-draf-inner">
-        <strong>Draf</strong>
-        <span>Narasi pada halaman ini masih draf awal dan belum diperiksa terhadap praktik yang sebenarnya. Sesuaikan setiap paragraf sebelum alamat portofolio dikirimkan.</span>
-      </div>
-    </div>
-
     <nav class="s2ep1-rail" id="s2ep1Rail" aria-label="Daftar analisis">
       <span class="s2ep1-rail-heading">Analisis</span>
       <ul>
@@ -2341,6 +2336,98 @@
     </section>
 
 
+  </div>
+
+  <!-- ============ SEMINAR PPG — PRESENTATION THEATER ============ -->
+  <div class="seminar-wrapper" id="seminarPpgWrapper" style="display:none;">
+    <header class="seminar-topbar">
+      <div class="seminar-topbar-actions">
+        <button class="seminar-back" id="seminarBackBtn" type="button" aria-label="Kembali ke pilihan portfolio" title="Kembali ke pilihan portfolio">
+          <i class="fa-solid fa-house" aria-hidden="true"></i>
+          <span>Kembali ke pilihan</span>
+        </button>
+        <button class="theme-toggle seminar-theme-toggle" id="seminarThemeToggle" type="button" aria-label="Toggle dark mode" title="Mode Gelap/Terang">
+          <span class="theme-icon" aria-hidden="true">🌙</span>
+        </button>
+      </div>
+      <div class="seminar-brand">
+        <img src="assets/img/ppg-logo-clean.png" alt="Logo PPG" width="96" height="48" />
+        <div>
+          <span class="seminar-eyebrow">PPG Prajabatan 2025/2026</span>
+          <strong>Ruang Presentasi Seminar PPG</strong>
+        </div>
+      </div>
+      <div class="seminar-topbar-status" aria-label="Status prototipe">
+        <span></span> Meeting 01 aktif
+      </div>
+    </header>
+
+    <main class="seminar-layout">
+      <aside class="seminar-library" aria-labelledby="seminarLibraryTitle">
+        <div class="seminar-library-heading">
+          <span class="seminar-kicker">16 Pertemuan</span>
+          <h2 id="seminarLibraryTitle">Perjalanan Reflektif</h2>
+          <p>Pilih presentasi untuk memasuki setiap tahap perjalanan Seminar PPG.</p>
+        </div>
+        <div class="seminar-meetings" id="seminarMeetings"></div>
+      </aside>
+
+      <section class="seminar-player" aria-labelledby="seminarDeckTitle">
+        <div class="seminar-player-heading">
+          <div>
+            <span class="seminar-kicker" id="seminarMeetingLabel">Pertemuan 01</span>
+            <h1 id="seminarDeckTitle">Identifikasi Diri</h1>
+            <p id="seminarDeckSubtitle">Visi pribadi, sosok calon guru, dan strategi pencapaiannya</p>
+          </div>
+          <div class="seminar-slide-position" aria-live="polite">
+            <span id="seminarCurrentSlide">01</span>
+            <span class="seminar-slide-divider"></span>
+            <span id="seminarTotalSlides">10</span>
+          </div>
+        </div>
+
+        <div class="seminar-stage-shell" id="seminarStageShell">
+              <div class="seminar-stage is-loading" id="seminarStage" tabindex="0" aria-label="Pemutar slide Seminar PPG" aria-busy="true">
+                <img id="seminarSlideImage" src="https://drive.google.com/thumbnail?id=1PNmfUeAQ0TzbVm1D3vcQsel5-ldEFxYY&amp;sz=w1920"
+                  alt="Pertemuan 1 Identifikasi Diri - slide 1" width="1920" height="1080" />
+                <div class="seminar-loading" id="seminarLoading" role="status" aria-live="polite" aria-atomic="true">
+                  <span class="seminar-loading-orbit" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                  </span>
+                  <span class="seminar-loading-label" id="seminarLoadingLabel">Memuat slide...</span>
+                </div>
+                <div class="seminar-hotspots" id="seminarHotspots" aria-label="Hotspot interaktif slide"></div>
+              </div>
+
+          <div class="seminar-controls" aria-label="Kontrol presentasi">
+            <button class="seminar-control seminar-control--previous" id="seminarPrev" type="button"
+              aria-label="Slide sebelumnya">
+              <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+              <span>Sebelumnya</span>
+            </button>
+            <div class="seminar-progress" aria-hidden="true">
+              <span id="seminarProgressBar"></span>
+            </div>
+            <button class="seminar-control seminar-control--fullscreen" id="seminarFullscreen" type="button"
+              aria-label="Tampilkan presentasi layar penuh">
+              <i class="fa-solid fa-expand" aria-hidden="true"></i>
+              <span>Layar penuh</span>
+            </button>
+            <button class="seminar-control seminar-control--next" id="seminarNext" type="button"
+              aria-label="Slide berikutnya">
+              <span>Berikutnya</span>
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="seminar-thumbnails" id="seminarThumbnails" aria-label="Daftar slide Pertemuan 1"></div>
+        <p class="seminar-player-hint" id="seminarPlayerHint">
+          Gunakan tombol panah, gestur geser, atau hotspot di dalam slide untuk bernavigasi.
+        </p>
+      </section>
+    </main>
   </div>
 
   <!-- Performance Mode Toast -->

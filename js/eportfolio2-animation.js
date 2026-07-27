@@ -656,9 +656,10 @@ function initEp2Particles() {
   if (!wrapper || wrapper.dataset.particlesBound === '1') return;
   wrapper.dataset.particlesBound = '1';
 
-  if (false) return;
-  if (window.innerWidth < 768) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (document.documentElement.classList.contains('perf-mode')) return;
+
+  var isMobile = window.innerWidth < 768;
 
   var canvas = document.createElement('canvas');
   canvas.id = 'ep2ParticleCanvas';
@@ -668,7 +669,7 @@ function initEp2Particles() {
   var ctx = canvas.getContext('2d');
   var particles = [];
   var mouseX = -999, mouseY = -999;
-  var particleCount = Math.min(Math.floor(window.innerWidth / 30), 40);
+  var particleCount = isMobile ? 10 : Math.min(Math.floor(window.innerWidth / 30), 40);
   var colors = ['#0F5EA8', '#39BDEB', '#2EC4B6', '#F1C05B'];
   var shapes = ['gear', 'hexBolt', 'cube', 'spark', 'circle'];
 
@@ -712,8 +713,9 @@ function initEp2Particles() {
     var color = colors[Math.floor(Math.random() * colors.length)];
     ripples.push({ x: e.clientX, y: e.clientY, radius: 0, maxRadius: 150 + Math.random() * 80, alpha: 0.4, color: color });
     ripples.push({ x: e.clientX, y: e.clientY, radius: 0, maxRadius: 80 + Math.random() * 60, alpha: 0.25, color: colors[Math.floor(Math.random() * colors.length)] });
-    for (var j = 0; j < 12; j++) {
-      var angle = (Math.PI * 2 / 12) * j + Math.random() * 0.3;
+    var burstCount = isMobile ? 6 : 12;
+    for (var j = 0; j < burstCount; j++) {
+      var angle = (Math.PI * 2 / burstCount) * j + Math.random() * 0.3;
       var speed = 2 + Math.random() * 3;
       var bColor = colors[Math.floor(Math.random() * colors.length)];
       burstParticles.push({

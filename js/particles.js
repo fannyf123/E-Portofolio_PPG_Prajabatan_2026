@@ -7,9 +7,9 @@
   if (!canvas) return;
 
   const isMobile = window.innerWidth < 768;
-  const prefersReduced = false;
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isPerfMode = document.documentElement.classList.contains('perf-mode');
-  if (isMobile || prefersReduced || isPerfMode) {
+  if (prefersReduced || isPerfMode) {
     canvas.style.display = 'none';
     return;
   }
@@ -152,8 +152,9 @@
     ripples.push({ x, y, radius: 0, maxRadius: 80 + Math.random() * 60, alpha: 0.25, color: colors[Math.floor(Math.random() * colors.length)] });
 
     // Burst mini particles
-    for (let i = 0; i < 12; i++) {
-      const angle = (Math.PI * 2 / 12) * i + Math.random() * 0.3;
+    const burstCount = isMobile ? 6 : 12;
+    for (let i = 0; i < burstCount; i++) {
+      const angle = (Math.PI * 2 / burstCount) * i + Math.random() * 0.3;
       const speed = 2 + Math.random() * 3;
       const bColor = colors[Math.floor(Math.random() * colors.length)];
       burstParticles.push({

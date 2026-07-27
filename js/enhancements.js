@@ -7,19 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const html = document.documentElement;
   const body = document.body;
 
-  document.querySelectorAll('a[href="#"]').forEach(link => {
-    link.classList.add('is-placeholder-link');
-    link.setAttribute('aria-disabled', 'true');
-    if (!link.getAttribute('title')) {
-      link.setAttribute('title', 'Tautan akan dilengkapi');
-    }
-    link.addEventListener('click', event => event.preventDefault());
-  });
-
   const hasGsap = Boolean(window.gsap);
   const hasScrollTrigger = Boolean(window.ScrollTrigger);
   const introTear = document.getElementById('introTear');
-  const prefersReducedMotion = false;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const introOpenKeys = new Set(['ArrowDown', 'PageDown', ' ', 'Spacebar', 'Enter']);
   let introOpened = false;
 
@@ -154,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mm = gsap.matchMedia();
 
     mm.add({
-      reduceMotion: '(max-width: 0px)',
+      reduceMotion: '(prefers-reduced-motion: reduce)',
       isDesktop: '(min-width: 900px)',
     }, context => {
       const { reduceMotion, isDesktop } = context.conditions;

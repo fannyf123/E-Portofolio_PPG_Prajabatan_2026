@@ -1,4 +1,5 @@
 import { refreshSemester2Ep1 } from './semester2-ep1.js';
+import { refreshSeminarPpg } from './seminar-ppg.js';
 
 /* ============================================
    PORTFOLIO CHOOSER SCREEN
@@ -16,6 +17,11 @@ export function initPortfolioChooser() {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ep2Wrapper = document.getElementById('eportfolio2Wrapper');
   const s2ep1Wrapper = document.getElementById('s2ep1Wrapper');
+  const seminarWrapper = document.getElementById('seminarPpgWrapper');
+
+  function isCardLocked(card) {
+    return card?.dataset.locked === 'true' || card?.classList.contains('is-locked');
+  }
 
   // Auto-unlock UAS chooser starting 27 May 2026.
   // Pakai server time dari HTTP Date header agar tidak bisa diakali
@@ -272,17 +278,45 @@ export function initPortfolioChooser() {
     window.scrollTo({ top: 0, behavior: 'auto' });
   }
 
+  const SEMINAR_HIDEABLE = 'body > section, body > footer, .floating-shapes, .scroll-rail, #navbar, .scroll-progress, .back-to-top';
+
+  function showSeminar() {
+    if (!seminarWrapper) return;
+    document.body.dataset.portfolio = 'seminar';
+    document.querySelectorAll(SEMINAR_HIDEABLE).forEach((el) => { el.style.display = 'none'; });
+    if (ep2Wrapper) ep2Wrapper.style.display = 'none';
+    if (s2ep1Wrapper) s2ep1Wrapper.style.display = 'none';
+    seminarWrapper.style.display = 'block';
+    document.body.style.overflow = '';
+    document.body.style.height = '';
+    document.body.style.position = '';
+    document.body.style.width = '';
+    document.body.style.top = '';
+    history.replaceState(null, '', '#seminar-ppg');
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    setTimeout(() => refreshSeminarPpg(), 0);
+  }
+
+  function hideSeminar() {
+    if (!seminarWrapper) return;
+    seminarWrapper.style.display = 'none';
+    document.querySelectorAll(SEMINAR_HIDEABLE).forEach((el) => { el.style.display = ''; });
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+
   function selectPortfolio(num) {
     document.body.setAttribute('data-portfolio', num);
     hideChooser();
 
     if (num === '2') showEP2();
     else if (num === 's2ep1') showS2Ep1();
+    else if (num === 'seminar') showSeminar();
   }
 
   cards.forEach(card => {
     card.addEventListener('click', (e) => {
-      if (card.dataset.locked === 'true' || card.classList.contains('is-locked')) {
+      if (isCardLocked(card)) {
         e.preventDefault();
         e.stopPropagation();
         card.classList.remove('shake');
@@ -319,6 +353,36 @@ export function initPortfolioChooser() {
         hideEP2();
         showChooser();
       });
+    });
+  }
+
+  if (seminarWrapper) {
+    const seminarBack = document.getElementById('seminarBackBtn');
+    seminarBack?.addEventListener('click', (event) => {
+      event.preventDefault();
+      hideSeminar();
+      showChooser();
+    });
+
+    const seminarThemeToggle = document.getElementById('seminarThemeToggle');
+    const themeRoot = document.documentElement;
+    const syncThemeIcons = () => {
+      const isDark = themeRoot.getAttribute('data-theme') === 'dark';
+      document.querySelectorAll('#themeToggle .theme-icon, #ep2ThemeToggle .theme-icon, #seminarThemeToggle .theme-icon')
+        .forEach((icon) => { icon.textContent = isDark ? '☀️' : '🌙'; });
+    };
+
+    syncThemeIcons();
+    seminarThemeToggle?.addEventListener('click', () => {
+      const nextTheme = themeRoot.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      themeRoot.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('theme', nextTheme);
+      syncThemeIcons();
+    });
+
+    new MutationObserver(syncThemeIcons).observe(themeRoot, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
     });
   }
 
@@ -364,19 +428,24 @@ export function initPortfolioChooser() {
     if (!hash || hash.length < 2) return false;
 
     const ep2Card = chooser.querySelector('.chooser-card[data-portfolio="2"]');
-    const ep2Locked = ep2Card && (ep2Card.classList.contains('is-locked') || ep2Card.dataset.locked === 'true');
+    const s2ep1Card = chooser.querySelector('.chooser-card[data-portfolio="s2ep1"]');
+    const ep2Locked = isCardLocked(ep2Card);
+    const s2ep1Locked = isCardLocked(s2ep1Card);
     const isEp2Hash = hash.startsWith('#ep2-');
     const isS2Hash = hash.startsWith('#s2ep1-');
+    const isSeminarHash = hash === '#seminar-ppg';
 
-    // EP2 hash but card is locked: ignore deep link, show chooser instead
-    if (isEp2Hash && ep2Locked) {
+    // Deep link ke kartu terkunci diabaikan agar selector tidak bisa dilewati.
+    if ((isEp2Hash && ep2Locked) || (isS2Hash && s2ep1Locked)) {
       history.replaceState(null, '', window.location.pathname + window.location.search);
       return false;
     }
+    if (!isEp2Hash && !isS2Hash && !isSeminarHash) return false;
 
     hideChooser();
     if (isEp2Hash) showEP2();
     else if (isS2Hash) showS2Ep1();
+    else if (isSeminarHash) showSeminar();
 
     setTimeout(() => {
       const target = document.querySelector(hash);
@@ -385,7 +454,7 @@ export function initPortfolioChooser() {
       }
     }, 60);
 
-    return true;
+    return isEp2Hash || isS2Hash || isSeminarHash;
   }
 
   if (document.readyState === 'loading') {

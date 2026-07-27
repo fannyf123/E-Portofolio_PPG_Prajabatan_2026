@@ -192,44 +192,6 @@ body[data-portfolio="s2ep1"] { overflow-x: clip !important; }
 
 .pillar-card { will-change: transform; }
 
-
-/* ---------- Penanda draf ----------
-   Ditempatkan menempel di bawah layar, bukan mengalir di atas halaman.
-   Navbar E-Portfolio 1 berposisi fixed di puncak, sehingga bilah yang
-   mengalir di awal wrapper akan tertindih olehnya. */
-.s2ep1-draf {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 70;
-  background: color-mix(in srgb, var(--rose) 16%, var(--s2-surface));
-  border-top: 1px solid color-mix(in srgb, var(--rose) 34%, transparent);
-  backdrop-filter: blur(var(--glass-blur));
-}
-
-.s2ep1-draf-inner {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  padding-block: 10px;
-  font-size: 0.84rem;
-  line-height: 1.6;
-  color: var(--s2-ink);
-}
-
-.s2ep1-draf strong {
-  flex: 0 0 auto;
-  padding: 3px 12px;
-  border-radius: var(--s2-r-pill);
-  background: var(--rose);
-  color: var(--white);
-  font-family: var(--font-heading);
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 /* ---------- Rel navigasi melayang ----------
    Dibuat position: fixed, bukan sticky di dalam grid. Sticky bergantung
    pada tidak adanya leluhur yang menjadi kontainer gulir, dan situs ini

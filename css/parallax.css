@@ -365,7 +365,7 @@ body:not(.intro-ready) {
   }
 }
 
-@media (prefers-reduced-motion: reduce) and (max-width: 0px) {
+@media (prefers-reduced-motion: reduce) {
   .parallax-layer,
   .parallax-float,
   .parallax-image-frame img,
