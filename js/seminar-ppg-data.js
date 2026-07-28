@@ -3601,7 +3601,7 @@ export const seminarDecks = [
     "slides": [
       {
         "number": 1,
-        "src": "https://drive.google.com/thumbnail?id=13YA9OOUFisWZbdZzcwBYARI_XTzTGaZn&sz=w1920",
+        "src": "https://drive.google.com/thumbnail?id=1FLnZY-YZgZ56yLZ8doPTmyxXb0sBLhUv&sz=w1920&v=m7-composite-v2",
         "alt": "Pertemuan 7 Inovasi Berbasis Ajaran Tamansiswa - slide 1",
         "hotspots": [
           {
@@ -3653,7 +3653,7 @@ export const seminarDecks = [
       },
       {
         "number": 2,
-        "src": "https://drive.google.com/thumbnail?id=1AqwZ1Qa-Ugf-57X3fl0bqTNecF8MEWXx&sz=w1920",
+        "src": "https://drive.google.com/thumbnail?id=1Tyl3UOvX9V2y2h_g3kSWEYmU1bdCOMr3&sz=w1920&v=m7-composite-v2",
         "alt": "Pertemuan 7 Inovasi Berbasis Ajaran Tamansiswa - slide 2",
         "hotspots": [
           {
@@ -3705,7 +3705,7 @@ export const seminarDecks = [
       },
       {
         "number": 3,
-        "src": "https://drive.google.com/thumbnail?id=1_bkBtF7GPuWtt2cL14tNIEAz5dREORg4&sz=w1920",
+        "src": "https://drive.google.com/thumbnail?id=1AbVAL0ZL8MR1IMud_NnaS4J37X6GLuKk&sz=w1920&v=m7-composite-v2",
         "alt": "Pertemuan 7 Inovasi Berbasis Ajaran Tamansiswa - slide 3",
         "hotspots": [
           {
@@ -3829,7 +3829,7 @@ export const seminarDecks = [
       },
       {
         "number": 4,
-        "src": "https://drive.google.com/thumbnail?id=1Z14fxCo5iAL_GPDCWMQ3m7OpW8yw7i5n&sz=w1920",
+        "src": "https://drive.google.com/thumbnail?id=1BH_rhm64QCe6xSeC3nge_tZ1VSocsxv-&sz=w1920&v=m7-composite-v2",
         "alt": "Pertemuan 7 Inovasi Berbasis Ajaran Tamansiswa - slide 4",
         "hotspots": [
           {
@@ -3899,7 +3899,7 @@ export const seminarDecks = [
       },
       {
         "number": 5,
-        "src": "https://drive.google.com/thumbnail?id=196aJkvsP2lcnhSICKnFoMqhTwY-IJwGp&sz=w1920",
+        "src": "https://drive.google.com/thumbnail?id=1l6yrihypKCvVl3wTS0Hj024kqCICNd0B&sz=w1920&v=m7-composite-v2",
         "alt": "Pertemuan 7 Inovasi Berbasis Ajaran Tamansiswa - slide 5",
         "hotspots": [
           {
@@ -3933,7 +3933,7 @@ export const seminarDecks = [
       },
       {
         "number": 6,
-        "src": "https://drive.google.com/thumbnail?id=1vCrHTAYJWp85U37zclLsLYv7RxMXIs2e&sz=w1920",
+        "src": "https://drive.google.com/thumbnail?id=1HPInmJJ6zjEGsi7cAONuoEjdqoO6yBso&sz=w1920&v=m7-composite-v2",
         "alt": "Pertemuan 7 Inovasi Berbasis Ajaran Tamansiswa - slide 6",
         "hotspots": [
           {
@@ -3967,7 +3967,7 @@ export const seminarDecks = [
       },
       {
         "number": 7,
-        "src": "https://drive.google.com/thumbnail?id=1QnAeO2fNWEzQ26Hoohl6HHmDjGt-aMPh&sz=w1920",
+        "src": "https://drive.google.com/thumbnail?id=1cbM15uinnupKHjQ9FlX9ZwgzbHJQSXnI&sz=w1920&v=m7-composite-v2",
         "alt": "Pertemuan 7 Inovasi Berbasis Ajaran Tamansiswa - slide 7",
         "hotspots": [
           {
@@ -3992,7 +3992,7 @@ export const seminarDecks = [
       },
       {
         "number": 8,
-        "src": "https://drive.google.com/thumbnail?id=1IDMS8L1NaO7WD0F04F6S_pKIyVIztHmZ&sz=w1920",
+        "src": "https://drive.google.com/thumbnail?id=1bJTTMUkjO8eHYrpACJxyZEOyK3GSB4ee&sz=w1920&v=m7-composite-v2",
         "alt": "Pertemuan 7 Inovasi Berbasis Ajaran Tamansiswa - slide 8",
         "hotspots": [
           {
@@ -4026,7 +4026,7 @@ export const seminarDecks = [
       },
       {
         "number": 9,
-        "src": "https://drive.google.com/thumbnail?id=1N_LG50V_ujP2j0b7JPmjKbRxoQTlto9M&sz=w1920",
+        "src": "https://drive.google.com/thumbnail?id=1c9oX3GVbcPMufgCXPL7BVU-JX8dlTLPE&sz=w1920&v=m7-composite-v2",
         "alt": "Pertemuan 7 Inovasi Berbasis Ajaran Tamansiswa - slide 9",
         "hotspots": [
           {
@@ -4051,7 +4051,7 @@ export const seminarDecks = [
       },
       {
         "number": 10,
-        "src": "https://drive.google.com/thumbnail?id=10VGxqNMTAIIxhofV8pMoJRtHWrA0ZuGj&sz=w1920",
+        "src": "https://drive.google.com/thumbnail?id=1IUKXCI7V14TNKBdVVlf8Vp-4XR7ILtGI&sz=w1920&v=m7-composite-v2",
         "alt": "Pertemuan 7 Inovasi Berbasis Ajaran Tamansiswa - slide 10",
         "hotspots": [
           {
@@ -4148,7 +4148,7 @@ export const seminarDecks = [
       },
       {
         "number": 11,
-        "src": "https://drive.google.com/thumbnail?id=1mFjhgDQOuBEHAokobSxAYnDemvufV_gj&sz=w1920",
+        "src": "https://drive.google.com/thumbnail?id=1yiC0WXHCKH86I5UEH5VPQZaKMIgzoqVR&sz=w1920&v=m7-composite-v2",
         "alt": "Pertemuan 7 Inovasi Berbasis Ajaran Tamansiswa - slide 11",
         "hotspots": [
           {
@@ -4209,7 +4209,7 @@ export const seminarDecks = [
       },
       {
         "number": 12,
-        "src": "https://drive.google.com/thumbnail?id=1jG9D50PRtNgqKuHyxH6FmuMETpW78Ox8&sz=w1920",
+        "src": "https://drive.google.com/thumbnail?id=1AwaF_pDwXbcJthM55tjfIxY4OWzy8eb1&sz=w1920&v=m7-composite-v2",
         "alt": "Pertemuan 7 Inovasi Berbasis Ajaran Tamansiswa - slide 12",
         "hotspots": [
           {

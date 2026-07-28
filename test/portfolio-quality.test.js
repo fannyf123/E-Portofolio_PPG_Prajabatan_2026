@@ -50,6 +50,28 @@ test('selector E-Portfolio 1 Semester 2 menolak klik dan deep link saat dikunci'
   assert.match(portfolioChooser, /isS2Hash\s*&&\s*s2ep1Locked/);
 });
 
+test('selector E-Portfolio 2 Semester 2 memakai tampilan lock yang sama', () => {
+  const card = indexHtml.match(
+    /<button[^>]*class=["'][^"']*chooser-card[^"']*is-locked[^"']*["'][^>]*data-portfolio=["']s2ep2["'][^>]*>[\s\S]*?<\/button>/
+  )?.[0] ?? '';
+
+  assert.match(card, /data-locked=["']true["']/);
+  assert.match(card, /aria-disabled=["']true["']/);
+  assert.match(card, /class=["']chooser-card-lock["']/);
+  assert.match(card, /Terkunci/);
+  assert.match(card, /Akan segera hadir/);
+});
+
+test('selector E-Portfolio 2 Semester 1 tetap tersedia tanpa auto-unlock', () => {
+  const card = indexHtml.match(
+    /<button[^>]*class=["'][^"']*chooser-card[^"']*["'][^>]*data-portfolio=["']2["'][^>]*>[\s\S]*?<\/button>/
+  )?.[0] ?? '';
+
+  assert.doesNotMatch(card, /is-locked|data-locked|aria-disabled/);
+  assert.match(card, /Lihat E-Portfolio 2/);
+  assert.doesNotMatch(portfolioChooser, /maybeAutoUnlockEp2|UNLOCK_AT|applyUnlock/);
+});
+
 test('link fungsional href hash tidak ditandai sebagai disabled secara global', () => {
   assert.doesNotMatch(enhancements, /querySelectorAll\(['"]a\[href=['"]#['"]\]['"]\)/);
   assert.doesNotMatch(enhancements, /setAttribute\(['"]aria-disabled['"],\s*['"]true['"]\)/);
@@ -119,11 +141,16 @@ test('tujuh deck Seminar PPG memakai 74 URL Drive unik dengan hotspot valid', ()
     deck.slides.map((slide) => ({ deck, slide }))
   );
   assert.equal(allSlides.length, 74);
-  const driveUrlPattern = /^https:\/\/drive\.google\.com\/thumbnail\?id=([\w-]+)&sz=w1920$/;
+  const driveUrlPattern = /^https:\/\/drive\.google\.com\/thumbnail\?id=([\w-]+)&sz=w1920(?:&v=([\w-]+))?$/;
   const fileIds = allSlides.map(({ deck, slide }) => {
     assert.doesNotMatch(slide.src, /^assets\/seminar\//);
     const match = slide.src.match(driveUrlPattern);
     assert.ok(match, `${deck.id} slide ${slide.number} bukan URL Drive`);
+    assert.equal(
+      match[2],
+      deck.meeting === 7 ? 'm7-composite-v2' : undefined,
+      `${deck.id} slide ${slide.number} memakai revisi gambar yang salah`
+    );
 
     slide.hotspots.forEach((hotspot) => {
       for (const value of [hotspot.x, hotspot.y, hotspot.width, hotspot.height]) {
@@ -185,6 +212,13 @@ test('header Seminar PPG memiliki home dan toggle tema di sisi kiri', () => {
 test('status meeting tetap tersedia pada header mobile Seminar PPG', () => {
   assert.match(seminarCss, /\.seminar-topbar\s*\{[^}]*grid-template-columns:\s*auto\s+minmax\(0,\s*1fr\)\s+auto;/s);
   assert.doesNotMatch(seminarCss, /\.seminar-back span,\s*\.seminar-topbar-status,\s*\.seminar-brand \.seminar-eyebrow/);
+});
+
+test('Pertemuan Seminar 8 sampai 16 terkunci dengan status akan segera hadir', () => {
+  assert.match(seminarPlayer, /button\.disabled\s*=\s*!available/);
+  assert.match(seminarPlayer, /button\.classList\.toggle\(['"]is-locked['"],\s*!available\)/);
+  assert.match(seminarPlayer, /Akan segera hadir/);
+  assert.match(seminarPlayer, /fa-lock/);
 });
 
 test('light mode Seminar PPG memakai token permukaan terang', () => {

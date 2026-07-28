@@ -210,8 +210,23 @@
 }
 
 .seminar-meeting:disabled {
-  cursor: default;
-  opacity: 0.48;
+  cursor: not-allowed;
+  opacity: 0.66;
+  border-color: color-mix(in srgb, var(--seminar-line) 72%, transparent);
+  background: color-mix(in srgb, var(--seminar-panel-strong) 74%, transparent);
+}
+
+.seminar-meeting.is-locked .seminar-meeting-state {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  color: color-mix(in srgb, var(--seminar-muted) 82%, transparent);
+  background: color-mix(in srgb, var(--seminar-line) 64%, transparent);
+}
+
+.seminar-meeting.is-locked .seminar-meeting-state i {
+  font-size: 0.68rem;
 }
 
 .seminar-meeting-number {

@@ -71,14 +71,21 @@ function buildMeetingLibrary(elements) {
     button.type = 'button';
     button.className = 'seminar-meeting';
     button.disabled = !available;
+    button.classList.toggle('is-locked', !available);
     button.dataset.meeting = String(meeting);
+    if (!available) {
+      button.setAttribute('aria-label', `Pertemuan ${twoDigits(meeting)} ${title}. Akan segera hadir`);
+      button.title = 'Akan segera hadir';
+    }
     button.innerHTML = `
       <span class="seminar-meeting-number">${twoDigits(meeting)}</span>
       <span class="seminar-meeting-copy">
         <strong>${title}</strong>
-        <small>${available ? 'Presentasi interaktif' : 'Segera ditambahkan'}</small>
+        <small>${available ? 'Presentasi interaktif' : 'Akan segera hadir'}</small>
       </span>
-      <span class="seminar-meeting-state" aria-hidden="true"></span>
+      <span class="seminar-meeting-state" aria-hidden="true">
+        ${available ? '' : '<i class="fa-solid fa-lock"></i>'}
+      </span>
     `;
 
     if (available) {

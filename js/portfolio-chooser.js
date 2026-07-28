@@ -23,44 +23,6 @@ export function initPortfolioChooser() {
     return card?.dataset.locked === 'true' || card?.classList.contains('is-locked');
   }
 
-  // Auto-unlock UAS chooser starting 27 May 2026.
-  // Pakai server time dari HTTP Date header agar tidak bisa diakali
-  // dengan ubah jam PC. Fallback ke client time hanya kalau request gagal.
-  (function maybeAutoUnlockEp2() {
-    const UNLOCK_AT = Date.UTC(2026, 4, 26, 17, 0, 0); // 27 Mei 00:00 WIB (UTC+7)
-
-    const ep2Card = chooser.querySelector('.chooser-card[data-portfolio="2"]');
-    if (!ep2Card) return;
-
-    function applyUnlock() {
-      ep2Card.classList.remove('is-locked');
-      ep2Card.removeAttribute('aria-disabled');
-      delete ep2Card.dataset.locked;
-      const lockBadge = ep2Card.querySelector('.chooser-card-lock');
-      if (lockBadge) lockBadge.remove();
-      const cta = ep2Card.querySelector('.chooser-card-cta');
-      if (cta) cta.textContent = 'Lihat E-Portfolio 2 →';
-    }
-
-    function checkUnlock(nowMs) {
-      if (nowMs >= UNLOCK_AT) applyUnlock();
-    }
-
-    // Get trusted server time via HTTP Date header
-    fetch(window.location.href, { method: 'HEAD', cache: 'no-store' })
-      .then(res => {
-        const dateHeader = res.headers.get('date');
-        if (!dateHeader) throw new Error('no date header');
-        const serverMs = new Date(dateHeader).getTime();
-        if (!Number.isFinite(serverMs)) throw new Error('invalid date');
-        checkUnlock(serverMs);
-      })
-      .catch(() => {
-        // Network gagal: fallback ke client clock (best-effort)
-        checkUnlock(Date.now());
-      });
-  })();
-
   // Layar pemilih dua langkah: pilih semester, lalu pilih e-portfolio.
   const steps = chooser.querySelectorAll('.chooser-step');
 
