@@ -1,7 +1,7 @@
 /* Naikkan nomor ini setiap kali isi situs berubah. Handler 'activate'
    di bawah menghapus seluruh cache yang namanya tidak cocok, sehingga
    pengunjung lama tidak tertinggal pada versi usang. */
-const CACHE_NAME = 'eportfolio-v2-semester2';
+const CACHE_NAME = 'eportfolio-v3-seminar-ust';
 const STATIC_ASSETS = [
   './',
   './index.html',

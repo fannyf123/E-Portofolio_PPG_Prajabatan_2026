@@ -2440,7 +2440,35 @@
     <span class="perf-toast-text">Performance Mode aktif</span>
   </div>
 
-  <script type="module" src="js/main.js"></script>
+  <script data-local-cache-reset>
+    window.__localCacheReset = Promise.resolve();
+
+    if (['localhost', '127.0.0.1'].includes(window.location.hostname)) {
+      const resetTasks = [];
+
+      if ('serviceWorker' in navigator) {
+        resetTasks.push(
+          navigator.serviceWorker.getRegistrations().then((registrations) =>
+            Promise.all(registrations.map((registration) => registration.unregister()))
+          )
+        );
+      }
+
+      if ('caches' in window) {
+        resetTasks.push(
+          caches.keys().then((cacheNames) =>
+            Promise.all(cacheNames.map((cacheName) => caches.delete(cacheName)))
+          )
+        );
+      }
+
+      window.__localCacheReset = Promise.all(resetTasks);
+    }
+  </script>
+  <script type="module" data-app-bootstrap>
+    await window.__localCacheReset;
+    await import('./js/main.js');
+  </script>
 </body>
 
 </html>

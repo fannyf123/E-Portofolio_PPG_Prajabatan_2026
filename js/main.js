@@ -867,8 +867,11 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
+// Vite localhost must always read the latest presentation manifest.
+const isLocalhost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+
 // Register Service Worker for PWA
-if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator && !isLocalhost) {
   window.addEventListener('load', () => {
     const base = import.meta.env.BASE_URL || '/';
     navigator.serviceWorker.register(`${base}sw.js`)

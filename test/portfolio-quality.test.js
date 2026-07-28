@@ -6,6 +6,7 @@ import { seminarDecks } from '../js/seminar-ppg-data.js';
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
 
 const main = read('js/main.js');
+const serviceWorker = read('public/sw.js');
 const enhancements = read('js/enhancements.js');
 const particles = read('js/particles.js');
 const eportfolio2Animation = read('js/eportfolio2-animation.js');
@@ -23,6 +24,23 @@ const allCss = readdirSync(new URL('../css/', import.meta.url))
 test('preloader mempertahankan lazy-loading gambar di luar layar', () => {
   assert.doesNotMatch(main, /img\.loading\s*=\s*['"]eager['"]/);
   assert.match(main, /filter\(img\s*=>\s*img\.loading\s*!==\s*['"]lazy['"]\)/);
+});
+
+test('localhost membersihkan Service Worker lama sebelum modul utama dimuat', () => {
+  const resetMarker = 'data-local-cache-reset';
+  const resetPosition = indexHtml.indexOf(resetMarker);
+  const mainModulePosition = indexHtml.indexOf('<script type="module" data-app-bootstrap>');
+
+  assert.ok(resetPosition >= 0, 'reset cache localhost belum tersedia');
+  assert.ok(resetPosition < mainModulePosition, 'reset cache harus berjalan sebelum modul utama');
+  assert.match(indexHtml, /(?:localhost|127\.0\.0\.1)/);
+  assert.match(indexHtml, /getRegistrations\(\)/);
+  assert.match(indexHtml, /registration\.unregister\(\)/);
+  assert.match(indexHtml, /caches\.delete\(cacheName\)/);
+  assert.match(indexHtml, /await window\.__localCacheReset/);
+  assert.match(indexHtml, /import\(['"]\.\/js\/main\.js['"]\)/);
+  assert.match(main, /!isLocalhost.*serviceWorker|serviceWorker.*!isLocalhost/s);
+  assert.match(serviceWorker, /const CACHE_NAME = 'eportfolio-v3-seminar-ust';/);
 });
 
 test('preferensi reduced motion tidak dinonaktifkan oleh hard-code atau media query mustahil', () => {
