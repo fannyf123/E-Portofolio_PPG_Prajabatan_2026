@@ -34,6 +34,7 @@ const WASH = {
   's2ep1-video':       'rgba(107, 203, 119, 0.13)',
   's2ep1-nonmengajar': 'rgba(155, 114, 207, 0.13)',
   's2ep1-penilaian':   'rgba(255, 111, 145, 0.13)',
+  's2ep1-produk':      'rgba(241, 163, 64, 0.13)',
 };
 
 let built = false;

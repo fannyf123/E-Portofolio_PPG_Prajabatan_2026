@@ -44,6 +44,7 @@
 .s2ep1-wrapper [data-accent="mint"]     { --s2-accent: var(--mint); }
 .s2ep1-wrapper [data-accent="lavender"] { --s2-accent: var(--lavender); }
 .s2ep1-wrapper [data-accent="rose"]     { --s2-accent: var(--rose); }
+.s2ep1-wrapper [data-accent="amber"]    { --s2-accent: var(--amber); }
 
 /* Tidak ada penimpaan token untuk mode gelap, dan itu disengaja.
    css/dark-mode.css membalik seluruh skala abu-abu — --white menjadi
@@ -295,4 +296,121 @@ body[data-portfolio="s2ep1"] { overflow-x: clip !important; }
    tanpa menindih isi. */
 @media (max-width: 1279px) {
   .s2ep1-rail { display: none; }
+}
+
+
+/* ---------- Produk Unggulan (07) ---------- */
+.s2ep1-produk .s2produk-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s2-gap);
+}
+
+.s2produk-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--s2-line);
+  border-radius: var(--s2-r-md);
+  background: var(--s2-surface);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s var(--ease-smooth), box-shadow 0.3s var(--ease-smooth);
+}
+
+.s2produk-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.s2produk-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--gray-100);
+}
+
+.s2produk-media img,
+.s2produk-media iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+  object-fit: cover;
+}
+
+.s2produk-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  padding: 6px 14px;
+  border-radius: var(--s2-r-pill);
+  background: color-mix(in srgb, var(--amber) 88%, var(--white));
+  color: var(--gray-800);
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: var(--shadow-sm);
+}
+
+.s2produk-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  padding: 22px 22px 24px;
+}
+
+.s2produk-kicker {
+  font-family: var(--font-heading);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--s2-accent, var(--amber));
+}
+
+.s2produk-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  line-height: 1.3;
+  color: var(--s2-ink);
+}
+
+.s2produk-desc {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--s2-muted);
+}
+
+.s2produk-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 10px 20px;
+  border-radius: var(--s2-r-pill);
+  background: var(--s2-accent, var(--amber));
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s var(--ease-smooth), box-shadow 0.25s var(--ease-smooth), filter 0.25s var(--ease-smooth);
+}
+
+.s2produk-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  filter: brightness(1.06);
+}
+
+@media (max-width: 900px) {
+  .s2ep1-produk .s2produk-grid { grid-template-columns: 1fr; }
 }
