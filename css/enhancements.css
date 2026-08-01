@@ -1754,6 +1754,18 @@ section > .container, .section > .container {
    PERFORMANCE OPTIMIZATIONS
    ============================================ */
 
+/* Saat scroll aktif, backdrop-filter dimatikan untuk SEMUA elemen.
+   Re-blur backdrop tiap frame adalah penyebab utama jank scroll
+   (40 elemen terukur di halaman ini). Class is-scrolling dipasang
+   oleh main.js saat scroll berlangsung dan dilepas ~120ms setelah
+   berhenti, sehingga tampilan diam tetap glassmorphism penuh. */
+body.is-scrolling *,
+body.is-scrolling *::before,
+body.is-scrolling *::after {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
 /* Reduce backdrop-filter blur intensity (very expensive) */
 .navbar.scrolled,
 .modal-overlay,

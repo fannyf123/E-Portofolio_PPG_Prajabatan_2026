@@ -392,7 +392,7 @@ function buildSectionScrub(section) {
         trigger: section,
         start: 'top bottom',
         end: 'bottom top',
-        scrub: 1.35
+        scrub: true
       }
     });
   }
@@ -411,7 +411,7 @@ function buildSectionScrub(section) {
         trigger: section,
         start: 'top bottom',
         end: 'bottom top',
-        scrub: 1.45
+        scrub: true
       }
     });
   }
@@ -427,7 +427,7 @@ function buildSectionScrub(section) {
         trigger: timeline,
         start: 'top 78%',
         end: 'bottom 42%',
-        scrub: 1.1
+        scrub: true
       }
     });
   }

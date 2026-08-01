@@ -233,6 +233,20 @@ function initMain() {
     }
   }, { passive: true });
 
+  // ---------- Backdrop-filter off during scroll ----------
+  // backdrop-filter di-render ulang tiap frame saat scroll dan menjadi
+  // sumber jank utama. Saat scroll aktif body diberi class is-scrolling
+  // (CSS mematikan backdrop-filter untuk semua elemen); ~120ms setelah
+  // scroll berhenti class dilepas sehingga glassmorphism kembali penuh.
+  let scrollEndTimer = null;
+  window.addEventListener('scroll', () => {
+    document.body.classList.add('is-scrolling');
+    clearTimeout(scrollEndTimer);
+    scrollEndTimer = setTimeout(() => {
+      document.body.classList.remove('is-scrolling');
+    }, 120);
+  }, { passive: true });
+
   // ---------- Typed Text Effect ----------
   const typedTextEl = document.getElementById('typedText');
   const phrases = [
@@ -495,7 +509,7 @@ function initMain() {
           trigger: heroSection,
           start: 'top top',
           end: 'bottom top',
-          scrub: 0.8,
+          scrub: true,
           invalidateOnRefresh: true
         }
       });

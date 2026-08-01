@@ -221,7 +221,7 @@ function initEp2Parallax(wrapper) {
         scroller: wrapper,
         start: 'top top',
         end: 'bottom top',
-        scrub: 1.2
+        scrub: true
       }
     });
   }
@@ -235,7 +235,7 @@ function initEp2Parallax(wrapper) {
         scroller: wrapper,
         start: 'top top',
         end: 'bottom top',
-        scrub: 1.5
+        scrub: true
       }
     });
   }
@@ -251,7 +251,7 @@ function initEp2Parallax(wrapper) {
           scroller: wrapper,
           start: 'top top',
           end: 'bottom top',
-          scrub: 2
+          scrub: true
         }
       });
     });

@@ -79,7 +79,7 @@ export function initPendidikanAnimation(){
         trigger: timelineEl,
         start: 'top 80%',
         end: 'bottom 40%',
-        scrub: 1.2
+        scrub: true
       }
     });
   }
