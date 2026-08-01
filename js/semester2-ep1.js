@@ -37,20 +37,27 @@ const WASH = {
   's2ep1-produk':      'rgba(241, 163, 64, 0.13)',
 };
 
+/* Sapuan warna E-Portfolio 2 Semester 2. */
+const WASH_S2EP2 = {
+  's2ep2-produk':   'rgba(241, 163, 64, 0.13)',
+  's2ep2-video':    'rgba(46, 196, 182, 0.13)',
+  's2ep2-refleksi': 'rgba(155, 114, 207, 0.13)',
+};
+
 let built = false;
 
 /* ---------- Utilitas ---------- */
 
 /** Menyorot satu butir pada rel navigasi dan melepas sorotan butir lain. */
-function highlight(id) {
-  document.querySelectorAll('#s2ep1Rail a[data-rail]').forEach((link) => {
+function highlight(id, railId = 's2ep1Rail') {
+  document.querySelectorAll(`#${railId} a[data-rail]`).forEach((link) => {
     if (link.dataset.rail === id) link.setAttribute('aria-current', 'true');
     else link.removeAttribute('aria-current');
   });
 }
 
-function buildHover(wrapper) {
-  wrapper.querySelectorAll('.pillar-card').forEach((card) => {
+function buildHover(wrapper, railId = 's2ep1Rail') {
+  wrapper.querySelectorAll('.pillar-card, .s2ep2-analisis-card').forEach((card) => {
     card.addEventListener('mouseenter', () => {
       gsap.to(card, { y: -6, scale: 1.015, duration: 0.3, ease: 'power2.out' });
     });
@@ -59,7 +66,7 @@ function buildHover(wrapper) {
     });
   });
 
-  wrapper.querySelectorAll('#s2ep1Rail a').forEach((link) => {
+  wrapper.querySelectorAll(`#${railId} a`).forEach((link) => {
     link.addEventListener('mouseenter', () => {
       gsap.to(link, { x: 4, duration: 0.25, ease: 'power2.out' });
     });
@@ -70,25 +77,25 @@ function buildHover(wrapper) {
 }
 
 /** Sapuan warna latar mengikuti bagian yang sedang dibaca. Mode penuh saja. */
-function buildWash(wrapper) {
-  const wash = wrapper.querySelector('.s2ep1-wash');
+function buildWash(wrapper, map = WASH) {
+  const wash = wrapper.querySelector('.s2ep1-wash, .s2ep2-wash');
   if (!wash) return;
 
-  Object.keys(WASH).forEach((id) => {
+  Object.keys(map).forEach((id) => {
     const section = document.getElementById(id);
     if (!section) return;
     ScrollTrigger.create({
       trigger: section,
       start: 'top 60%',
       end: 'bottom 40%',
-      onEnter: () => gsap.to(wash, { backgroundColor: WASH[id], duration: 0.8, ease: 'power2.out' }),
-      onEnterBack: () => gsap.to(wash, { backgroundColor: WASH[id], duration: 0.8, ease: 'power2.out' }),
+      onEnter: () => gsap.to(wash, { backgroundColor: map[id], duration: 0.8, ease: 'power2.out' }),
+      onEnterBack: () => gsap.to(wash, { backgroundColor: map[id], duration: 0.8, ease: 'power2.out' }),
     });
   });
 }
 
-function buildRail(wrapper) {
-  const rail = document.getElementById('s2ep1Rail');
+function buildRail(wrapper, railId = 's2ep1Rail') {
+  const rail = document.getElementById(railId);
   if (!rail) return;
 
   rail.addEventListener('click', (e) => {
@@ -98,7 +105,7 @@ function buildRail(wrapper) {
     const target = document.getElementById(link.dataset.rail);
     if (!target) return;
     target.scrollIntoView({ behavior: REDUCED_MOTION ? 'auto' : 'smooth', block: 'start' });
-    highlight(link.dataset.rail);
+    highlight(link.dataset.rail, railId);
   });
 
   if (typeof IntersectionObserver !== 'function') return;
@@ -111,13 +118,13 @@ function buildRail(wrapper) {
       const visible = entries
         .filter((entry) => entry.isIntersecting)
         .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-      if (visible.length) highlight(visible[0].target.id);
+      if (visible.length) highlight(visible[0].target.id, railId);
     },
     { rootMargin: '-88px 0px -55% 0px', threshold: 0 }
   );
 
   sections.forEach((section) => observer.observe(section));
-  highlight(sections[0].id);
+  highlight(sections[0].id, railId);
 }
 
 /** Tanpa GSAP atau saat pengguna meminta gerak dikurangi: tampilkan langsung. */
@@ -220,7 +227,9 @@ export function refreshSemester2Ep2() {
     });
   });
 
-  buildHover(wrapper);
+  buildHover(wrapper, 's2ep2Rail');
+  if (!isCalm()) buildWash(wrapper, WASH_S2EP2);
+  buildRail(wrapper, 's2ep2Rail');
   ScrollTrigger.refresh();
   window.dispatchEvent(new CustomEvent('portfolio:layoutchange'));
 }
