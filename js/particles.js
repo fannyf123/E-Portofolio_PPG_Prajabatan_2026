@@ -34,6 +34,10 @@
       '.hero-badges', '.about-stats', '.footer'
     ];
 
+    // Rect disimpan dalam koordinat DOKUMEN (top + scrollY) agar saat
+    // scroll hanya perlu satu pembacaan window.scrollY, bukan reflow
+    // getBoundingClientRect untuk ratusan elemen per scroll.
+    const scrollY = window.scrollY;
     contentRects = [];
     selectors.forEach(sel => {
       document.querySelectorAll(sel).forEach(el => {
@@ -41,11 +45,11 @@
         if (rect.width > 0 && rect.height > 0) {
           contentRects.push({
             left: rect.left - 36,
-            top: rect.top - 36,
+            top: rect.top + scrollY - 36,
             right: rect.right + 36,
-            bottom: rect.bottom + 36,
+            bottom: rect.bottom + scrollY + 36,
             centerX: rect.left + rect.width / 2,
-            centerY: rect.top + rect.height / 2,
+            centerY: rect.top + scrollY + rect.height / 2,
           });
         }
       });
@@ -57,9 +61,12 @@
     let totalForceY = 0;
     let activeRects = 0;
 
+    // Satu pembacaan scrollY per frame — rect sudah dalam koordinat dokumen
+    const scrollY = window.scrollY;
+
     contentRects.forEach(rect => {
       const nearestX = Math.max(rect.left, Math.min(p.x, rect.right));
-      const nearestY = Math.max(rect.top, Math.min(p.y, rect.bottom));
+      const nearestY = Math.max(rect.top - scrollY, Math.min(p.y, rect.bottom - scrollY));
       const dx = p.x - nearestX;
       const dy = p.y - nearestY;
       const distSq = dx * dx + dy * dy;
@@ -70,7 +77,7 @@
         const dist = Math.sqrt(distSq) || 1;
         const force = (avoidRadius - dist) / avoidRadius;
         const angle = distSq === 0
-          ? Math.atan2(p.y - rect.centerY, p.x - rect.centerX) || (Math.random() * Math.PI * 2)
+          ? Math.atan2(p.y - (rect.centerY - scrollY), p.x - rect.centerX) || (Math.random() * Math.PI * 2)
           : Math.atan2(dy, dx);
 
         totalForceX += Math.cos(angle) * force;
@@ -438,11 +445,12 @@
     }, 200);
   });
 
-  let scrollTimer;
-  window.addEventListener('scroll', () => {
-    clearTimeout(scrollTimer);
-    scrollTimer = setTimeout(updateContentRects, 150);
-  }, { passive: true });
+  // Rect konten dihitung ulang hanya saat layout benar-benar berubah
+  // (resize, filter artefak, accordion, pergantian portofolio) — bukan
+  // pada setiap scroll. Posisi scroll ditangani via koordinat dokumen.
+  window.addEventListener('portfolio:layoutchange', () => {
+    updateContentRects();
+  });
 
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {

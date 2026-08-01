@@ -161,6 +161,7 @@ export function refreshSemester2Ep1() {
 
   if (built) {
     ScrollTrigger.refresh();
+    window.dispatchEvent(new CustomEvent('portfolio:layoutchange'));
     return;
   }
   built = true;

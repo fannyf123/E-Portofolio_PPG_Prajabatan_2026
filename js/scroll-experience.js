@@ -451,7 +451,11 @@ function setActiveSection(section, index, ui) {
 
 function refreshSoon() {
   window.clearTimeout(refreshSoon.timer);
-  refreshSoon.timer = window.setTimeout(() => ScrollTrigger.refresh(), 420);
+  refreshSoon.timer = window.setTimeout(() => {
+    ScrollTrigger.refresh();
+    // Beri tahu modul lain (highlightNav, partikel) bahwa layout berubah
+    window.dispatchEvent(new CustomEvent('portfolio:layoutchange'));
+  }, 420);
 }
 
 function animateVisiblePortfolioCards() {

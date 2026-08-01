@@ -28,15 +28,16 @@ window.refreshEp2Animation = refreshEp2Animation;
 
 let mainInitialized = false;
 
-function waitForWindowLoad() {
-  if (document.readyState === 'complete') return Promise.resolve();
-  return new Promise(resolve => window.addEventListener('load', resolve, { once: true }));
-}
-
 function preloadPageContent() {
   const loadingFill = document.querySelector('.intro-panel-loading-fill');
   const loadingStatus = document.getElementById('introLoadingStatus');
-  const images = Array.from(document.images).filter(img => img.loading !== 'lazy');
+  // Hanya gambar di area pertama (intro, chooser, hero) yang menahan
+  // loading screen. Gambar lain di bawah fold memakai lazy-loading dan
+  // tidak perlu memperlambat pembukaan portofolio.
+  const heroScope = document.querySelector('#introTear, #portfolioChooser, #hero, .ep2-hero');
+  const images = heroScope
+    ? Array.from(heroScope.querySelectorAll('img')).filter(img => img.loading !== 'lazy')
+    : [];
   const tasks = [];
   let completed = 0;
 
@@ -92,8 +93,10 @@ function preloadPageContent() {
     tasks.push(document.fonts.ready.catch(() => {}).then(updateProgress));
   }
 
-  tasks.push(waitForWindowLoad().then(updateProgress));
-
+  // Catatan: window load TIDAK lagi menjadi penahan loading screen.
+  // Sebelumnya intro menunggu seluruh aset halaman (termasuk logo 590KB
+  // dan slide Drive) sehingga pembukaan terasa lambat. Kini cukup gambar
+  // area pertama + font.
   return Promise.race([
     Promise.allSettled(tasks),
     new Promise(resolve => setTimeout(resolve, 15000))
@@ -296,26 +299,52 @@ function initMain() {
   const navLinks = document.querySelectorAll('.nav-links a');
   let lastSyncedHash = '';
 
+  // Posisi section di-cache agar highlightNav tidak memaksa reflow
+  // (offsetTop/offsetHeight) pada setiap frame scroll.
+  let sectionPositions = [];
+  let sectionPositionsReady = false;
+
+  function measureSectionPositions() {
+    sectionPositions = Array.from(sections).map((sec) => ({
+      id: sec.getAttribute('id'),
+      top: sec.offsetTop,
+      height: sec.offsetHeight
+    }));
+    sectionPositionsReady = true;
+  }
+
+  let measureTimer;
+  function scheduleMeasure() {
+    clearTimeout(measureTimer);
+    measureTimer = setTimeout(() => {
+      measureSectionPositions();
+      lastSyncedHash = '';
+    }, 200);
+  }
+
+  measureSectionPositions();
+  window.addEventListener('resize', scheduleMeasure, { passive: true });
+  window.addEventListener('portfolio:layoutchange', scheduleMeasure, { passive: true });
+
   function highlightNav() {
+    if (!sectionPositionsReady) return;
     // Trigger highlight when section reaches the upper third of the screen
     const scrollPos = window.scrollY + (window.innerHeight / 3);
     let activeId = '';
 
-    sections.forEach(sec => {
-      const top = sec.offsetTop;
-      const height = sec.offsetHeight;
-      const id = sec.getAttribute('id');
-
-      if (scrollPos >= top && scrollPos < top + height) {
-        activeId = id;
+    for (let i = 0; i < sectionPositions.length; i++) {
+      const pos = sectionPositions[i];
+      if (scrollPos >= pos.top && scrollPos < pos.top + pos.height) {
+        activeId = pos.id;
         navLinks.forEach(link => {
           link.classList.remove('active');
-          if (link.getAttribute('href') === `#${id}`) {
+          if (link.getAttribute('href') === `#${pos.id}`) {
             link.classList.add('active');
           }
         });
+        break;
       }
-    });
+    }
 
     // Sync URL hash with active section without scrolling
     if (activeId && window.scrollY > 80) {
