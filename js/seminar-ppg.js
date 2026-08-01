@@ -1,5 +1,10 @@
-import { seminarDecks } from './seminar-ppg-data.js';
+import { seminarDecks as seminarDecksS1 } from './seminar-ppg-data.js';
+import { seminarDecksS2 } from './seminar-ppg-data-s2.js';
 import { seminarThumbMap } from './seminar-thumbs.js';
+
+// Deck 1-7: presentasi gambar dari Google Drive.
+// Deck 8-16: slide teks refleksi & karya inovasi (tanpa gambar).
+const seminarDecks = [...seminarDecksS1, ...seminarDecksS2];
 
 function thumbSrcFor(slide) {
   const match = slide.src.match(/thumbnail\?id=([\w-]+)/);
@@ -78,6 +83,7 @@ function playerElements() {
     stageShell: document.getElementById('seminarStageShell'),
     stage: document.getElementById('seminarStage'),
     image: document.getElementById('seminarSlideImage'),
+    text: document.getElementById('seminarSlideText'),
     loading: document.getElementById('seminarLoading'),
     loadingLabel: document.getElementById('seminarLoadingLabel'),
     hotspots: document.getElementById('seminarHotspots'),
@@ -152,10 +158,18 @@ function buildThumbnails(elements) {
     button.type = 'button';
     button.className = 'seminar-thumb';
     button.setAttribute('aria-label', `Buka slide ${slide.number}`);
-    button.innerHTML = `
-      <img src="${thumbSrcFor(slide)}" alt="" width="320" height="180" loading="lazy" />
-      <span>${twoDigits(slide.number)}</span>
-    `;
+    if (slide.content) {
+      // Slide teks: placeholder berupa nomor, bukan gambar
+      button.innerHTML = `
+        <span class="seminar-thumb-text">${twoDigits(slide.number)}</span>
+        <span>${twoDigits(slide.number)}</span>
+      `;
+    } else {
+      button.innerHTML = `
+        <img src="${thumbSrcFor(slide)}" alt="" width="320" height="180" loading="lazy" />
+        <span>${twoDigits(slide.number)}</span>
+      `;
+    }
     button.addEventListener('click', () => showSlide(index, elements));
     elements.thumbnails.appendChild(button);
   });
@@ -198,10 +212,30 @@ function setSlideLoading(elements, loading, message = 'Memuat slide...') {
 
 function preloadAdjacentSlides(deck, index) {
   [index - 1, index + 1].forEach((candidate) => {
-    if (!deck.slides[candidate]) return;
+    const slide = deck.slides[candidate];
+    if (!slide || slide.content) return; // slide teks tidak perlu preload
     const image = new Image();
-    image.src = deck.slides[candidate].src;
+    image.src = slide.src;
   });
+}
+
+function renderTextSlide(slide, elements) {
+  elements.text.hidden = false;
+  elements.image.hidden = true;
+
+  const content = slide.content || {};
+  const body = Array.isArray(content.body) ? content.body : [];
+  const bullets = Array.isArray(content.bullets) ? content.bullets : [];
+
+  elements.text.innerHTML = `
+    <div class="seminar-text-card">
+      ${content.eyebrow ? `<p class="seminar-text-eyebrow">${content.eyebrow}</p>` : ''}
+      ${content.title ? `<h3 class="seminar-text-title">${content.title}</h3>` : ''}
+      ${body.map((paragraph) => `<p class="seminar-text-paragraph">${paragraph}</p>`).join('')}
+      ${bullets.length ? `<ul class="seminar-text-bullets">${bullets.map((item) => `<li>${item}</li>`).join('')}</ul>` : ''}
+      ${content.quote ? `<blockquote class="seminar-text-quote">${content.quote}</blockquote>` : ''}
+    </div>
+  `;
 }
 
 function showSlide(index, elements = playerElements()) {
@@ -213,16 +247,25 @@ function showSlide(index, elements = playerElements()) {
   elements.stage.classList.remove('is-changing');
   void elements.stage.offsetWidth;
   elements.stage.classList.add('is-changing');
-  setSlideLoading(elements, true);
-  elements.image.src = slide.src;
-  elements.image.alt = slide.alt;
   elements.current.textContent = twoDigits(slide.number);
   elements.total.textContent = twoDigits(deck.slides.length);
   elements.progress.style.width = `${((boundedIndex + 1) / deck.slides.length) * 100}%`;
   elements.previous.disabled = boundedIndex === 0;
   elements.next.disabled = boundedIndex === deck.slides.length - 1;
 
-  renderHotspots(slide, elements);
+  if (slide.content) {
+    // Slide teks: konten dirender langsung, tidak ada gambar Drive
+    renderTextSlide(slide, elements);
+    setSlideLoading(elements, false);
+    renderHotspots(slide, elements);
+  } else {
+    elements.text.hidden = true;
+    elements.image.hidden = false;
+    setSlideLoading(elements, true);
+    elements.image.src = slide.src;
+    elements.image.alt = slide.alt;
+    renderHotspots(slide, elements);
+  }
 
   elements.thumbnails.querySelectorAll('.seminar-thumb').forEach((thumbnail, thumbnailIndex) => {
     const active = thumbnailIndex === boundedIndex;
@@ -231,7 +274,7 @@ function showSlide(index, elements = playerElements()) {
     if (active) thumbnail.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
   });
 
-  if (elements.image.currentSrc === slide.src && elements.image.complete && elements.image.naturalWidth > 0) {
+  if (!slide.content && elements.image.currentSrc === slide.src && elements.image.complete && elements.image.naturalWidth > 0) {
     setSlideLoading(elements, false);
   }
 

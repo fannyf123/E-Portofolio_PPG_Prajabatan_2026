@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { seminarDecks } from '../js/seminar-ppg-data.js';
+import { seminarDecksS2 } from '../js/seminar-ppg-data-s2.js';
 
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
 
@@ -207,6 +208,50 @@ test('fullscreen Seminar PPG menjaga rasio slide dan memisahkan kontrol', () => 
   assert.match(stageRule, /aspect-ratio:\s*16\s*\/\s*9;/);
   assert.match(hotspotRule, /min-width:\s*0;/);
   assert.match(hotspotRule, /min-height:\s*0;/);
+});
+
+test('deck 8-16 Seminar PPG memakai slide teks dengan struktur valid', () => {
+  const expectedS2 = [
+    { id: 'meeting-08', meeting: 8, slides: 6, hotspots: 0 },
+    { id: 'meeting-09', meeting: 9, slides: 8, hotspots: 0 },
+    { id: 'meeting-10', meeting: 10, slides: 6, hotspots: 0 },
+    { id: 'meeting-11', meeting: 11, slides: 6, hotspots: 0 },
+    { id: 'meeting-12', meeting: 12, slides: 6, hotspots: 0 },
+    { id: 'meeting-13', meeting: 13, slides: 8, hotspots: 0 },
+    { id: 'meeting-14', meeting: 14, slides: 6, hotspots: 0 },
+    { id: 'meeting-15', meeting: 15, slides: 6, hotspots: 0 },
+    { id: 'meeting-16', meeting: 16, slides: 8, hotspots: 4 },
+  ];
+  const summary = seminarDecksS2.map((deck) => ({
+    id: deck.id,
+    meeting: deck.meeting,
+    slides: deck.slides.length,
+    hotspots: deck.slides.reduce((sum, slide) => sum + slide.hotspots.length, 0),
+  }));
+  assert.deepEqual(summary, expectedS2);
+
+  const allSlides = seminarDecksS2.flatMap((deck) => deck.slides);
+  allSlides.forEach((slide) => {
+    // Slide teks TIDAK memakai URL Drive — konten dirender langsung
+    assert.equal(slide.src, undefined, 'slide teks tidak boleh punya src');
+    assert.ok(slide.content, 'slide teks wajib punya content');
+    assert.ok(slide.content.eyebrow, 'content wajib punya eyebrow');
+    assert.ok(slide.content.title, 'content wajib punya title');
+    assert.ok(
+      slide.content.body?.length || slide.content.bullets?.length || slide.content.quote,
+      'content wajib memuat body, bullets, atau quote'
+    );
+    assert.equal(Number.isInteger(slide.number), true);
+    slide.hotspots.forEach((hotspot) => {
+      assert.ok(hotspot.x >= 0 && hotspot.y >= 0);
+      assert.ok(hotspot.width > 0 && hotspot.height > 0);
+      assert.ok(hotspot.x + hotspot.width <= 100.001);
+      assert.ok(hotspot.y + hotspot.height <= 100.001);
+      if (hotspot.targetSlide !== null) {
+        assert.ok(hotspot.targetSlide >= 1 && hotspot.targetSlide <= slide.number + 10);
+      }
+    });
+  });
 });
 
 test('Seminar PPG menampilkan loader estetik saat gambar belum siap', () => {

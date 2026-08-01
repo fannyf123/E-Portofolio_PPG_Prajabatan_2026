@@ -817,3 +817,95 @@
     transition: none;
   }
 }
+
+
+/* ---------- Slide Teks (deck refleksi & karya inovasi) ---------- */
+.seminar-slide-text {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  padding: clamp(20px, 4vw, 56px);
+  overflow-y: auto;
+}
+
+.seminar-text-card {
+  width: min(100%, 860px);
+  max-height: 100%;
+  padding: clamp(20px, 3.4vw, 44px);
+  border: 1px solid var(--seminar-line);
+  border-radius: clamp(14px, 1.6vw, 22px);
+  background: color-mix(in srgb, var(--seminar-panel) 88%, transparent);
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.18);
+  text-align: left;
+}
+
+.seminar-text-eyebrow {
+  margin: 0 0 10px;
+  font-family: var(--font-heading);
+  font-size: clamp(0.72rem, 1vw, 0.9rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--seminar-muted);
+}
+
+.seminar-text-title {
+  margin: 0 0 14px;
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 2.6vw, 2.1rem);
+  line-height: 1.2;
+  color: inherit;
+}
+
+.seminar-text-paragraph {
+  margin: 0 0 12px;
+  font-size: clamp(0.9rem, 1.4vw, 1.06rem);
+  line-height: 1.65;
+  color: var(--seminar-muted);
+}
+
+.seminar-text-bullets {
+  margin: 12px 0 0;
+  padding-left: 22px;
+  display: grid;
+  gap: 8px;
+}
+
+.seminar-text-bullets li {
+  font-size: clamp(0.9rem, 1.4vw, 1.02rem);
+  line-height: 1.55;
+  color: var(--seminar-muted);
+}
+
+.seminar-text-quote {
+  margin: 16px 0 0;
+  padding: 14px 18px;
+  border-left: 3px solid var(--primary);
+  border-radius: 0 12px 12px 0;
+  background: color-mix(in srgb, var(--primary) 8%, transparent);
+  font-size: clamp(0.92rem, 1.4vw, 1.05rem);
+  font-style: italic;
+  line-height: 1.6;
+  color: inherit;
+}
+
+/* Thumbnail placeholder untuk slide teks */
+.seminar-thumb-text {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background:
+    radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--primary) 22%, transparent), transparent 60%),
+    var(--seminar-panel-soft);
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: color-mix(in srgb, var(--primary) 55%, var(--seminar-muted));
+}
+
+.seminar-thumb.is-active .seminar-thumb-text {
+  color: var(--primary-light, var(--primary));
+}
