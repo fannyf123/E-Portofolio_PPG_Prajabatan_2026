@@ -345,6 +345,13 @@
   transition: filter 0.35s ease, transform 0.35s var(--ease-smooth);
 }
 
+/* Atribut hidden pada img/teks WAJIB menang atas display di atas;
+   tanpa ini gambar presentasi tetap tampil di belakang slide teks. */
+.seminar-stage img[hidden],
+.seminar-slide-text[hidden] {
+  display: none;
+}
+
 .seminar-stage.is-loading > img {
   filter: blur(3px) saturate(0.72);
   transform: scale(1.014);
