@@ -338,6 +338,39 @@ body[data-portfolio="s2ep1"] { overflow-x: clip !important; }
   object-fit: cover;
 }
 
+/* State "belum tersedia": placeholder ikon besar, tanpa gambar/tautan */
+.s2produk-media--placeholder {
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--amber) 16%, transparent), transparent 62%),
+    var(--s2-surface-alt);
+  border-bottom: 1px dashed var(--s2-line);
+}
+
+.s2produk-media--placeholder > i {
+  font-size: 3rem;
+  color: color-mix(in srgb, var(--amber) 55%, var(--gray-300));
+}
+
+.s2produk-card--belum .s2produk-title,
+.s2produk-card--belum .s2produk-desc {
+  opacity: 0.82;
+}
+
+.s2produk-cta--belum {
+  cursor: default;
+  box-shadow: none;
+  background: color-mix(in srgb, var(--s2-muted) 14%, transparent);
+  color: var(--s2-muted);
+}
+
+.s2produk-cta--belum:hover {
+  transform: none;
+  box-shadow: none;
+  filter: none;
+}
+
 .s2produk-badge {
   position: absolute;
   top: 14px;
