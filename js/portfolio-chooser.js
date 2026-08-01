@@ -59,6 +59,28 @@ export function initPortfolioChooser() {
 
   initChooserSteps();
 
+  // ---------- Mode pratinjau (?preview=1) ----------
+  // Membuka paksa kartu Semester 2 yang terkunci di RUNTIME saja, agar
+  // pemilik dapat melihat isinya sebelum dinilai. Markup asli (data-locked,
+  // aria-disabled, class is-locked) TIDAK diubah, sehingga portofolio tetap
+  // terkunci bagi pengunjung biasa dan test markup tetap berlaku.
+  const previewMode = new URLSearchParams(window.location.search).get('preview') === '1';
+  if (previewMode) {
+    cards.forEach((card) => {
+      if (!isCardLocked(card)) return;
+      if (card.dataset.portfolio !== 's2ep1') return; // hanya yang sudah ada isinya
+      card.dataset.locked = 'false';
+      card.removeAttribute('aria-disabled');
+      card.classList.remove('is-locked');
+      const badge = card.querySelector('.chooser-card-badge');
+      const cta = card.querySelector('.chooser-card-cta');
+      const lock = card.querySelector('.chooser-card-lock');
+      if (badge) badge.textContent = 'PRATINJAU';
+      if (lock) lock.remove();
+      if (cta) cta.textContent = 'Lihat E-Portfolio 1 →';
+    });
+  }
+
   function showChooser() {
     gotoStep('semester');
     chooser.classList.add('active');
