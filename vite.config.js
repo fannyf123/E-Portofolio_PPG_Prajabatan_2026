@@ -11,7 +11,8 @@ function copyStaticAssets() {
     name: 'copy-static-assets',
     closeBundle() {
       const folders = [
-        ['assets/pdf', 'assets/pdf']
+        ['assets/pdf', 'assets/pdf'],
+        ['assets/img/seminar', 'assets/img/seminar']
       ];
 
       folders.forEach(([sourceDir, targetDir]) => {
