@@ -24,6 +24,35 @@ let currentDeckIndex = 0;
 let currentSlideIndex = 0;
 let touchStartX = null;
 
+/* ---------- Progres baca (localStorage) ----------
+   Menyimpan slide terakhir per pertemuan agar penilai yang membuka
+   presentasi lalu menutupnya dapat melanjutkan dari tempat berhenti,
+   bukan dari slide 1 lagi. */
+const PROGRESS_KEY = 'seminarProgress';
+
+function getProgress() {
+  try {
+    return JSON.parse(localStorage.getItem(PROGRESS_KEY)) || {};
+  } catch (_) {
+    return {};
+  }
+}
+
+function saveProgress() {
+  try {
+    const progress = getProgress();
+    progress[activeDeck().meeting] = currentSlideIndex;
+    localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+  } catch (_) {
+    // localStorage tidak tersedia (mode privat) — abaikan dengan tenang
+  }
+}
+
+function savedSlideFor(meeting) {
+  const saved = getProgress()[meeting];
+  return Number.isInteger(saved) && saved > 0 ? saved : 0;
+}
+
 function twoDigits(value) {
   return String(value).padStart(2, '0');
 }
@@ -77,11 +106,17 @@ function buildMeetingLibrary(elements) {
       button.setAttribute('aria-label', `Pertemuan ${twoDigits(meeting)} ${title}. Akan segera hadir`);
       button.title = 'Akan segera hadir';
     }
+
+    const resumeAt = available ? savedSlideFor(meeting) : 0;
     button.innerHTML = `
       <span class="seminar-meeting-number">${twoDigits(meeting)}</span>
       <span class="seminar-meeting-copy">
         <strong>${title}</strong>
-        <small>${available ? 'Presentasi interaktif' : 'Akan segera hadir'}</small>
+        <small>${available
+          ? (resumeAt > 0
+              ? `Lanjut slide ${resumeAt + 1} dari ${seminarDecks[deckIndex].slides.length}`
+              : 'Presentasi interaktif')
+          : 'Akan segera hadir'}</small>
       </span>
       <span class="seminar-meeting-state" aria-hidden="true">
         ${available ? '' : '<i class="fa-solid fa-lock"></i>'}
@@ -91,7 +126,7 @@ function buildMeetingLibrary(elements) {
     if (available) {
         button.addEventListener('click', () => {
           currentDeckIndex = deckIndex;
-          currentSlideIndex = 0;
+          currentSlideIndex = savedSlideFor(meeting);
           renderDeck(elements);
           scrollPresentationIntoView(elements);
         });
@@ -194,6 +229,7 @@ function showSlide(index, elements = playerElements()) {
   }
 
   preloadAdjacentSlides(deck, boundedIndex);
+  saveProgress();
 }
 
 function renderDeck(elements) {
