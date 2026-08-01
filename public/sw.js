@@ -2,16 +2,16 @@
    di bawah menghapus seluruh cache yang namanya tidak cocok, sehingga
    pengunjung lama tidak tertinggal pada versi usang. */
 const CACHE_NAME = 'eportfolio-v3-seminar-ust';
+// Hanya file yang benar-benar ada di dist/ yang boleh masuk pre-cache.
+// Asset ber-hash (logo, css, js) TIDAK boleh didaftarkan statis: nama
+// filenya berubah tiap build (Vite hash), sehingga cache.addAll gagal
+// 404 dan shell offline tidak pernah lengkap. File ber-hash di-cache
+// secara otomatis oleh handler fetch (stale-while-revalidate).
 const STATIC_ASSETS = [
   './',
   './index.html',
   './manifest.json',
-  './favicon.png',
-  './assets/img/ppg-logo-clean.png',
-  './assets/img/profile.jpeg',
-  './assets/img/ust-logo.png',
-  './assets/img/uny-logo.png',
-  './assets/img/smk2klaten-logo.png'
+  './favicon.png'
 ];
 
 // Install Event - Pre-cache core shell
