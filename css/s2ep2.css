@@ -10,12 +10,14 @@
   background: var(--s2-surface);
 }
 
-/* Aksen per kartu analisis */
-.s2ep2-wrapper [data-accent="amber"]    { --s2ep2-accent: var(--amber); }
-.s2ep2-wrapper [data-accent="teal"]     { --s2ep2-accent: var(--teal); }
-.s2ep2-wrapper [data-accent="mint"]     { --s2ep2-accent: var(--mint); }
-.s2ep2-wrapper [data-accent="coral"]    { --s2ep2-accent: var(--coral); }
-.s2ep2-wrapper [data-accent="lavender"] { --s2ep2-accent: var(--lavender); }
+/* Aksen per kartu analisis — peta ini juga mengaktifkan --s2-accent yang
+   dipakai komponen .s2produk-* (CTA, kicker) milik semester2-ep1.css.
+   Tanpa peta ini, semua kartu di s2ep2 jatuh ke satu warna fallback. */
+.s2ep2-wrapper [data-accent="amber"]    { --s2ep2-accent: var(--amber);    --s2-accent: var(--amber); }
+.s2ep2-wrapper [data-accent="teal"]     { --s2ep2-accent: var(--teal);     --s2-accent: var(--teal); }
+.s2ep2-wrapper [data-accent="mint"]     { --s2ep2-accent: var(--mint);     --s2-accent: var(--mint); }
+.s2ep2-wrapper [data-accent="coral"]    { --s2ep2-accent: var(--coral);    --s2-accent: var(--coral); }
+.s2ep2-wrapper [data-accent="lavender"] { --s2ep2-accent: var(--lavender); --s2-accent: var(--lavender); }
 
 /* ---------- Grid produk (satu kolom lebar) ---------- */
 .s2ep2-produk-grid {
@@ -81,13 +83,13 @@
 .s2ep2-analisis-icon {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   margin-bottom: 14px;
-  border-radius: var(--s2-r-pill);
+  border-radius: var(--s2-r-sm);
   background: color-mix(in srgb, var(--s2ep2-accent) 16%, transparent);
-  color: var(--s2ep2-accent);
-  font-size: 1.05rem;
+  font-size: 1.45rem;
+  line-height: 1;
 }
 
 .s2ep2-analisis-card h3 {
