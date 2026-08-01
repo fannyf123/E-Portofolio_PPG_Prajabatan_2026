@@ -1,4 +1,11 @@
 import { seminarDecks } from './seminar-ppg-data.js';
+import { seminarThumbMap } from './seminar-thumbs.js';
+
+function thumbSrcFor(slide) {
+  const match = slide.src.match(/thumbnail\?id=([\w-]+)/);
+  const key = match ? match[1] : null;
+  return (key && seminarThumbMap[key]) || slide.src;
+}
 
 const meetingPlan = [
   'Identifikasi Diri',
@@ -146,7 +153,7 @@ function buildThumbnails(elements) {
     button.className = 'seminar-thumb';
     button.setAttribute('aria-label', `Buka slide ${slide.number}`);
     button.innerHTML = `
-      <img src="${slide.src}" alt="" width="320" height="180" loading="lazy" />
+      <img src="${thumbSrcFor(slide)}" alt="" width="320" height="180" loading="lazy" />
       <span>${twoDigits(slide.number)}</span>
     `;
     button.addEventListener('click', () => showSlide(index, elements));
