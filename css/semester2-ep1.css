@@ -73,21 +73,56 @@
 .chooser-step-back {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  margin-bottom: 18px;
-  padding: 8px 18px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  gap: 8px;
+  margin-bottom: 26px;
+  padding: 9px 20px 9px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: var(--s2-r-pill);
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.85);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04));
+  color: rgba(255, 255, 255, 0.92);
   font-family: var(--font-heading);
   font-size: 0.85rem;
   font-weight: 600;
+  letter-spacing: 0.02em;
   cursor: pointer;
-  transition: background 0.25s var(--ease-smooth);
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 0 0 0 rgba(46, 196, 182, 0);
+  transition:
+    transform 0.25s var(--ease-smooth),
+    box-shadow 0.25s var(--ease-smooth),
+    border-color 0.25s var(--ease-smooth),
+    background 0.25s var(--ease-smooth);
 }
 
-.chooser-step-back:hover { background: rgba(255, 255, 255, 0.14); }
+.chooser-step-back > span:first-child {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--s2-r-pill);
+  background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+  color: var(--white);
+  font-size: 0.8rem;
+  line-height: 1;
+  box-shadow: 0 2px 8px rgba(46, 196, 182, 0.45);
+  transition: transform 0.25s var(--ease-smooth);
+}
+
+.chooser-step-back:hover {
+  transform: translateY(-2px);
+  border-color: rgba(46, 196, 182, 0.65);
+  background: linear-gradient(135deg, rgba(46, 196, 182, 0.24), rgba(255, 255, 255, 0.06));
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 0 18px rgba(46, 196, 182, 0.28);
+}
+
+.chooser-step-back:hover > span:first-child { transform: translateX(-3px); }
+
+.chooser-step-back:active { transform: translateY(0); }
 
 .chooser-step-back:focus-visible {
   outline: 2px solid var(--accent);
