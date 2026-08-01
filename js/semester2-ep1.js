@@ -185,4 +185,42 @@ export function refreshSemester2Ep1() {
   if (!isCalm()) buildWash(wrapper);
 
   ScrollTrigger.refresh();
+  window.dispatchEvent(new CustomEvent('portfolio:layoutchange'));
+}
+
+/* ---------- Semester 2 — E-Portfolio 2 (Produk Terbaik) ----------
+   Halaman yang sama dengan EP1 Semester 2: hero + section produk.
+   Dibangun saat wrapper ditampilkan, bukan saat halaman dimuat. */
+
+let builtS2Ep2 = false;
+
+export function refreshSemester2Ep2() {
+  const wrapper = document.getElementById('s2ep2Wrapper');
+  if (!wrapper) return;
+
+  if (REDUCED_MOTION) {
+    revealStatic(wrapper);
+    return;
+  }
+
+  if (builtS2Ep2) {
+    ScrollTrigger.refresh();
+    window.dispatchEvent(new CustomEvent('portfolio:layoutchange'));
+    return;
+  }
+  builtS2Ep2 = true;
+
+  wrapper.querySelectorAll('.s2ep2-hero, .analisis.section, .s2ep2-refleksi').forEach((section, i) => {
+    applyScrollExperienceTo(section, i);
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top 78%',
+      once: true,
+      onEnter: () => section.classList.add('is-in'),
+    });
+  });
+
+  buildHover(wrapper);
+  ScrollTrigger.refresh();
+  window.dispatchEvent(new CustomEvent('portfolio:layoutchange'));
 }

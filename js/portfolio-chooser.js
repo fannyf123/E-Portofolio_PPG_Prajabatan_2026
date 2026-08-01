@@ -1,4 +1,4 @@
-import { refreshSemester2Ep1 } from './semester2-ep1.js';
+import { refreshSemester2Ep1, refreshSemester2Ep2 } from './semester2-ep1.js';
 import { refreshSeminarPpg } from './seminar-ppg.js';
 
 /* ============================================
@@ -17,6 +17,7 @@ export function initPortfolioChooser() {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ep2Wrapper = document.getElementById('eportfolio2Wrapper');
   const s2ep1Wrapper = document.getElementById('s2ep1Wrapper');
+  const s2ep2Wrapper = document.getElementById('s2ep2Wrapper');
   const seminarWrapper = document.getElementById('seminarPpgWrapper');
 
   function isCardLocked(card) {
@@ -66,9 +67,11 @@ export function initPortfolioChooser() {
   // terkunci bagi pengunjung biasa dan test markup tetap berlaku.
   const previewMode = new URLSearchParams(window.location.search).get('preview') === '1';
   if (previewMode) {
+    const previewLabels = { s2ep1: 'Lihat E-Portfolio 1 →', s2ep2: 'Lihat E-Portfolio 2 →' };
     cards.forEach((card) => {
       if (!isCardLocked(card)) return;
-      if (card.dataset.portfolio !== 's2ep1') return; // hanya yang sudah ada isinya
+      const num = card.dataset.portfolio;
+      if (!previewLabels[num]) return; // hanya kartu yang sudah ada isinya
       card.dataset.locked = 'false';
       card.removeAttribute('aria-disabled');
       card.classList.remove('is-locked');
@@ -77,7 +80,7 @@ export function initPortfolioChooser() {
       const lock = card.querySelector('.chooser-card-lock');
       if (badge) badge.textContent = 'PRATINJAU';
       if (lock) lock.remove();
-      if (cta) cta.textContent = 'Lihat E-Portfolio 1 →';
+      if (cta) cta.textContent = previewLabels[num];
     });
   }
 
@@ -172,7 +175,15 @@ export function initPortfolioChooser() {
     ['#s2ep1-video', 'Video'],
     ['#s2ep1-nonmengajar', 'Nonmengajar'],
     ['#s2ep1-penilaian', 'Penilaian'],
+    ['#s2ep1-produk', 'Produk'],
     ['#s2ep1-refleksi', 'Refleksi'],
+  ];
+
+  const S2EP2_LINKS = [
+    ['#s2ep2-hero', 'Beranda'],
+    ['#s2ep2-produk', 'Rancangan'],
+    ['#s2ep2-video', 'Video'],
+    ['#s2ep2-refleksi', 'Refleksi'],
   ];
 
   const navLinks = document.getElementById('navLinks');
@@ -220,14 +231,15 @@ export function initPortfolioChooser() {
     });
   }
 
-  function pakaiTautanSemester2() {
+  function pakaiTautanSemester2(links) {
+    const daftar = links || S2_LINKS;
     if (navLinks) {
       if (navAsli === null) navAsli = [...navLinks.children];
-      navLinks.replaceChildren(...simpulTautan(S2_LINKS, true));
+      navLinks.replaceChildren(...simpulTautan(daftar, true));
     }
     if (footerSitemap) {
       if (footerAsli === null) footerAsli = [...footerSitemap.children];
-      footerSitemap.replaceChildren(...simpulTautan(S2_LINKS, false));
+      footerSitemap.replaceChildren(...simpulTautan(daftar, false));
     }
   }
 
@@ -242,6 +254,7 @@ export function initPortfolioChooser() {
     if (!s2ep1Wrapper) return;
     document.querySelectorAll(HIDEABLE).forEach((el) => { el.style.display = 'none'; });
     if (ep2Wrapper) ep2Wrapper.style.display = 'none';
+    if (s2ep2Wrapper) s2ep2Wrapper.style.display = 'none';
 
     pakaiTautanSemester2();
     pindahkanFooterKeSemester2();
@@ -256,6 +269,31 @@ export function initPortfolioChooser() {
   function hideS2Ep1() {
     if (!s2ep1Wrapper) return;
     s2ep1Wrapper.style.display = 'none';
+    kembalikanFooter();
+    pulihkanTautan();
+    document.querySelectorAll(HIDEABLE).forEach((el) => { el.style.display = ''; });
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+
+  function showS2Ep2() {
+    if (!s2ep2Wrapper) return;
+    document.querySelectorAll(HIDEABLE).forEach((el) => { el.style.display = 'none'; });
+    if (ep2Wrapper) ep2Wrapper.style.display = 'none';
+    if (s2ep1Wrapper) s2ep1Wrapper.style.display = 'none';
+
+    pakaiTautanSemester2(S2EP2_LINKS);
+    pindahkanFooterKeSemester2();
+    s2ep2Wrapper.style.display = 'block';
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+    window.scrollTo({ top: 0, behavior: 'auto' });
+
+    setTimeout(() => refreshSemester2Ep2(), 0);
+  }
+
+  function hideS2Ep2() {
+    if (!s2ep2Wrapper) return;
+    s2ep2Wrapper.style.display = 'none';
     kembalikanFooter();
     pulihkanTautan();
     document.querySelectorAll(HIDEABLE).forEach((el) => { el.style.display = ''; });
@@ -295,6 +333,7 @@ export function initPortfolioChooser() {
 
     if (num === '2') showEP2();
     else if (num === 's2ep1') showS2Ep1();
+    else if (num === 's2ep2') showS2Ep2();
     else if (num === 'seminar') showSeminar();
   }
 
@@ -413,22 +452,26 @@ export function initPortfolioChooser() {
 
     const ep2Card = chooser.querySelector('.chooser-card[data-portfolio="2"]');
     const s2ep1Card = chooser.querySelector('.chooser-card[data-portfolio="s2ep1"]');
+    const s2ep2Card = chooser.querySelector('.chooser-card[data-portfolio="s2ep2"]');
     const ep2Locked = isCardLocked(ep2Card);
     const s2ep1Locked = isCardLocked(s2ep1Card);
+    const s2ep2Locked = isCardLocked(s2ep2Card);
     const isEp2Hash = hash.startsWith('#ep2-');
     const isS2Hash = hash.startsWith('#s2ep1-');
+    const isS2Ep2Hash = hash.startsWith('#s2ep2-');
     const isSeminarHash = hash === '#seminar-ppg';
 
     // Deep link ke kartu terkunci diabaikan agar selector tidak bisa dilewati.
-    if ((isEp2Hash && ep2Locked) || (isS2Hash && s2ep1Locked)) {
+    if ((isEp2Hash && ep2Locked) || (isS2Hash && s2ep1Locked) || (isS2Ep2Hash && s2ep2Locked)) {
       history.replaceState(null, '', window.location.pathname + window.location.search);
       return false;
     }
-    if (!isEp2Hash && !isS2Hash && !isSeminarHash) return false;
+    if (!isEp2Hash && !isS2Hash && !isS2Ep2Hash && !isSeminarHash) return false;
 
     hideChooser();
     if (isEp2Hash) showEP2();
     else if (isS2Hash) showS2Ep1();
+    else if (isS2Ep2Hash) showS2Ep2();
     else if (isSeminarHash) showSeminar();
 
     setTimeout(() => {
@@ -438,7 +481,7 @@ export function initPortfolioChooser() {
       }
     }, 60);
 
-    return isEp2Hash || isS2Hash || isSeminarHash;
+    return isEp2Hash || isS2Hash || isS2Ep2Hash || isSeminarHash;
   }
 
   if (document.readyState === 'loading') {
