@@ -459,6 +459,7 @@ export function initPortfolioChooser() {
     if (s2ep2Wrapper) s2ep2Wrapper.style.display = 'none';
 
     document.getElementById('s2ep2Rail')?.style.setProperty('display', 'none');
+    document.getElementById('s2ep1Rail')?.style.setProperty('display', '');
     document.querySelectorAll('.scroll-rail').forEach(el => el.style.display = 'none');
 
     pakaiTautanSemester2();
@@ -509,6 +510,7 @@ export function initPortfolioChooser() {
 
     if (s2ep1Wrapper) s2ep1Wrapper.style.display = 'none';
     document.getElementById('s2ep1Rail')?.style.setProperty('display', 'none');
+    document.getElementById('s2ep2Rail')?.style.setProperty('display', '');
     document.querySelectorAll('.scroll-rail').forEach(el => el.style.display = 'none');
 
     pakaiTautanSemester2(S2EP2_LINKS);
