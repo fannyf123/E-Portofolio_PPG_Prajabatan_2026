@@ -232,7 +232,7 @@ export function initPortfolioChooser() {
 
     // Hide all E-Portfolio 1 sections
 
-    document.querySelectorAll('body > section, body > footer, .floating-shapes, .scroll-progress, #navbar, .back-to-top, .scroll-rail, .s2ep1-rail, .s2ep2-rail').forEach(el => {
+    document.querySelectorAll('body > section, body > footer, .floating-shapes, .scroll-progress, #navbar, .back-to-top, .scroll-rail').forEach(el => {
 
       el.style.display = 'none';
 
@@ -280,7 +280,7 @@ export function initPortfolioChooser() {
 
     // Restore E-Portfolio 1 sections
 
-    document.querySelectorAll('body > section, body > footer, .floating-shapes, .scroll-progress, #navbar, .back-to-top, .scroll-rail, .s2ep1-rail, .s2ep2-rail').forEach(el => {
+    document.querySelectorAll('body > section, body > footer, .floating-shapes, .scroll-progress, #navbar, .back-to-top, .scroll-rail').forEach(el => {
 
       el.style.display = '';
 
@@ -298,7 +298,7 @@ export function initPortfolioChooser() {
 
   // ID ganda. Hanya daftar tautannya yang ditukar.
 
-  const HIDEABLE = 'body > section, .floating-shapes, .scroll-rail, .s2ep1-rail, .s2ep2-rail';
+  const HIDEABLE = 'body > section, .floating-shapes, .scroll-rail';
 
   const S2_LINKS = [
 
@@ -582,6 +582,8 @@ export function initPortfolioChooser() {
     seminarWrapper.style.display = 'none';
 
     document.querySelectorAll(SEMINAR_HIDEABLE).forEach((el) => { el.style.display = ''; });
+
+    document.querySelectorAll('.s2ep1-rail, .s2ep2-rail').forEach(el => el.style.display = 'none');
 
     history.replaceState(null, '', window.location.pathname + window.location.search);
 
