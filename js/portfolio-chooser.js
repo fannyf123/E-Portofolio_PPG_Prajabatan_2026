@@ -494,7 +494,7 @@ export function initPortfolioChooser() {
 
     window.scrollTo({ top: 0, behavior: 'auto' });
 
-    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+    if (window.ScrollTrigger) window.ScrollTrigger.refresh();
 
   }
 
@@ -543,7 +543,7 @@ export function initPortfolioChooser() {
 
     window.scrollTo({ top: 0, behavior: 'auto' });
 
-    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+    if (window.ScrollTrigger) window.ScrollTrigger.refresh();
 
   }
 
@@ -594,7 +594,7 @@ export function initPortfolioChooser() {
     document.querySelectorAll('.s2ep1-rail, .s2ep2-rail').forEach(el => el.style.display = 'none');
     document.querySelectorAll('.scroll-rail').forEach(el => el.style.display = '');
 
-    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+    if (window.ScrollTrigger) window.ScrollTrigger.refresh();
 
     history.replaceState(null, '', window.location.pathname + window.location.search);
 
