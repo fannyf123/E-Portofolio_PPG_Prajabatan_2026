@@ -458,7 +458,7 @@ export function initPortfolioChooser() {
 
     if (s2ep2Wrapper) s2ep2Wrapper.style.display = 'none';
 
-    document.querySelectorAll('.s2ep2-rail').forEach(el => el.style.display = 'none');
+    document.getElementById('s2ep2Rail')?.style.setProperty('display', 'none');
     document.querySelectorAll('.scroll-rail').forEach(el => el.style.display = 'none');
 
     pakaiTautanSemester2();
@@ -489,7 +489,8 @@ export function initPortfolioChooser() {
 
     document.querySelectorAll(HIDEABLE).forEach((el) => { el.style.display = ''; });
 
-    document.querySelectorAll('.s2ep1-rail, .s2ep2-rail').forEach(el => el.style.display = 'none');
+    document.getElementById('s2ep1Rail')?.style.setProperty('display', 'none');
+    document.getElementById('s2ep2Rail')?.style.setProperty('display', 'none');
     document.querySelectorAll('.scroll-rail').forEach(el => el.style.display = '');
 
     window.scrollTo({ top: 0, behavior: 'auto' });
@@ -507,7 +508,7 @@ export function initPortfolioChooser() {
     if (ep2Wrapper) ep2Wrapper.style.display = 'none';
 
     if (s2ep1Wrapper) s2ep1Wrapper.style.display = 'none';
-    document.querySelectorAll('.s2ep1-rail').forEach(el => el.style.display = 'none');
+    document.getElementById('s2ep1Rail')?.style.setProperty('display', 'none');
     document.querySelectorAll('.scroll-rail').forEach(el => el.style.display = 'none');
 
     pakaiTautanSemester2(S2EP2_LINKS);
@@ -538,7 +539,8 @@ export function initPortfolioChooser() {
 
     document.querySelectorAll(HIDEABLE).forEach((el) => { el.style.display = ''; });
 
-    document.querySelectorAll('.s2ep1-rail, .s2ep2-rail').forEach(el => el.style.display = 'none');
+    document.getElementById('s2ep1Rail')?.style.setProperty('display', 'none');
+    document.getElementById('s2ep2Rail')?.style.setProperty('display', 'none');
     document.querySelectorAll('.scroll-rail').forEach(el => el.style.display = '');
 
     window.scrollTo({ top: 0, behavior: 'auto' });
@@ -591,7 +593,8 @@ export function initPortfolioChooser() {
 
     document.querySelectorAll(SEMINAR_HIDEABLE).forEach((el) => { el.style.display = ''; });
 
-    document.querySelectorAll('.s2ep1-rail, .s2ep2-rail').forEach(el => el.style.display = 'none');
+    document.getElementById('s2ep1Rail')?.style.setProperty('display', 'none');
+    document.getElementById('s2ep2Rail')?.style.setProperty('display', 'none');
     document.querySelectorAll('.scroll-rail').forEach(el => el.style.display = '');
 
     if (window.ScrollTrigger) window.ScrollTrigger.refresh();
