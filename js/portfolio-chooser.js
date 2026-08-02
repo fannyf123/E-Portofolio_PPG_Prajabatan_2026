@@ -492,6 +492,8 @@ export function initPortfolioChooser() {
 
     window.scrollTo({ top: 0, behavior: 'auto' });
 
+    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+
   }
 
   function showS2Ep2() {
@@ -536,6 +538,8 @@ export function initPortfolioChooser() {
     document.querySelectorAll('.s2ep1-rail, .s2ep2-rail').forEach(el => el.style.display = 'none');
 
     window.scrollTo({ top: 0, behavior: 'auto' });
+
+    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
 
   }
 
@@ -584,6 +588,8 @@ export function initPortfolioChooser() {
     document.querySelectorAll(SEMINAR_HIDEABLE).forEach((el) => { el.style.display = ''; });
 
     document.querySelectorAll('.s2ep1-rail, .s2ep2-rail').forEach(el => el.style.display = 'none');
+
+    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
 
     history.replaceState(null, '', window.location.pathname + window.location.search);
 
