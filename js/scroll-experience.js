@@ -549,6 +549,12 @@ function getInitialSection(sections) {
 }
 
 function initScrollExperience() {
+  // Jangan buat scroll-rail (dot kanan) jika halaman Semester 2 sedang
+  // tampil — Semester 2 memakai nav bar kiri (s2ep1-rail / s2ep2-rail).
+  const s2ep1 = document.getElementById('s2ep1Wrapper');
+  const s2ep2 = document.getElementById('s2ep2Wrapper');
+  if ((s2ep1 && s2ep1.style.display === 'block') || (s2ep2 && s2ep2.style.display === 'block')) return;
+
   // Halaman Semester 2 memakai anatomi yang sama dengan E-Portfolio 1
   // (section.section[id]), sehingga tanpa pengecualian ini kedelapan
   // bagiannya ikut terhitung: rel titik menampilkan 19 butir untuk 11
