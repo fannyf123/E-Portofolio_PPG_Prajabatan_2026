@@ -556,7 +556,7 @@ function initScrollExperience() {
   // lewat applyScrollExperienceTo() setelah wrappernya ditampilkan.
   const sections = gsap.utils
     .toArray('section.section[id]')
-    .filter((s) => !s.closest('.eportfolio2-wrapper') && !s.closest('#s2ep1Wrapper'));
+    .filter((s) => !s.closest('.eportfolio2-wrapper') && !s.closest('#s2ep1Wrapper') && !s.closest('#s2ep2Wrapper'));
   if (!sections.length) return;
 
   document.body.classList.add('gsap-ready', 'scroll-fx-ready');
