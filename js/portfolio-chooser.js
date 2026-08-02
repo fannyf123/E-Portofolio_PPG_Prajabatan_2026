@@ -134,6 +134,8 @@ export function initPortfolioChooser() {
     document.querySelectorAll('body > section, body > footer, .floating-shapes, .scroll-progress, #navbar, .back-to-top, .scroll-rail').forEach(el => {
       el.style.display = 'none';
     });
+    if (s2ep1Wrapper) s2ep1Wrapper.style.display = 'none';
+    if (s2ep2Wrapper) s2ep2Wrapper.style.display = 'none';
     // Show E-Portfolio 2
     ep2Wrapper.style.display = 'block';
     document.body.style.overflow = '';
@@ -308,6 +310,7 @@ export function initPortfolioChooser() {
     document.querySelectorAll(SEMINAR_HIDEABLE).forEach((el) => { el.style.display = 'none'; });
     if (ep2Wrapper) ep2Wrapper.style.display = 'none';
     if (s2ep1Wrapper) s2ep1Wrapper.style.display = 'none';
+    if (s2ep2Wrapper) s2ep2Wrapper.style.display = 'none';
     seminarWrapper.style.display = 'block';
     document.body.style.overflow = '';
     document.body.style.height = '';
@@ -362,6 +365,7 @@ export function initPortfolioChooser() {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       if (s2ep1Wrapper && s2ep1Wrapper.style.display === 'block') hideS2Ep1();
+      if (s2ep2Wrapper && s2ep2Wrapper.style.display === 'block') hideS2Ep2();
       window.scrollTo({ top: 0, behavior: 'auto' });
       showChooser();
     });

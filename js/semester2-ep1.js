@@ -57,7 +57,10 @@ function highlight(id, railId = 's2ep1Rail') {
 }
 
 function buildHover(wrapper, railId = 's2ep1Rail') {
-  wrapper.querySelectorAll('.pillar-card, .s2ep2-analisis-card').forEach((card) => {
+  const cardSelector = wrapper.classList.contains('s2ep2-wrapper')
+    ? '.s2ep2-analisis-card'
+    : '.pillar-card';
+  wrapper.querySelectorAll(cardSelector).forEach((card) => {
     card.addEventListener('mouseenter', () => {
       gsap.to(card, { y: -6, scale: 1.015, duration: 0.3, ease: 'power2.out' });
     });
@@ -129,12 +132,12 @@ function buildRail(wrapper, railId = 's2ep1Rail') {
 
 /** Tanpa GSAP atau saat pengguna meminta gerak dikurangi: tampilkan langsung. */
 function revealStatic(wrapper) {
-  wrapper.querySelectorAll('.analisis.section, .pillar-card, .philosophy-card, .section-header').forEach((el) => {
+  wrapper.querySelectorAll('.analisis.section, .pillar-card, .philosophy-card, .section-header, .s2ep2-analisis-card').forEach((el) => {
     el.style.opacity = '1';
     el.style.transform = 'none';
     el.style.visibility = 'visible';
   });
-  wrapper.querySelectorAll('.analisis.section, .s2ep1-refleksi').forEach((el) => {
+  wrapper.querySelectorAll('.analisis.section, .s2ep1-refleksi, .s2ep2-refleksi').forEach((el) => {
     el.classList.add('is-in');
   });
 }
