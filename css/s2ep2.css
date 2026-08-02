@@ -4,6 +4,19 @@
    ============================================ */
 
 .s2ep2-wrapper {
+  /* Token yang sama dengan .s2ep1-wrapper — tanpa ini semua
+     var(--s2-*) jatuh ke kosong dan kartu kehilangan border,
+     radius, dan latar. */
+  --s2-ink:         var(--gray-800);
+  --s2-muted:       var(--gray-500);
+  --s2-surface:     var(--white);
+  --s2-surface-alt: var(--gray-50);
+  --s2-line:        var(--gray-100);
+  --s2-r-sm:   12px;
+  --s2-r-md:   20px;
+  --s2-r-pill: 999px;
+  --s2-gap:    clamp(20px, 4vw, 40px);
+
   --s2ep2-accent: var(--amber);
   font-family: var(--font-body);
   color: var(--s2-ink);
