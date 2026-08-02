@@ -3,7 +3,13 @@
    Portfolio modal popup for artifact analysis
    ============================================ */
 
-document.addEventListener('DOMContentLoaded', () => {
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initArtefakModal);
+} else {
+  initArtefakModal();
+}
+
+function initArtefakModal() {
 
   const modalOverlay = document.getElementById('modalOverlay');
   const modalClose = document.getElementById('modalClose');
@@ -473,4 +479,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-});
+}
